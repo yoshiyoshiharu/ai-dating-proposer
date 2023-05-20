@@ -1,6 +1,16 @@
+import Head from 'next/head'
+import Header from './components/Header'
+
 const Main = () => {
   return (
-    <div>main page</div>
+    <>
+      <Head>
+        <title>AIデートプラン提案アプリ</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Header></Header>
+    </>
   )
 }
 
