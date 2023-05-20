@@ -1,4 +1,3 @@
-import { GetServerSideProps, NextPage } from "next";
 import { useState } from "react";
 
 type Image = {
@@ -12,8 +11,8 @@ const fetchImage = async (): Promise<Image> => {
   return images[0];
 };
 
-const Result: NextPage<Props> = ({ initialimageUrl }) => {
-  const [imageUrl, setImageUrl] = useState(initialimageUrl);
+const Result = () => {
+  const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
@@ -32,16 +31,3 @@ const Result: NextPage<Props> = ({ initialimageUrl }) => {
 };
 
 export default Result;
-
-type Props = {
-  initialimageUrl: string;
-}
-
-export const getServerSideProps : GetServerSideProps<Props> = async () => {
-  const image = await fetchImage();
-  return {
-    props: {
-      initialimageUrl: image.url,
-    },
-  };
-}
