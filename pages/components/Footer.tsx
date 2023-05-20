@@ -5,7 +5,7 @@ export default function Header() {
     <>
       <footer>
         created by
-        <Link href="https://github.com/yoshiyoshiharu">
+        <Link href="https://github.com/yoshiyoshiharu" target="_blank">
           <span className="my-github">Haruki Yoshdia</span>
         </Link>
       </footer>
