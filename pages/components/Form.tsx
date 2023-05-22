@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 
 const Form = () => {
   const handleSubmit = async (event) => {
@@ -18,10 +18,10 @@ const Form = () => {
       body: JSONdata,
     };
 
-    const response = await fetch('/api/form', options);
+    const response = await fetch('/api/client', options);
 
     const result = await response.json();
-    alert(`Is this your full name: ${result.data}`);
+    alert(result.data);
   };
 
   return (

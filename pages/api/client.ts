@@ -2,14 +2,13 @@ export default async function handler(req, res) {
   const messages: Message[] = [
     {
       role: "user",
-      content: "JSで`0.1+0.1+0.1`の実行結果を教えて",
+      content: messageFormat,
     },
   ];
 
   const content = await chatCompletion(messages)
-  console.log("Aaaa")
-  console.log(content)
-  res.status(200).json({ data: `${content?.content}` });
+  const parse_content = parseGPTResponse(content.content)
+  res.status(200).json({ data: parse_content });
 }
 
 export type Message = {
@@ -17,7 +16,7 @@ export type Message = {
   content: string;
 };
 
-export const chatCompletion = async (messages: Message[]): Promise<Message | undefined> => {
+export const chatCompletion = async (messages: Message[]): Promise<Message> => {
   const body = JSON.stringify({
     messages,
     model: "gpt-3.5-turbo",
@@ -34,6 +33,44 @@ export const chatCompletion = async (messages: Message[]): Promise<Message | und
     body,
   });
   const data = await res.json();
-  const choice = 0;
-  return data.choices[choice].message;
+  return data.choices[0].message;
 };
+
+export const parseGPTResponse = (gptResponse: string) => {
+  const regex = /```json([\s\S]*?)```/gm
+  const match = regex.exec(gptResponse)
+
+  if (match === null || match?.[1] === null) {
+    throw new Error("JSON content not found in the string")
+  }
+  const jsonData: object = JSON.parse(match[1])
+
+  return jsonData
+}
+
+const messageFormat = `
+You are an excellent dating plan proposer.
+
+The output should be a markdown code snippet formatted in the following schema in Japanese:
+
+\`\`\`json
+[
+  {
+   place: string, // title of the dating plan.
+   description: string // description of the dating plan.
+  },
+  {
+   place: string, // title of the dating plan.
+   description: string // description of the dating plan.
+  },
+]
+\`\`\`
+
+NOTES:
+* Do not include areas that do not exist.
+* Please list only areas in Japan.
+* Please do not include anything other than JSON in your answer.
+* Response must be Japanese
+
+東京 湾岸 20代 What 5 dating plan do you propose?
+`
