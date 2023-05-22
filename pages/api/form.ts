@@ -1,7 +1,7 @@
 export default function handler(req, res) {
   const body = req.body;
 
-  if (req.method !== 'GET') {
+  if (req.method !== 'POST') {
     return res.status(405).json({ data: 'Method Not Allowed' });
   }
 
