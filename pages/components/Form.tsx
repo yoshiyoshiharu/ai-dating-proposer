@@ -48,28 +48,70 @@ const Form = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="area">エリア</label>
-        <input type="text" id="area" name="area"/>
+        <div className="form-group">
+          <label className="label" htmlFor="area">エリア</label>
+          <input className="input" type="text" id="area" name="area"/>
+        </div>
 
-        <button type="submit">Submit</button>
+        <button className="submit-button" type="submit">提案してもらう</button>
       </form>
 
       <div>
         {
           loading &&
-          <p>loading...</p>
+          <p className="loading">loading...</p>
         }
       </div>
-      <div>
+      <div className="cards">
         {
           loading || plans.map((plan) => (
-            <div key={plan.place}>
+            <div className="card" key={plan.place}>
               <h2>{plan.place}</h2>
               <p>{plan.description}</p>
             </div>
           ))
         }
       </div>
+      <style jsx>{`
+      form {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        .form-group {
+          display: flex;
+          margin: 10px;
+          .label {
+            width: 20%;
+          }
+          .input {
+            width: 100%;
+          }
+
+
+        }
+        .submit-button {
+          width: 100%;
+          margin: 10px auto;
+          padding: 10px;
+          border-radius: 10px;
+          border: 1px solid #333;
+          background-color: #fff;
+          cursor: pointer;
+          &:hover {
+            background-color: pink;
+          }
+        }
+      }
+      .cards {
+        .card {
+          width: 50%;
+          margin: 10px auto;
+          padding: 10px;
+          border: 1px solid #333;
+          border-radius: 10px;
+        }
+      }
+      `}</style>
     </>
   )
 }
