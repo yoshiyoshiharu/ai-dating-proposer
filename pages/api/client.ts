@@ -1,14 +1,20 @@
 export default async function handler(req, res) {
+  const area = req.body.area
+
   const messages: Message[] = [
     {
       role: "user",
-      content: messageFormat,
+      content: messageFormat(area),
     },
   ];
 
-  const content = await chatCompletion(messages)
-  const parse_content = parseGPTResponse(content.content)
-  res.status(200).json({ plans: parse_content });
+  try {
+    const content = await chatCompletion(messages)
+    const parse_content = parseGPTResponse(content.content)
+    res.status(200).json({ plans: parse_content });
+  } catch (e) {
+    alert(e)
+  }
 }
 
 export type Message = {
@@ -48,7 +54,8 @@ export const parseGPTResponse = (gptResponse: string) => {
   return jsonData
 }
 
-const messageFormat = `
+export const messageFormat = (area) => {
+  return `
 You are an excellent dating plan proposer.
 
 The output should be a markdown code snippet formatted in the following schema in Japanese:
@@ -72,5 +79,6 @@ NOTES:
 * Please do not include anything other than JSON in your answer.
 * Response must be Japanese
 
-東京 湾岸 20代 What 5 dating plan do you propose?
+${area} 湾岸 What 5 dating plan do you propose?
 `
+}

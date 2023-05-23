@@ -86,8 +86,6 @@ const Form = () => {
           .input {
             width: 100%;
           }
-
-
         }
         .submit-button {
           width: 100%;
@@ -95,7 +93,6 @@ const Form = () => {
           padding: 10px;
           border-radius: 10px;
           border: 1px solid #333;
-          background-color: #fff;
           cursor: pointer;
           &:hover {
             background-color: pink;
