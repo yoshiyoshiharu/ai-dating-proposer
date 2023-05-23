@@ -47,6 +47,12 @@ const Form = () => {
 
   return (
     <>
+      {
+        loading &&
+        <div className="loading">
+        </div>
+      }
+
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="label" htmlFor="area">エリア</label>
@@ -56,12 +62,6 @@ const Form = () => {
         <button className="submit-button" type="submit">提案してもらう</button>
       </form>
 
-      <div>
-        {
-          loading &&
-          <p className="loading">loading...</p>
-        }
-      </div>
       <div className="cards">
         {
           loading || plans.map((plan) => (
@@ -107,6 +107,15 @@ const Form = () => {
           border: 1px solid #333;
           border-radius: 10px;
         }
+      }
+      .loading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #333;
+        opacity: 0.7;
       }
       `}</style>
     </>
