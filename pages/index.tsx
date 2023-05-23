@@ -1,4 +1,3 @@
-import { GetServerSideProps } from "next";
 import Head from 'next/head'
 import Header from './components/Header'
 import Result  from './components/Result'
@@ -22,22 +21,3 @@ const Main = () => {
 }
 
 export default Main
-
-type Image = {
-  url: string;
-}
-
-const fetchImage = async (): Promise<Image> => {
-  const res = await fetch("https://api.thecatapi.com/v1/images/search");
-  const images = await res.json();
-  return images[0];
-};
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const image = await fetchImage();
-  return {
-    props: {
-      initialimageUrl: image.url,
-    },
-  };
-}
