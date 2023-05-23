@@ -1,5 +1,31 @@
 import { useState } from "react";
 
+type PlanCase = {
+  area: string;
+}
+
+type Plan = {
+  area: string;
+  description: string;
+}
+
+const fetchPlans = async (planCase: PlanCase): Promise<Plan[]> => {
+  const JSONdata = JSON.stringify(planCase);
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSONdata,
+  };
+
+  const res = await fetch("/api/client", options);
+  const jsonRes = await res.json();
+  const plans = jsonRes.plans;
+  return plans;
+}
+
 const Form = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -8,20 +34,9 @@ const Form = () => {
       area: event.target.area.value,
     };
 
-    const JSONdata = JSON.stringify(data);
+    const plans = fetchPlans(data);
 
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSONdata,
-    };
-
-    const response = await fetch('/api/client', options);
-
-    const result = await response.json();
-    alert(result.data);
+    console.dir(plans)
   };
 
   return (

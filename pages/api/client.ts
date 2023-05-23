@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
   const content = await chatCompletion(messages)
   const parse_content = parseGPTResponse(content.content)
-  res.status(200).json({ data: parse_content });
+  res.status(200).json({ plans: parse_content });
 }
 
 export type Message = {
