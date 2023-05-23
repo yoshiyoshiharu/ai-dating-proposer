@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-type PlanCase = {
+type PlanCondition = {
   area: string;
 }
 
@@ -9,8 +9,8 @@ type Plan = {
   description: string;
 }
 
-const fetchPlans = async (planCase: PlanCase): Promise<Plan[]> => {
-  const JSONdata = JSON.stringify(planCase);
+const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
+  const JSONdata = JSON.stringify(planCondition);
 
   const options = {
     method: 'POST',
@@ -33,12 +33,12 @@ const Form = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const planCase = {
+    const planCondition = {
       area: event.target.area.value,
     };
 
     setLoading(true);
-    const plans = await fetchPlans(planCase);
+    const plans = await fetchPlans(planCondition);
     setPlans(plans);
     setLoading(false);
 
