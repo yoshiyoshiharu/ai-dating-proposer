@@ -79,6 +79,6 @@ NOTES:
 * Please do not include anything other than JSON in your answer.
 * Response must be Japanese
 
-${area} What 5 dating plan do you propose?
+${area} What ３３３ dating plan do you propose?
 `
 }
