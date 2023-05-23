@@ -28,7 +28,7 @@ const fetchPlans = async (planCase: PlanCase): Promise<Plan[]> => {
 
 const Form = () => {
   const [plans, setPlans] = useState<Plan[]>([]);
-  const [loadging, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -56,7 +56,13 @@ const Form = () => {
 
       <div>
         {
-          loadging || plans.map((plan) => (
+          loading &&
+          <p>loading...</p>
+        }
+      </div>
+      <div>
+        {
+          loading || plans.map((plan) => (
             <div key={plan.place}>
               <h2>{plan.place}</h2>
               <p>{plan.description}</p>
