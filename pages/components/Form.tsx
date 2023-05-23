@@ -1,9 +1,11 @@
+import { useState } from "react";
+
 type PlanCase = {
   area: string;
 }
 
 type Plan = {
-  area: string;
+  place: string;
   description: string;
 }
 
@@ -25,14 +27,20 @@ const fetchPlans = async (planCase: PlanCase): Promise<Plan[]> => {
 }
 
 const Form = () => {
+  const [plans, setPlans] = useState<Plan[]>([]);
+  const [loadging, setLoading] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const data = {
+    const planCase = {
       area: event.target.area.value,
     };
 
-    const plans = fetchPlans(data);
+    setLoading(true);
+    const plans = await fetchPlans(planCase);
+    setPlans(plans);
+    setLoading(false);
 
     console.dir(plans)
   };
@@ -45,6 +53,17 @@ const Form = () => {
 
         <button type="submit">Submit</button>
       </form>
+
+      <div>
+        {
+          loadging || plans.map((plan) => (
+            <div key={plan.place}>
+              <h2>{plan.place}</h2>
+              <p>{plan.description}</p>
+            </div>
+          ))
+        }
+      </div>
     </>
   )
 }
