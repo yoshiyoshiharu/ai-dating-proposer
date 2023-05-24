@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Loading from "./Loading";
 
 type PlanCondition = {
   area: string;
@@ -39,8 +40,7 @@ const Form = () => {
     <>
       {
         loading &&
-        <div className="loading">
-        </div>
+        <Loading></Loading>
       }
 
       <form onSubmit={handleSubmit}>
@@ -97,15 +97,6 @@ const Form = () => {
           border: 1px solid #333;
           border-radius: 10px;
         }
-      }
-      .loading {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: #333;
-        opacity: 0.7;
       }
       `}</style>
     </>
