@@ -1,4 +1,4 @@
-module githu.com/yoshiyoshiharu/ai-dating-proposer
+module github.com/yoshiyoshiharu/ai-dating-proposer
 
 go 1.20
 
