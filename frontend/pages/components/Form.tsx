@@ -10,17 +10,7 @@ type Plan = {
 }
 
 const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
-  const JSONdata = JSON.stringify(planCondition);
-
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSONdata,
-  };
-
-  const res = await fetch("/api/client", options);
+  const res = await fetch("/api/client");
   const jsonRes = await res.json();
   const plans = jsonRes.plans;
   return plans;
