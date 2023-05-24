@@ -4,9 +4,18 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"regexp"
+	"strings"
+	"encoding/json"
+	"errors"
 
 	openai "github.com/sashabaranov/go-openai"
 )
+
+type Plan = struct {
+	Place       string `json:"place"`
+	Description string `json:"description"`
+}
 
 func messageFormat () string {
 	return `
@@ -39,7 +48,25 @@ Tokyo What 3 dating plan do you propose?
 `
 }
 
-func FetchPlans() (string, error) {
+func FetchPlans () ([]Plan, error) {
+	message := messageFormat()
+
+	res, err := executeApi(message)
+
+	if err != nil {
+		return nil, err
+	}
+
+	plans := parseResponse(res)
+
+	if len(plans) == 0 {
+		return nil, errors.New("No plans")
+	}
+
+	return plans, nil
+}
+
+func executeApi(message string) (string, error) {
 	client := openai.NewClient(os.Getenv("OPENAI_API_KEY"))
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
@@ -48,7 +75,7 @@ func FetchPlans() (string, error) {
 			Messages: []openai.ChatCompletionMessage{
 				{
 					Role:    openai.ChatMessageRoleUser,
-					Content: messageFormat(),
+					Content: message,
 				},
 			},
 		},
@@ -60,4 +87,17 @@ func FetchPlans() (string, error) {
 	}
 
 	return resp.Choices[0].Message.Content, nil
+}
+
+func parseResponse(res string) []Plan {
+	reg, _ := regexp.Compile("```json" + `([\s\S]*?)` + "```")
+	matched := reg.FindString(res)
+
+	matched = strings.Replace(matched, "```json", "", 1)
+	matched = strings.Replace(matched, "```", "", 1)
+
+	var plans []Plan
+	json.Unmarshal([]byte(matched), &plans)
+	fmt.Printf("Plans : %+v", plans)
+	return plans
 }
