@@ -1,7 +1,17 @@
-export default async function handler(req, res) {
-  const area = req.body.area
+import { NextApiRequest, NextApiResponse } from 'next'
 
-  const resp = await fetch("http://localhost:8080")
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const body = JSON.stringify({
+    area: req.body.area,
+})
+
+  const resp = await fetch("http://localhost:8080", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: body
+  })
 
   const data = await resp.json();
   console.log(data)
