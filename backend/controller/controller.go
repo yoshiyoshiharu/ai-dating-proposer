@@ -31,15 +31,16 @@ func GetPlans(c *gin.Context) {
 }
 
 func GetPlace(c *gin.Context) {
-	google_map.FetchPlace()
+	id := google_map.FetchPlaceID()
+
+	c.IndentedJSON(http.StatusOK, id)
 }
 
-func GetPlaceDetail(c *gin.Context) {
-	google_map.FetchPlaceDetail()
-}
 
 func GetPlacePhoto(c *gin.Context) {
-	bytes := google_map.FetchPhoto()
+	id := google_map.FetchPlaceID()
+	photoReferences := google_map.FetchPlacePhotoReferences(id)
+	bytes := google_map.FetchPhoto(photoReferences[1])
 
 	c.Data(http.StatusOK, "image/jpeg", bytes)
 }
