@@ -1,11 +1,15 @@
 package controller
 
 import (
+	"image"
 	"net/http"
+	"os"
+	"bytes"
+	"image/jpeg"
 
 	"github.com/gin-gonic/gin"
-	openai "github.com/yoshiyoshiharu/ai-dating-proposer/openai"
 	google_map "github.com/yoshiyoshiharu/ai-dating-proposer/google_map"
+	openai "github.com/yoshiyoshiharu/ai-dating-proposer/openai"
 )
 
 func GetPlans(c *gin.Context) {
@@ -39,5 +43,15 @@ func GetPlaceDetail(c *gin.Context) {
 }
 
 func GetPlacePhoto(c *gin.Context) {
-	google_map.FetchPhoto()
+	filepath := google_map.FetchPhoto()
+
+	file, _ := os.Open(filepath)
+
+	defer file.Close()
+
+	image, _, _ := image.Decode(file)
+	buf := new(bytes.Buffer)
+	_ = jpeg.Encode(buf, image, nil)
+
+	c.Data(http.StatusOK, "image/jpeg", buf.Bytes())
 }
