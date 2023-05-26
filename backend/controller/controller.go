@@ -1,11 +1,7 @@
 package controller
 
 import (
-	"image"
 	"net/http"
-	"os"
-	"bytes"
-	"image/jpeg"
 
 	"github.com/gin-gonic/gin"
 	google_map "github.com/yoshiyoshiharu/ai-dating-proposer/google_map"
@@ -43,15 +39,7 @@ func GetPlaceDetail(c *gin.Context) {
 }
 
 func GetPlacePhoto(c *gin.Context) {
-	filepath := google_map.FetchPhoto()
+	bytes := google_map.FetchPhoto()
 
-	file, _ := os.Open(filepath)
-
-	defer file.Close()
-
-	image, _, _ := image.Decode(file)
-	buf := new(bytes.Buffer)
-	_ = jpeg.Encode(buf, image, nil)
-
-	c.Data(http.StatusOK, "image/jpeg", buf.Bytes())
+	c.Data(http.StatusOK, "image/jpeg", bytes)
 }

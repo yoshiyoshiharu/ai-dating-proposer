@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"image/jpeg"
+	"image"
+	"bytes"
 	"log"
 	"os"
 
@@ -46,7 +48,7 @@ func FetchPlaceDetail() {
 	fmt.Println(resp)
 }
 
-func FetchPhoto() string {
+func FetchPhoto() []byte {
   client, err := maps.NewClient(maps.WithAPIKey(os.Getenv("GOOGLE_API_KEY")))
 	check(err)
 
@@ -61,17 +63,20 @@ func FetchPhoto() string {
 
 	fmt.Println(resp)
 
-	img, err := resp.Image()
+	image, err := resp.Image()
 	check(err)
 
-	filepath := "tmp/photo.jpg"
-	file, err := os.Create(filepath)
+	bytes := imageToBytes(image)
+
+	return bytes
+}
+
+func imageToBytes(image image.Image) []byte {
+	buf := new(bytes.Buffer)
+	err := jpeg.Encode(buf, image, nil)
 	check(err)
 
-	err = jpeg.Encode(file, img, &jpeg.Options{Quality: 100})
-	check(err)
-
-	return filepath
+	return buf.Bytes()
 }
 
 func check(err error) {
