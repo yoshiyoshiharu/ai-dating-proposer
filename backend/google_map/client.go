@@ -46,7 +46,7 @@ func FetchPlaceDetail() {
 	fmt.Println(resp)
 }
 
-func FetchPhoto() {
+func FetchPhoto() string {
   client, err := maps.NewClient(maps.WithAPIKey(os.Getenv("GOOGLE_API_KEY")))
 	check(err)
 
@@ -64,10 +64,14 @@ func FetchPhoto() {
 	img, err := resp.Image()
 	check(err)
 
-	file, err := os.Create("tmp/photo.jpg")
+	filepath := "tmp/photo.jpg"
+	file, err := os.Create(filepath)
 	check(err)
+
 	err = jpeg.Encode(file, img, &jpeg.Options{Quality: 100})
 	check(err)
+
+	return filepath
 }
 
 func check(err error) {
