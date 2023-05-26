@@ -54,8 +54,8 @@ func FetchPhoto() []byte {
 
 	r := &maps.PlacePhotoRequest{
 		PhotoReference: "AZose0m0Wawrjo-vbQqjgEcdRAC41M1izkkOBYkOO3BtzNH_KavGGIHnXcQnYLJaZ_Eh4ahTKa4kffXnnU5_RO43bQ4LMAY9JrS3SbZqhBt5q6-TlaCXscXQaMVjPoq8DwQZzJcyvhjjRbIzrEoEVC4sPaXq9j_V7Zz7OIwk9hTx2OVdkxxw",
-		MaxHeight:      300,
-		MaxWidth:       300,
+		MaxHeight:      1000,
+		MaxWidth:       1000,
 	}
 
 	resp, err := client.PlacePhoto(context.Background(), r)
