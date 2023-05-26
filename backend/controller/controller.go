@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	openai "github.com/yoshiyoshiharu/ai-dating-proposer/openai"
+	google_map "github.com/yoshiyoshiharu/ai-dating-proposer/google_map"
 )
 
 func GetPlans(c *gin.Context) {
@@ -27,4 +28,16 @@ func GetPlans(c *gin.Context) {
 	// }
 
 	c.IndentedJSON(http.StatusOK, resp)
+}
+
+func GetPlace(c *gin.Context) {
+	google_map.FetchPlace()
+}
+
+func GetPlaceDetail(c *gin.Context) {
+	google_map.FetchPlaceDetail()
+}
+
+func GetPlacePhoto(c *gin.Context) {
+	google_map.FetchPhoto()
 }
