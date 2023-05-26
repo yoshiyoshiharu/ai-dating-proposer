@@ -60,7 +60,7 @@ func FetchPlans () ([]Plan, error) {
 	plans := parseResponse(res)
 
 	if len(plans) == 0 {
-		return nil, errors.New("No plans")
+		return nil, errors.New("no plans")
 	}
 
 	return plans, nil
