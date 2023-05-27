@@ -6,29 +6,38 @@ import (
 	"github.com/gin-gonic/gin"
 	google_map "github.com/yoshiyoshiharu/ai-dating-proposer/google_map"
 	openai "github.com/yoshiyoshiharu/ai-dating-proposer/openai"
+	// plan "github.com/yoshiyoshiharu/ai-dating-proposer/plan"
 )
 
 func GetPlans(c *gin.Context) {
-	resp, err := openai.FetchPlans()
+	var err error
+
+	plans, err := openai.FetchPlans()
+	// plans := []*plan.Plan{
+	// 	{
+	// 		Place:       "東京タワー",
+	// 	},
+	// 	{
+	// 		Place:       "東京スカイツリー",
+	// 	},
+	// }
+
+	for _, plan := range plans {
+		err = plan.FetchPhotoReferencesFromPlace()
+	}
 
 	if err != nil {
 		c.IndentedJSON(http.StatusInternalServerError, err)
 		return
 	}
 
-	c.IndentedJSON(http.StatusOK, resp)
-}
-
-func GetPlace(c *gin.Context) {
-	id := google_map.FetchPlaceID()
-
-	c.IndentedJSON(http.StatusOK, id)
+	c.IndentedJSON(http.StatusOK, plans)
 }
 
 func GetPlacePhoto(c *gin.Context) {
-	id := google_map.FetchPlaceID()
-	photoReferences := google_map.FetchPlacePhotoReferences(id)
-	bytes := google_map.FetchPhoto(photoReferences[1])
+	photoReference := c.Param("photo_reference")
+
+	bytes := google_map.FetchPhoto(photoReference)
 
 	c.Data(http.StatusOK, "image/jpeg", bytes)
 }

@@ -3,7 +3,6 @@ package google_map
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"image"
 	"image/jpeg"
 	"log"
@@ -12,28 +11,27 @@ import (
 	"googlemaps.github.io/maps"
 )
 
-func FetchPlaceID() string {
+func FetchPlaceID(query string) (string, error) {
 	c, err := maps.NewClient(maps.WithAPIKey(os.Getenv("GOOGLE_API_KEY")))
 	if err != nil {
-		log.Fatalf("fatal error: %s", err)
+		return "", err
 	}
 	r := &maps.TextSearchRequest{
-		Query: "深川江戸資料館",
+		Query: query,
 	}
 
 	res, err := c.TextSearch(context.Background(), r)
 	if err != nil {
-		log.Fatalf("fatal error: %s", err)
+		return "", err
 	}
 
-	fmt.Println(res.Results[0].PlaceID)
-	return res.Results[0].PlaceID
+	return res.Results[0].PlaceID, nil
 }
 
-func FetchPlacePhotoReferences(placeID string) []string {
+func FetchPlacePhotoReferences(placeID string) ([]string, error) {
 	client, err := maps.NewClient(maps.WithAPIKey(os.Getenv("GOOGLE_API_KEY")))
 	if err != nil {
-		log.Fatalf("fatal error: %s", err)
+		return nil, err
 	}
 
 	r := &maps.PlaceDetailsRequest{
@@ -42,7 +40,7 @@ func FetchPlacePhotoReferences(placeID string) []string {
 
 	resp, err := client.PlaceDetails(context.Background(), r)
 	if err != nil {
-		log.Fatalf("fatal error: %s", err)
+		return nil, err
 	}
 
 	var photoReferences []string
@@ -51,7 +49,7 @@ func FetchPlacePhotoReferences(placeID string) []string {
 		photoReferences = append(photoReferences, photo.PhotoReference)
 	}
 
-	return photoReferences
+	return photoReferences, nil
 }
 
 func FetchPhoto(photoReference string) []byte {

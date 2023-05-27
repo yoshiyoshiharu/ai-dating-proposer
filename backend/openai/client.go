@@ -10,12 +10,8 @@ import (
 	"strings"
 
 	openai "github.com/sashabaranov/go-openai"
+	plan "github.com/yoshiyoshiharu/ai-dating-proposer/plan"
 )
-
-type Plan = struct {
-	Place       string `json:"place"`
-	Description string `json:"description"`
-}
 
 func messageFormat() string {
 	return `
@@ -45,7 +41,7 @@ Tokyo What 5 dating plan do you propose?
 `
 }
 
-func FetchPlans() ([]Plan, error) {
+func FetchPlans() ([]*plan.Plan, error) {
 	message := messageFormat()
 
 	res, err := executeApi(message)
@@ -86,15 +82,15 @@ func executeApi(message string) (string, error) {
 	return resp.Choices[0].Message.Content, nil
 }
 
-func parseResponse(res string) []Plan {
+func parseResponse(res string) []*plan.Plan {
 	reg, _ := regexp.Compile("```json" + `([\s\S]*?)` + "```")
 	matched := reg.FindString(res)
 
 	matched = strings.Replace(matched, "```json", "", 1)
 	matched = strings.Replace(matched, "```", "", 1)
 
-	var plans []Plan
+	var plans []*plan.Plan
 	json.Unmarshal([]byte(matched), &plans)
-	fmt.Printf("Plans : %+v", plans)
+
 	return plans
 }

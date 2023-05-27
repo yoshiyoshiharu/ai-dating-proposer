@@ -23,7 +23,6 @@ func NewRouter() *gin.Engine {
 		AllowCredentials: false,
 	}))
 	router.GET("/api", GetPlans)
-	router.GET("/api/place", GetPlace)
 	router.GET("/api/place_photo", GetPlacePhoto)
 
 	return router
