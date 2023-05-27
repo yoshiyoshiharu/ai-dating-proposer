@@ -5,5 +5,5 @@ export default async function handler(req, res) {
 
   const data = await resp.json();
   console.log(data)
-  return res.json({ plans: data})
+  return res.json({ plans: data })
 }

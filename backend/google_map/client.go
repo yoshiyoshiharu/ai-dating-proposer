@@ -7,6 +7,8 @@ import (
 	"image/jpeg"
 	"log"
 	"os"
+	"errors"
+
 
 	"googlemaps.github.io/maps"
 )
@@ -52,9 +54,15 @@ func FetchPlacePhotoReferences(placeID string) ([]string, error) {
 	return photoReferences, nil
 }
 
-func FetchPhoto(photoReference string) []byte {
+func FetchPhoto(photoReference string) ([]byte, error) {
 	client, err := maps.NewClient(maps.WithAPIKey(os.Getenv("GOOGLE_API_KEY")))
-	check(err)
+	if err != nil {
+		return nil, err
+	}
+
+	if photoReference == "" {
+		return nil, errors.New("photoReference is empty")
+	}
 
 	r := &maps.PlacePhotoRequest{
 		PhotoReference: photoReference,
@@ -63,14 +71,18 @@ func FetchPhoto(photoReference string) []byte {
 	}
 
 	resp, err := client.PlacePhoto(context.Background(), r)
-	check(err)
+	if err != nil {
+		return nil, err
+	}
 
 	image, err := resp.Image()
-	check(err)
+	if err != nil {
+		return nil, err
+	}
 
 	bytes := imageToBytes(image)
 
-	return bytes
+	return bytes, nil
 }
 
 func imageToBytes(image image.Image) []byte {
