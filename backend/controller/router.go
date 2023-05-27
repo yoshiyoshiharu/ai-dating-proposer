@@ -1,15 +1,30 @@
 package controller
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func NewRouter() *gin.Engine {
 	router := gin.Default()
 
-	router.GET("/", GetPlans)
-	router.GET("/place", GetPlace)
-	router.GET("/place_photo", GetPlacePhoto)
+    router.Use(cors.New(cors.Config{
+        AllowOrigins: []string{
+            "http://localhost:3000",
+        },
+        AllowMethods: []string{
+            "POST",
+            "GET",
+            "OPTIONS",
+        },
+        AllowHeaders: []string{
+            "Content-Type",
+        },
+        AllowCredentials: false,
+    }))
+	router.GET("/api", GetPlans)
+	router.GET("/api/place", GetPlace)
+	router.GET("/api/place_photo", GetPlacePhoto)
 
 	return router
 }
