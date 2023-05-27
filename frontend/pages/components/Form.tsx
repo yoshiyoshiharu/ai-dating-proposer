@@ -39,7 +39,8 @@ const Form = () => {
   };
 
   const getPhotoUrl = async ()  => {
-    const res = await fetch("http://localhost:8080/api/place_photo");
+    const photo_reference = "AZose0lfwCvUMojakGDQRyWq2IU_0yXu5S9TFMFrGGtQrzvo8l1Lq8i8efk5mMEuVFgGbvxjzs7xWsft6q8xir-gsrq7LSrDAC0hPmqMpfCcWFdBE5-fOb2naKCrh0ET3ijW-wAH1oI-TTHaq5d2oradJr15ABNxxAuzz8KICJ1rCYNFrubA"
+    const res = await fetch(`http://localhost:8080/api/place_photo?photo_reference=${photo_reference}`);
     const blob = await res.blob();
     return URL.createObjectURL(blob);
   }
