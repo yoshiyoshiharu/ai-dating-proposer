@@ -65,7 +65,11 @@ const Form = () => {
           fetchingPlan || plans.map((plan) => (
             <div className="card" key={plan.place}>
               <h2>{plan.place}</h2>
-              <img src={imageData}></img>
+              <div className="photos">
+                <img src={imageData} className="photo"></img>
+                <img src={imageData} className="photo"></img>
+                <img src={imageData} className="photo"></img>
+              </div>
             </div>
           ))
         }
@@ -104,6 +108,13 @@ const Form = () => {
           padding: 10px;
           border: 1px solid #333;
           border-radius: 10px;
+        }
+      }
+      .photos {
+        display: flex;
+        justify-content: space-between;
+        .photo {
+          width: 30%;
         }
       }
       `}</style>
