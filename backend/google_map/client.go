@@ -67,8 +67,6 @@ func FetchPhoto(photoReference string) []byte {
 	resp, err := client.PlacePhoto(context.Background(), r)
 	check(err)
 
-	fmt.Println(resp)
-
 	image, err := resp.Image()
 	check(err)
 
