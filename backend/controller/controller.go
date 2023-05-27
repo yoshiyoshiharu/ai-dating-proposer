@@ -16,17 +16,6 @@ func GetPlans(c *gin.Context) {
 		return
 	}
 
-	// resp := []openai.Plan{
-	// 	{
-	// 		Place:       "渋谷",
-	// 		Description: "渋谷で飲み会",
-	// 	},
-	// 	{
-	// 		Place:       "新宿",
-	// 		Description: "新宿で飲み会",
-	// 	},
-	// }
-
 	c.IndentedJSON(http.StatusOK, resp)
 }
 
