@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Form from './components/Form'
-import Test from './components/Test'
 
 const Main = () => {
   return (
@@ -15,7 +14,6 @@ const Main = () => {
       <Header></Header>
       <Form></Form>
       <Footer></Footer>
-      <Test></Test>
     </>
   )
 }

@@ -19,7 +19,8 @@ const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
 
 const Form = () => {
   const [plans, setPlans] = useState<Plan[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [fetchingPlan, setFetchingPlan] = useState<boolean>(false);
+  const [imageData, setImageData] = useState<string>("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,18 +29,25 @@ const Form = () => {
       area: event.target.area.value,
     };
 
-    setLoading(true);
+    setFetchingPlan(true);
     const plans = await fetchPlans(planCondition);
     setPlans(plans);
-    setLoading(false);
+    setFetchingPlan(false);
 
-    console.dir(plans)
+    const objectUrl = await getPhotoUrl();
+    setImageData(objectUrl);
   };
+
+  const getPhotoUrl = async ()  => {
+    const res = await fetch("http://localhost:8080/api/place_photo");
+    const blob = await res.blob();
+    return URL.createObjectURL(blob);
+  }
 
   return (
     <>
       {
-        loading &&
+        fetchingPlan &&
         <Loading></Loading>
       }
 
@@ -54,10 +62,10 @@ const Form = () => {
 
       <div className="cards">
         {
-          loading || plans.map((plan) => (
+          fetchingPlan || plans.map((plan) => (
             <div className="card" key={plan.place}>
               <h2>{plan.place}</h2>
-              <p>{plan.description}</p>
+              <img src={imageData}></img>
             </div>
           ))
         }
