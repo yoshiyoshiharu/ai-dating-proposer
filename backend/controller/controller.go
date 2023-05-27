@@ -36,7 +36,6 @@ func GetPlace(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, id)
 }
 
-
 func GetPlacePhoto(c *gin.Context) {
 	id := google_map.FetchPlaceID()
 	photoReferences := google_map.FetchPlacePhotoReferences(id)

@@ -2,12 +2,12 @@ package client
 
 import (
 	"context"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 	"regexp"
 	"strings"
-	"encoding/json"
-	"errors"
 
 	openai "github.com/sashabaranov/go-openai"
 )
@@ -17,14 +17,14 @@ type Plan = struct {
 	Description string `json:"description"`
 }
 
-func messageFormat () string {
+func messageFormat() string {
 	return `
 You are an excellent dating plan proposer.
 
 The output should be a markdown code snippet formatted in the following schema in Japanese:
 ` +
-"```json" +
-`
+		"```json" +
+		`
 [
   {
    place: string, // title of the dating plan.
@@ -36,8 +36,8 @@ The output should be a markdown code snippet formatted in the following schema i
   },
 ]
 ` +
-"```" +
-`
+		"```" +
+		`
 NOTES:
 * Do not include areas that do not exist.
 * Please list only areas in Japan.
@@ -48,7 +48,7 @@ Tokyo What 3 dating plan do you propose?
 `
 }
 
-func FetchPlans () ([]Plan, error) {
+func FetchPlans() ([]Plan, error) {
 	message := messageFormat()
 
 	res, err := executeApi(message)
