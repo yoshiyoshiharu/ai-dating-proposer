@@ -6,12 +6,11 @@ export default function Test() {
   const handleSubmit = async (event) => {
     console.log("start")
     const res = await fetch('http://localhost:8080/api/place_photo')
-    // const res = await fetch('https://i.imgur.com/uSvshvJ.jpg')
-    console.log(res);
     const blob = await res.blob();
-    console.log(blob);
-    setImageData(URL.createObjectURL(blob));
+    const objectUrl = URL.createObjectURL(blob);
+    setImageData(objectUrl);
   }
+
   return (
     <>
       <div className="test">

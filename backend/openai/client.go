@@ -27,12 +27,10 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 [
   {
-   place: string, // title of the dating plan.
-   description: string // description of the dating plan.
+   place: string, // place name of the dating plan in Japanese.
   },
   {
-   place: string, // title of the dating plan.
-   description: string // description of the dating plan.
+   place: string, // place name of the dating plan in Japanese.
   },
 ]
 ` +
@@ -41,10 +39,9 @@ The output should be a markdown code snippet formatted in the following schema i
 NOTES:
 * Do not include areas that do not exist.
 * Please list only areas in Japan.
-* Please do not include anything other than JSON in your answer.
-* Response must be Japanese
+* Output only JSON, No description
 
-Tokyo What 3 dating plan do you propose?
+Tokyo What 5 dating plan do you propose?
 `
 }
 
