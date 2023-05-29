@@ -45,7 +45,7 @@ const Form = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="label" htmlFor="area">エリア</label>
-          <input className="input" type="text" id="area" name="area" />
+          <input className="input" type="text" id="area" name="area" required/>
         </div>
 
         <button className="submit-button" type="submit">提案してもらう</button>
