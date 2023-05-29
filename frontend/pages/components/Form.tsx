@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Loading from "./Loading";
+import Image from "./Image";
 
 type PlanCondition = {
   area: string;
@@ -8,6 +9,7 @@ type PlanCondition = {
 type Plan = {
   place: string;
   description: string;
+  photo_references: string[];
 }
 
 const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
@@ -34,13 +36,14 @@ const Form = () => {
     setPlans(plans);
     setFetchingPlan(false);
 
-    const objectUrl = await getPhotoUrl();
+    console.log(plans)
+    const photoReference = "AZose0lfwCvUMojakGDQRyWq2IU_0yXu5S9TFMFrGGtQrzvo8l1Lq8i8efk5mMEuVFgGbvxjzs7xWsft6q8xir-gsrq7LSrDAC0hPmqMpfCcWFdBE5-fOb2naKCrh0ET3ijW-wAH1oI-TTHaq5d2oradJr15ABNxxAuzz8KICJ1rCYNFrubA"
+    const objectUrl = await getPhotoUrl(photoReference);
     setImageData(objectUrl);
   };
 
-  const getPhotoUrl = async ()  => {
-    const photo_reference = "AZose0lfwCvUMojakGDQRyWq2IU_0yXu5S9TFMFrGGtQrzvo8l1Lq8i8efk5mMEuVFgGbvxjzs7xWsft6q8xir-gsrq7LSrDAC0hPmqMpfCcWFdBE5-fOb2naKCrh0ET3ijW-wAH1oI-TTHaq5d2oradJr15ABNxxAuzz8KICJ1rCYNFrubA"
-    const res = await fetch(`http://localhost:8080/api/place_photo?photo_reference=${photo_reference}`);
+  const getPhotoUrl = async (photoReference: string)  => {
+    const res = await fetch(`http://localhost:8080/api/place_photo?photo_reference=${photoReference}`);
     const blob = await res.blob();
     return URL.createObjectURL(blob);
   }
@@ -67,9 +70,11 @@ const Form = () => {
             <div className="card" key={plan.place}>
               <h2>{plan.place}</h2>
               <div className="photos">
-                <img src={imageData} className="photo"></img>
-                <img src={imageData} className="photo"></img>
-                <img src={imageData} className="photo"></img>
+                {
+                  plan.photo_references.map((photoReference) => (
+                    <Image photoReference={photoReference}></Image>
+                  ))
+                }
               </div>
             </div>
           ))
@@ -114,9 +119,6 @@ const Form = () => {
       .photos {
         display: flex;
         justify-content: space-between;
-        .photo {
-          width: 30%;
-        }
       }
       `}</style>
     </>
