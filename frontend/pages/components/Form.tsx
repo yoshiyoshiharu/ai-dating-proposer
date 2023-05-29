@@ -11,6 +11,10 @@ type PlanCondition = {
 const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
   try {
     const res = await fetch("http://localhost:8080/api/plans?area=" + planCondition.area)
+    if (!res.ok) {
+      throw new Error("API response was not ok");
+    }
+
     const plans = await res.json();
     return plans
   } catch {
