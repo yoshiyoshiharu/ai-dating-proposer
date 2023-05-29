@@ -2,6 +2,7 @@ package entity
 
 import (
 	"errors"
+	"fmt"
 
 	google_map "github.com/yoshiyoshiharu/ai-dating-proposer/google_map"
 )
@@ -18,6 +19,7 @@ func (p *Plan) FetchPhotoReferencesFromPlace() error {
 		return errors.New("place is empty")
 	}
 
+	fmt.Println("Start FetchPhotoReferencesFromPlace")
 	place_id, err := google_map.FetchPlaceID(p.Place + " " + p.Area)
 	if err != nil {
 		return err

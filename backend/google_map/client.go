@@ -3,18 +3,21 @@ package google_map
 import (
 	"bytes"
 	"context"
+	"errors"
+	"fmt"
 	"image"
 	"image/jpeg"
 	"log"
 	"os"
-	"errors"
-
 
 	"googlemaps.github.io/maps"
 )
 
 func FetchPlaceID(query string) (string, error) {
 	c, err := maps.NewClient(maps.WithAPIKey(os.Getenv("GOOGLE_API_KEY")))
+
+	fmt.Println("Start FetchPlaceID")
+
 	if err != nil {
 		return "", err
 	}
@@ -23,7 +26,7 @@ func FetchPlaceID(query string) (string, error) {
 	}
 
 	res, err := c.TextSearch(context.Background(), r)
-	if err != nil {
+	if err != nil || len(res.Results) == 0 {
 		return "", err
 	}
 
@@ -31,6 +34,10 @@ func FetchPlaceID(query string) (string, error) {
 }
 
 func FetchPlacePhotoReferences(placeID string) ([]string, error) {
+	if placeID == "" {
+		return nil, errors.New("placeID is empty")
+	}
+
 	client, err := maps.NewClient(maps.WithAPIKey(os.Getenv("GOOGLE_API_KEY")))
 	if err != nil {
 		return nil, err
