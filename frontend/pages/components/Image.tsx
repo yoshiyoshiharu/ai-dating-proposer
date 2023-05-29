@@ -17,7 +17,7 @@ export default function Image({ photoReference }: { photoReference: string }) {
 
   return (
     <>
-    <img src={imageData} alt="写真" className="photo" />
+    <img src={imageData} alt="イメージ" className="photo" />
       <style jsx>{`
         .photo {
           width: 30%;

@@ -22,7 +22,6 @@ const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
 const Form = () => {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [fetchingPlan, setFetchingPlan] = useState<boolean>(false);
-  const [imageData, setImageData] = useState<string>("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,18 +34,7 @@ const Form = () => {
     const plans = await fetchPlans(planCondition);
     setPlans(plans);
     setFetchingPlan(false);
-
-    console.log(plans)
-    const photoReference = "AZose0lfwCvUMojakGDQRyWq2IU_0yXu5S9TFMFrGGtQrzvo8l1Lq8i8efk5mMEuVFgGbvxjzs7xWsft6q8xir-gsrq7LSrDAC0hPmqMpfCcWFdBE5-fOb2naKCrh0ET3ijW-wAH1oI-TTHaq5d2oradJr15ABNxxAuzz8KICJ1rCYNFrubA"
-    const objectUrl = await getPhotoUrl(photoReference);
-    setImageData(objectUrl);
   };
-
-  const getPhotoUrl = async (photoReference: string)  => {
-    const res = await fetch(`http://localhost:8080/api/place_photo?photo_reference=${photoReference}`);
-    const blob = await res.blob();
-    return URL.createObjectURL(blob);
-  }
 
   return (
     <>
