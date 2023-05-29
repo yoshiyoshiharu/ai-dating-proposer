@@ -1,16 +1,11 @@
 import { useState } from "react";
 import Loading from "./Loading";
-import Image from "./Image";
-import { PREFECTURES } from "../consts/prefectures";
+import Cards from "./Cards";
+import { PREFECTURES } from "../../consts/prefectures";
+import { Plan } from "../../entity/plan";
 
 type PlanCondition = {
   area: string;
-}
-
-type Plan = {
-  place: string;
-  description: string;
-  photo_references: string[];
 }
 
 const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
@@ -53,11 +48,11 @@ const Form = () => {
           <select name="area" id="area" required>
             <option value="">エリアを選択してください</option>
             <>
-            {
-              PREFECTURES.map((prefecture) => (
-                <option value={prefecture.value}>{prefecture.label}</option>
-              ))
-            }
+              {
+                PREFECTURES.map((prefecture) => (
+                  <option value={prefecture.value}>{prefecture.label}</option>
+                ))
+              }
             </>
           </select>
         </div>
@@ -65,22 +60,7 @@ const Form = () => {
         <button className="submit-button" type="submit">提案してもらう</button>
       </form>
 
-      <div className="cards">
-        {
-          fetchingPlan || plans.length == 0 || plans.map((plan) => (
-            <div className="card" key={plan.place}>
-              <h2>{plan.place}</h2>
-              <div className="photos">
-                {
-                  plan.photo_references?.map((photoReference) => (
-                    <Image photoReference={photoReference}></Image>
-                  ))
-                }
-              </div>
-            </div>
-          ))
-        }
-      </div>
+      <Cards plans={plans}></Cards>
       <style jsx>{`
       form {
         width: 50%;
@@ -107,22 +87,6 @@ const Form = () => {
             background-color: pink;
           }
         }
-      }
-      .cards {
-        .card {
-          width: 50%;
-          background-color: #fff;
-          margin: 10px auto;
-          padding: 10px;
-          border: 1px solid #333;
-          border-radius: 10px;
-        }
-      }
-      .photos {
-        display: flex;
-        width: 100%;
-        overflow: scroll;
-        justify-content: space-between;
       }
       `}</style>
     </>
