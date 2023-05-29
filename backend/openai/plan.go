@@ -1,4 +1,4 @@
-package client
+package plan
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	openai "github.com/sashabaranov/go-openai"
-	plan "github.com/yoshiyoshiharu/ai-dating-proposer/plan"
+	plan "github.com/yoshiyoshiharu/ai-dating-proposer/entity"
 )
 
 func messageFormat(area string) string {
