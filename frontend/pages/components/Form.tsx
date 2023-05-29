@@ -14,9 +14,13 @@ type Plan = {
 }
 
 const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
-  const res = await fetch("http://localhost:8080/api/plans?area=" + planCondition.area)
-  const plans = await res.json();
-  return plans
+  try {
+    const res = await fetch("http://localhost:8080/api/plans?area=" + planCondition.area)
+    const plans = await res.json();
+    return plans
+  } catch {
+    return []
+  }
 }
 
 const Form = () => {
@@ -55,8 +59,6 @@ const Form = () => {
               ))
             }
             </>
-            <option value="東京都">東京都</option>
-            <option value="大阪府">大阪府</option>
           </select>
         </div>
 
@@ -65,12 +67,12 @@ const Form = () => {
 
       <div className="cards">
         {
-          fetchingPlan || plans.map((plan) => (
+          fetchingPlan || plans.length == 0 || plans.map((plan) => (
             <div className="card" key={plan.place}>
               <h2>{plan.place}</h2>
               <div className="photos">
                 {
-                  plan.photo_references.map((photoReference) => (
+                  plan.photo_references?.map((photoReference) => (
                     <Image photoReference={photoReference}></Image>
                   ))
                 }
