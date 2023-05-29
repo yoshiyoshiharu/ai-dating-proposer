@@ -50,7 +50,7 @@ const Form = () => {
             <>
               {
                 PREFECTURES.map((prefecture) => (
-                  <option value={prefecture.value}>{prefecture.label}</option>
+                  <option key={prefecture.label} value={prefecture.value}>{prefecture.label}</option>
                 ))
               }
             </>
