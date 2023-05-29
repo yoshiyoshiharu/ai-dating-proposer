@@ -13,10 +13,9 @@ type Plan = {
 }
 
 const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
-  const res = await fetch("/api/client");
-  const jsonRes = await res.json();
-  const plans = jsonRes.plans;
-  return plans;
+  const res = await fetch("http://localhost:8080/api/plans?area=Tokyo")
+  const plans = await res.json();
+  return plans
 }
 
 const Form = () => {
