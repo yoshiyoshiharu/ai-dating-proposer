@@ -109,6 +109,7 @@ const Form = () => {
       .cards {
         .card {
           width: 50%;
+          background-color: #fff;
           margin: 10px auto;
           padding: 10px;
           border: 1px solid #333;
