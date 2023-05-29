@@ -35,7 +35,6 @@ const Cards = ({ plans }: { plans: Plan[] }) => {
           display: flex;
           width: 100%;
           overflow: scroll;
-          justify-content: space-between;
         }
       `}</style>
     </>
