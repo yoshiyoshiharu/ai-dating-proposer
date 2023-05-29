@@ -23,7 +23,7 @@ const Form = () => {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [fetchingPlan, setFetchingPlan] = useState<boolean>(false);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     const planCondition = {
