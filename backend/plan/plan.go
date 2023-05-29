@@ -7,6 +7,7 @@ import (
 )
 
 type Plan struct {
+	Area            string   `json:"area"`
 	Place           string   `json:"place"`
 	Description     string   `json:"description"`
 	PhotoReferences []string `json:"photo_references"`
@@ -17,7 +18,7 @@ func (p *Plan) FetchPhotoReferencesFromPlace() error {
 		return errors.New("place is empty")
 	}
 
-	place_id, err := google_map.FetchPlaceID(p.Place)
+	place_id, err := google_map.FetchPlaceID(p.Place + " " + p.Area)
 	if err != nil {
 		return err
 	}

@@ -15,7 +15,7 @@ import (
 
 func messageFormat(area string) string {
 	return `
-You are an excellent dating plan proposer.
+You are an excellent date spot proposer.
 
 The output should be a markdown code snippet formatted in the following schema in Japanese:
 ` +
@@ -23,10 +23,10 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 [
   {
-   place: string, // place name of the dating plan in Japanese.
+   place: string, // place name of the data spot in Japanese.
   },
   {
-   place: string, // place name of the dating plan in Japanese.
+   place: string, // place name of the data spot in Japanese.
   },
 ]
 ` +
@@ -39,7 +39,7 @@ NOTES:
 ` +
 		area +
 		`
-What 5 dating plan do you propose?
+What 5 data spot do you propose?
 `
 }
 
@@ -56,6 +56,10 @@ func FetchPlans(area string) ([]*plan.Plan, error) {
 
 	if len(plans) == 0 {
 		return nil, errors.New("no plans")
+	}
+
+	for _, plan := range plans {
+		plan.Area = area
 	}
 
 	return plans, nil
