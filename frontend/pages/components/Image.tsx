@@ -21,6 +21,9 @@ export default function Image({ photoReference }: { photoReference: string }) {
       <style jsx>{`
         .photo {
           width: 30%;
+          height: 250px;
+          margin: 0 10px;
+          border-radius: 10px;
         }
       `}</style>
     </>

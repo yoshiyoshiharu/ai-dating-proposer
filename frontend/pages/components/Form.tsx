@@ -118,6 +118,8 @@ const Form = () => {
       }
       .photos {
         display: flex;
+        width: 100%;
+        overflow: scroll;
         justify-content: space-between;
       }
       `}</style>
