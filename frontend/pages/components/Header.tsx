@@ -1,14 +1,22 @@
+import Image from "next/image";
+
 export default function Header() {
   return (
     <>
       <header>
-        <h1 className="title">AIデートプラン提案アプリ</h1>
+        <Image src="/header.png" alt="icon" className="header-icon" width="64" height="64" />
+        <h1 className="title">
+          AIデートプラン提案アプリ
+        </h1>
       </header>
       <style jsx>{`
         header {
           background-color: pink;
+          display: flex;
+          align-items: center;
           .title {
             margin: 0;
+            font-family: "TsukuARdGothic-Regular", sans-serif;
           }
         }
       `}</style>
