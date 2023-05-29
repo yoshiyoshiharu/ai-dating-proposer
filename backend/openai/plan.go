@@ -13,7 +13,7 @@ import (
 	entity "github.com/yoshiyoshiharu/ai-dating-proposer/entity"
 )
 
-func messageFormat(area string) string {
+func planMessageFormat(area string) string {
 	return `
 You are an excellent date spot proposer.
 
@@ -44,15 +44,15 @@ What 5 data spot do you propose?
 }
 
 func FetchPlans(area string) ([]*entity.Plan, error) {
-	message := messageFormat(area)
+	message := planMessageFormat(area)
 
-	res, err := executeApi(message)
+	res, err := executePlanApi(message)
 
 	if err != nil {
 		return nil, err
 	}
 
-	plans := parseResponse(res)
+	plans := parsePlanResponse(res)
 
 	if len(plans) == 0 {
 		return nil, errors.New("no plans")
@@ -65,7 +65,7 @@ func FetchPlans(area string) ([]*entity.Plan, error) {
 	return plans, nil
 }
 
-func executeApi(message string) (string, error) {
+func executePlanApi(message string) (string, error) {
 	client := openai.NewClient(os.Getenv("OPENAI_API_KEY"))
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
@@ -88,7 +88,7 @@ func executeApi(message string) (string, error) {
 	return resp.Choices[0].Message.Content, nil
 }
 
-func parseResponse(res string) []*entity.Plan {
+func parsePlanResponse(res string) []*entity.Plan {
 	reg, _ := regexp.Compile("```json" + `([\s\S]*?)` + "```")
 	matched := reg.FindString(res)
 
