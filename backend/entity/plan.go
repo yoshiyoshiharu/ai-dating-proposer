@@ -19,7 +19,6 @@ func (p *Plan) FetchPhotoReferencesFromPlace() error {
 		return errors.New("place is empty")
 	}
 
-	fmt.Println("Start FetchPhotoReferencesFromPlace")
 	place_id, err := google_map.FetchPlaceID(p.Place + " " + p.Area)
 	if err != nil {
 		return err
@@ -28,7 +27,8 @@ func (p *Plan) FetchPhotoReferencesFromPlace() error {
 	if place_id != "" {
 		photoReferences, err := google_map.FetchPlacePhotoReferences(place_id)
 		if err != nil {
-			return err
+			// TODO ここで結構エラーが発生するので、発生したエラーをいいかんじにする
+			return nil
 		}
 
 		p.PhotoReferences = append(p.PhotoReferences, photoReferences...)
