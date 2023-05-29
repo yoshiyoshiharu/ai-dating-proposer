@@ -16,8 +16,6 @@ import (
 func FetchPlaceID(query string) (string, error) {
 	c, err := maps.NewClient(maps.WithAPIKey(os.Getenv("GOOGLE_API_KEY")))
 
-	fmt.Println("Start FetchPlaceID")
-
 	if err != nil {
 		return "", err
 	}
@@ -40,6 +38,7 @@ func FetchPlacePhotoReferences(placeID string) ([]string, error) {
 
 	client, err := maps.NewClient(maps.WithAPIKey(os.Getenv("GOOGLE_API_KEY")))
 	if err != nil {
+		fmt.Println("err1")
 		return nil, err
 	}
 
@@ -49,7 +48,9 @@ func FetchPlacePhotoReferences(placeID string) ([]string, error) {
 
 	resp, err := client.PlaceDetails(context.Background(), r)
 	if err != nil {
-		return nil, err
+		fmt.Println("error occured in PlaceDetails", err, "placeID:", placeID)
+		// ライブラリのissus, 一旦エラーを握りつぶす
+		return nil, nil
 	}
 
 	var photoReferences []string

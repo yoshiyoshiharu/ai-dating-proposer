@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"os"
 	"regexp"
 	"strings"
@@ -77,7 +76,6 @@ func executePlanApi(message string) (string, error) {
 	)
 
 	if err != nil || len(resp.Choices) == 0 {
-		fmt.Printf("ChatCompletion error: %v\n", err)
 		return "", err
 	}
 

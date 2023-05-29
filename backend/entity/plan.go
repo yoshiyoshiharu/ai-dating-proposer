@@ -2,7 +2,6 @@ package entity
 
 import (
 	"errors"
-	"fmt"
 
 	google_map "github.com/yoshiyoshiharu/ai-dating-proposer/google_map"
 )
@@ -27,9 +26,7 @@ func (p *Plan) FetchPhotoReferencesFromPlace() error {
 	if place_id != "" {
 		photoReferences, err := google_map.FetchPlacePhotoReferences(place_id)
 		if err != nil {
-			// TODO ここで結構エラーが発生するので、発生したエラーをいいかんじにする
-			fmt.Println(err)
-			return nil
+			return err
 		}
 
 		p.PhotoReferences = append(p.PhotoReferences, photoReferences...)

@@ -31,13 +31,11 @@ func GetPlans(c *gin.Context) {
 		err = plan.FetchPhotoReferencesFromPlace()
 
 		if err != nil {
-			fmt.Println(err)
 			c.IndentedJSON(http.StatusInternalServerError, err)
 			return
 		}
 	}
 
-	fmt.Println(plans)
 	c.IndentedJSON(http.StatusOK, plans)
 }
 
