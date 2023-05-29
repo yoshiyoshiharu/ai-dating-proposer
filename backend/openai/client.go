@@ -76,7 +76,7 @@ func executeApi(message string) (string, error) {
 		},
 	)
 
-	if err != nil {
+	if err != nil || len(resp.Choices) == 0 {
 		fmt.Printf("ChatCompletion error: %v\n", err)
 		return "", err
 	}

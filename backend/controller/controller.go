@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -20,15 +21,23 @@ func GetPlans(c *gin.Context) {
 
 	plans, err := openai.FetchPlans(area)
 
-	for _, plan := range plans {
-		err = plan.FetchPhotoReferencesFromPlace()
-	}
-
 	if err != nil {
+		fmt.Println(err)
 		c.IndentedJSON(http.StatusInternalServerError, err)
 		return
 	}
 
+	for _, plan := range plans {
+		err = plan.FetchPhotoReferencesFromPlace()
+
+		if err != nil {
+			fmt.Println(err)
+			c.IndentedJSON(http.StatusInternalServerError, err)
+			return
+		}
+	}
+
+	fmt.Println(plans)
 	c.IndentedJSON(http.StatusOK, plans)
 }
 
