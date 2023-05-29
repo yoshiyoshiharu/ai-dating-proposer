@@ -28,6 +28,7 @@ func (p *Plan) FetchPhotoReferencesFromPlace() error {
 		photoReferences, err := google_map.FetchPlacePhotoReferences(place_id)
 		if err != nil {
 			// TODO ここで結構エラーが発生するので、発生したエラーをいいかんじにする
+			fmt.Println(err)
 			return nil
 		}
 
