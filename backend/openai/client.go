@@ -13,7 +13,7 @@ import (
 	plan "github.com/yoshiyoshiharu/ai-dating-proposer/plan"
 )
 
-func messageFormat() string {
+func messageFormat(area string) string {
 	return `
 You are an excellent dating plan proposer.
 
@@ -36,13 +36,15 @@ NOTES:
 * Do not include areas that do not exist.
 * Please list only areas in Japan.
 * Output only JSON, No description
-
-Tokyo What 5 dating plan do you propose?
+` +
+		area +
+		`
+What 5 dating plan do you propose?
 `
 }
 
-func FetchPlans() ([]*plan.Plan, error) {
-	message := messageFormat()
+func FetchPlans(area string) ([]*plan.Plan, error) {
+	message := messageFormat(area)
 
 	res, err := executeApi(message)
 

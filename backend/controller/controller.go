@@ -11,15 +11,14 @@ import (
 func GetPlans(c *gin.Context) {
 	var err error
 
-	plans, err := openai.FetchPlans()
-	// plans := []*plan.Plan{
-	// 	{
-	// 		Place:       "東京タワー",
-	// 	},
-	// 	{
-	// 		Place:       "東京スカイツリー",
-	// 	},
-	// }
+	area := c.Query("area")
+
+	if area == "" {
+		c.IndentedJSON(http.StatusBadRequest, "area is required")
+		return
+	}
+
+	plans, err := openai.FetchPlans(area)
 
 	for _, plan := range plans {
 		err = plan.FetchPhotoReferencesFromPlace()
