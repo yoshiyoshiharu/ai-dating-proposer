@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	google_map "github.com/yoshiyoshiharu/ai-dating-proposer/google_map"
-	openai "github.com/yoshiyoshiharu/ai-dating-proposer/openai"
+	"github.com/yoshiyoshiharu/ai-dating-proposer/openai"
 )
 
 func GetPlans(c *gin.Context) {
