@@ -25,12 +25,14 @@ func (p *Plan) FetchPhotoReferencesFromPlace() error {
 		return err
 	}
 
-	photoReferences, err := google_map.FetchPlacePhotoReferences(place_id)
-	if err != nil {
-		return err
-	}
+	if place_id != "" {
+		photoReferences, err := google_map.FetchPlacePhotoReferences(place_id)
+		if err != nil {
+			return err
+		}
 
-	p.PhotoReferences = append(p.PhotoReferences, photoReferences...)
+		p.PhotoReferences = append(p.PhotoReferences, photoReferences...)
+	}
 
 	return nil
 }

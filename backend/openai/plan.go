@@ -35,12 +35,8 @@ The output should be a markdown code snippet formatted in the following schema i
 NOTES:
 * Do not include areas that do not exist.
 * Please list only areas in Japan.
-* Output only JSON, No description
-` +
-		area +
-		`
-What 5 data plan do you propose?
-`
+* Output only JSON, No description` +
+		"What 5 data plan in" + area + "do you propose?"
 }
 
 func FetchPlans(area string) ([]*entity.Plan, error) {
