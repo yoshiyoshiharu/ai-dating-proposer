@@ -15,7 +15,7 @@ import (
 
 func planMessageFormat(area string) string {
 	return `
-You are an excellent date spot proposer.
+You are an excellent date plan proposer.
 
 The output should be a markdown code snippet formatted in the following schema in Japanese:
 ` +
@@ -23,10 +23,10 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 [
   {
-   place: string, // place name of the data spot in Japanese.
+   place: string, // place name of the data plan in Japanese.
   },
   {
-   place: string, // place name of the data spot in Japanese.
+   place: string, // place name of the data plan in Japanese.
   },
 ]
 ` +
@@ -39,7 +39,7 @@ NOTES:
 ` +
 		area +
 		`
-What 5 data spot do you propose?
+What 5 data plan do you propose?
 `
 }
 
