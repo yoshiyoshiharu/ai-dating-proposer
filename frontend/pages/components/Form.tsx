@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Loading from "./Loading";
 import Image from "./Image";
+import { PREFECTURES } from "../consts/prefectures";
 
 type PlanCondition = {
   area: string;
@@ -45,7 +46,18 @@ const Form = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="label" htmlFor="area">エリア</label>
-          <input className="input" type="text" id="area" name="area" required/>
+          <select name="area" id="area" required>
+            <option value="">エリアを選択してください</option>
+            <>
+            {
+              PREFECTURES.map((prefecture) => (
+                <option value={prefecture.value}>{prefecture.label}</option>
+              ))
+            }
+            </>
+            <option value="東京都">東京都</option>
+            <option value="大阪府">大阪府</option>
+          </select>
         </div>
 
         <button className="submit-button" type="submit">提案してもらう</button>
