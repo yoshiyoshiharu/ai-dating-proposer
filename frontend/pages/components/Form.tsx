@@ -22,12 +22,15 @@ const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
   }
 }
 
+
 const Form = () => {
+  const [submited, setSubmited] = useState<boolean>(false);
   const [plans, setPlans] = useState<Plan[]>([]);
   const [fetchingPlan, setFetchingPlan] = useState<boolean>(false);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    setSubmited(true);
 
     const planCondition = {
       area: event.target.area.value,
@@ -64,7 +67,7 @@ const Form = () => {
         <button className="submit-button" type="submit">提案してもらう</button>
       </form>
 
-      <Cards plans={plans}></Cards>
+      <Cards plans={plans} submited={submited}></Cards>
       <style jsx>{`
       form {
         width: 50%;

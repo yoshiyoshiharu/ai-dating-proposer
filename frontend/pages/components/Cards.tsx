@@ -1,8 +1,8 @@
 import { Plan } from '../../entity/plan';
 import Image from './Image';
 
-const Cards = ({ plans }: { plans: Plan[] }) => {
-  if (plans.length == 0) {
+const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
+  if (submited && plans.length == 0) {
     return (
       <>
         <h2>プランが見つかりませんでした。もう一度試してください。</h2>
