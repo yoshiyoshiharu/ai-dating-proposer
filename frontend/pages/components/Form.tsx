@@ -13,7 +13,7 @@ type Plan = {
 }
 
 const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
-  const res = await fetch("http://localhost:8080/api/plans?area=Tokyo")
+  const res = await fetch("http://localhost:8080/api/plans?area=" + planCondition.area)
   const plans = await res.json();
   return plans
 }
@@ -45,7 +45,7 @@ const Form = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="label" htmlFor="area">エリア</label>
-          <input className="input" type="text" id="area" name="area"/>
+          <input className="input" type="text" id="area" name="area" />
         </div>
 
         <button className="submit-button" type="submit">提案してもらう</button>
