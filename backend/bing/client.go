@@ -2,6 +2,7 @@ package bing
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -51,5 +52,6 @@ func SearchImages(query string) ([]string, error) {
 		imageUrls = append(imageUrls, v.ContentURL)
 	}
 
+	fmt.Println(imageUrls)
 	return imageUrls, nil
 }
