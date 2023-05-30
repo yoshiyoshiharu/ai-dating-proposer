@@ -52,7 +52,7 @@ const Form = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="label" htmlFor="area">エリア</label>
-          <select name="area" id="area" required>
+          <select className="select" name="area" id="area" required>
             <option value="">エリアを選択してください</option>
             <>
               {
@@ -72,20 +72,30 @@ const Form = () => {
       form {
         width: 50%;
         margin: 0 auto;
-        text-align: center;
+        background-color: #ffaaaa;
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 20px;
         .form-group {
           display: flex;
-          margin: 10px;
+          align-items: center;
+          justify-content: space-between;
           .label {
-            width: 20%;
+            width: 60px;
+            white-space: nowrap;
           }
-          .input {
-            width: 100%;
+          .select {
+            width: 90%;
+            box-sizing: border-box;
+            padding: 10px;
+            height: 40px;
+            border-radius: 10px;
+            color: #555;
           }
         }
         .submit-button {
           width: 100%;
-          margin: 10px auto;
+          margin: 20px auto 0 auto;
           padding: 10px;
           border-radius: 10px;
           border: 1px solid #333;
