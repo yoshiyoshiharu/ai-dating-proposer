@@ -1,23 +1,7 @@
-import { useEffect, useState } from "react";
-
-export default function Image({ photoReference }: { photoReference: string }) {
-  const [imageData, setImageData] = useState<string>("");
-
-  useEffect(() => {
-    const fetchPhotoImage = async (photoReference: string) => {
-      const res = await fetch(`http://localhost:8080/api/place_photo?photo_reference=${photoReference}`);
-      const blob = await res.blob();
-      const objectUrl =  URL.createObjectURL(blob);
-      setImageData(objectUrl);
-    }
-
-    fetchPhotoImage(photoReference);
-  }, []);
-
-
+export default function Image({ imageUrl }: { imageUrl: string }) {
   return (
     <>
-    <img src={imageData} className="photo" />
+    <img src={imageUrl} className="photo" />
       <style jsx>{`
         .photo {
           width: 30%;

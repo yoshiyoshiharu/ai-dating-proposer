@@ -23,8 +23,8 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
                 <h2>{plan.place}</h2>
                 <div className="photos">
                   {
-                    plan.photo_references?.map((photoReference: string) => (
-                      <Image photoReference={photoReference}></Image>
+                    plan.image_urls?.map((imageUrl: string) => (
+                      <Image imageUrl={imageUrl}></Image>
                     ))
                   }
                 </div>
