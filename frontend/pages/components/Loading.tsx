@@ -3,31 +3,51 @@ export default function Loading() {
     <>
       <div className="loader-wrap">
         <div className="wrapper">
-          <div className="circle"></div>
-          <div className="circle"></div>
-          <div className="circle"></div>
-          <div className="shadow"></div>
-          <div className="shadow"></div>
-          <div className="shadow"></div>
-          <span>Loading</span>
+          <div className="circles">
+            <div className="circle"></div>
+            <div className="circle"></div>
+            <div className="circle"></div>
+            <div className="shadow"></div>
+            <div className="shadow"></div>
+            <div className="shadow"></div>
+          </div>
+          <div className="description">
+            <div className="description-detail">プランを考えています</div>
+            <div className="description-detail">15秒ほどかかります</div>
+          </div>
         </div>
-      </div>
+      </div >
       <style jsx>{`
         .loader-wrap {
           position: absolute;
-          top: 0;
+          top: 60px;
           left: 0;
           width: 100%;
           height: 100vh;
           background: pink;
         }
-        .wrapper{
+        .wrapper {
+          position: absolute;
+          width: 100%;
+          top:40%;
+          .circles{
             width:200px;
             height:60px;
             position: absolute;
             left:50%;
-            top:50%;
             transform: translate(-50%, -50%);
+          }
+          .description {
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 70px;
+            font-family: 'Lato';
+            font-size: 16px;
+            letter-spacing: 12px;
+            color: #fff;
+            .description-detail {
+            }
+          }
         }
         .circle{
             width:20px;
@@ -100,15 +120,6 @@ export default function Loading() {
             left:auto;
             right:15%;
             animation-delay: .3s;
-        }
-        .wrapper span{
-            position: absolute;
-            top:75px;
-            font-family: 'Lato';
-            font-size: 20px;
-            letter-spacing: 12px;
-            color: #fff;
-            left:15%;
         }
       `}</style>
     </>
