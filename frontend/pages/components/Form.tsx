@@ -1,6 +1,4 @@
-import { useState } from "react";
-import Loading from "./Loading";
-import Cards from "./Cards";
+import { useState } from "react"; import Loading from "./Loading"; import Cards from "./Cards";
 import { PREFECTURES } from "../../consts/prefectures";
 import { Plan } from "../../entity/plan";
 
@@ -10,7 +8,7 @@ type PlanCondition = {
 
 const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
   try {
-    const res = await fetch("http://localhost:8080/api/plans?area=" + planCondition.area)
+    const res = await fetch("/api/client?area=" + planCondition.area)
     if (!res.ok) {
       throw new Error("API response was not ok");
     }
