@@ -9,6 +9,9 @@ export default function Description() {
         .description {
           width: 50%;
           margin: 0 auto;
+          @media screen and (max-width: 768px) {
+            width: 90%;
+          }
         }
       `}</style>
     </>

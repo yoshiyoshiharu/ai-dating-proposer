@@ -19,6 +19,11 @@ export default function Header() {
             font-family: "TsukuARdGothic-Regular", sans-serif;
           }
         }
+        @media screen and (max-width: 768px) {
+          .title {
+            font-size: 1.5rem;
+          }
+        }
       `}</style>
     </>
   );

@@ -16,6 +16,10 @@ const Images = ({ imageUrls }: { imageUrls: string[] }) => {
             height: 250px;
             margin: 0 10px;
             border-radius: 10px;
+            @media screen and (max-width: 768px) {
+              width: 150px;
+              height: 150px;
+            }
           }
         }
         `}</style>

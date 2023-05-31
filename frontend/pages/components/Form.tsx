@@ -67,42 +67,45 @@ const Form = () => {
 
       <Cards plans={plans} submited={submited}></Cards>
       <style jsx>{`
-      form {
-        width: 50%;
-        margin: 0 auto;
-        background-color: #ffaaaa;
-        padding: 30px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        .form-group {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          .label {
-            width: 60px;
-            white-space: nowrap;
-          }
-          .select {
-            width: 90%;
-            box-sizing: border-box;
-            padding: 10px;
-            height: 40px;
-            border-radius: 10px;
-            color: #555;
-          }
-        }
-        .submit-button {
-          width: 100%;
-          margin: 20px auto 0 auto;
-          padding: 10px;
+        form {
+          width: 50%;
+          margin: 0 auto;
+          background-color: #ffaaaa;
+          padding: 30px;
           border-radius: 10px;
-          border: 1px solid #333;
-          cursor: pointer;
-          &:hover {
-            background-color: pink;
+          margin-bottom: 20px;
+          @media screen and (max-width: 768px) {
+            width: 90%;
+          }
+          .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .label {
+              width: 60px;
+              white-space: nowrap;
+            }
+            .select {
+              width: 90%;
+              box-sizing: border-box;
+              padding: 10px;
+              height: 40px;
+              border-radius: 10px;
+              color: #555;
+            }
+          }
+          .submit-button {
+            width: 100%;
+            margin: 20px auto 0 auto;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            cursor: pointer;
+            &:hover {
+              background-color: pink;
+            }
           }
         }
-      }
       `}</style>
     </>
   )
