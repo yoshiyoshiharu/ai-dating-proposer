@@ -39,7 +39,7 @@ const Form = () => {
     setFetchingPlan(true);
     const plans = await fetchPlans(planCondition);
     setPlans(plans);
-    // setFetchingPlan(false);
+    setFetchingPlan(false);
   };
 
   return (

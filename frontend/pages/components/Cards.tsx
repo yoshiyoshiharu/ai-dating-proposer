@@ -1,5 +1,5 @@
 import { Plan } from '../../entity/plan';
-import Image from './Image';
+import Images from './Images';
 
 const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
   if (submited && plans.length == 0) {
@@ -18,16 +18,10 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
       <>
         <div className="cards">
           {
-            plans.map((plan) => (
+            plans !== undefined && plans.map((plan) => (
               <div className="card" key={plan.place}>
                 <h2>{plan.place}</h2>
-                <div className="photos">
-                  {
-                    plan.photo_references?.map((photoReference: string) => (
-                      <Image photoReference={photoReference}></Image>
-                    ))
-                  }
-                </div>
+                <Images imageUrls={plan.image_urls}></Images>
               </div>
             ))
           }
@@ -42,11 +36,6 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
               border: 1px solid #333;
               border-radius: 10px;
             }
-          }
-          .photos {
-            display: flex;
-            width: 100%;
-            overflow: scroll;
           }
         `}</style>
       </>
