@@ -13,6 +13,9 @@ export default function Description() {
             width: 90%;
           }
         }
+        _:lang(x)+_:-webkit-full-screen-document, .description {
+          width: 90%;
+        }
       `}</style>
     </>
   );

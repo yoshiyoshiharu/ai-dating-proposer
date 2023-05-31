@@ -44,7 +44,7 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
             }
           }
           _:lang(x)+_:-webkit-full-screen-document, .card {
-            width: 50%;
+            width: 90%;
             background-color: #fff;
             margin: 10px auto;
             padding: 10px;
@@ -55,7 +55,7 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
             }
           }
           _:lang(x)+_:-webkit-full-screen-document, .place {
-              font-size: 1rem;
+              font-size: 1.5rem;
           }
         `}</style>
       </>

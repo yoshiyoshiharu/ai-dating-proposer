@@ -106,6 +106,9 @@ const Form = () => {
             }
           }
         }
+        _:lang(x)+_:-webkit-full-screen-document, form {
+          width: 90%;
+        }
       `}</style>
     </>
   )

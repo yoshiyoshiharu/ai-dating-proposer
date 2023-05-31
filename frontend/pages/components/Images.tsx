@@ -23,8 +23,8 @@ const Images = ({ imageUrls }: { imageUrls: string[] }) => {
           }
         }
          _:lang(x)+_:-webkit-full-screen-document, .image {
-            width: 100px;
-            height: 100px;
+            width: 200px;
+            height: 200px;
             margin: 0 5px;
             border-radius: 10px;
           }
