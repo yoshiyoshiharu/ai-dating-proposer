@@ -129,6 +129,7 @@ const Form = () => {
        _:lang(x)+_:-webkit-full-screen-document, .submit-button {
             width: 100%;
             background-color: #eee;
+            color: #333;
             margin: 20px auto 0 auto;
             padding: 10px;
             border-radius: 10px;
