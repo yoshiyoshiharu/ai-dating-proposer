@@ -29,9 +29,6 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
         <style jsx>{`
           .cards {
             .card {
-              .place {
-                font-size: 1rem;
-              }
               width: 50%;
               background-color: #fff;
               margin: 10px auto;
@@ -41,7 +38,24 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
               @media screen and (max-width: 768px) {
                 width: 90%;
               }
+              .place {
+                font-size: 1rem;
+              }
             }
+          }
+          _:lang(x)+_:-webkit-full-screen-document, .card {
+            width: 50%;
+            background-color: #fff;
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            .place {
+              font-size: 1rem;
+            }
+          }
+          _:lang(x)+_:-webkit-full-screen-document, .place {
+              font-size: 1rem;
           }
         `}</style>
       </>
