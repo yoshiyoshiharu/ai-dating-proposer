@@ -18,7 +18,7 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
       <>
         <div className="cards">
           {
-            plans.map((plan) => (
+            plans !== undefined && plans.map((plan) => (
               <div className="card" key={plan.place}>
                 <h2>{plan.place}</h2>
                 <Images imageUrls={plan.image_urls}></Images>

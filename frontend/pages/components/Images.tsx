@@ -2,7 +2,7 @@ const Images = ({ imageUrls }: { imageUrls: string[] }) => {
   return (
     <>
       <div className="images">
-        {imageUrls.length > 0 && imageUrls.map((imageUrl) => (
+        {imageUrls !== undefined && imageUrls.length > 0 && imageUrls.map((imageUrl) => (
           <img className="image" src={imageUrl} key={imageUrl} />
         ))}
       </div>
