@@ -8,7 +8,7 @@ type PlanCondition = {
 
 const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
   try {
-    const res = await fetch("/api/client?area=" + planCondition.area)
+    const res = await fetch("https://plan-hisx7j6zla-an.a.run.app/api/plans?area=" + planCondition.area)
     if (!res.ok) {
       throw new Error("API response was not ok");
     }
