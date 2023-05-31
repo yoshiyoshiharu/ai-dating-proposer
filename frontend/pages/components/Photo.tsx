@@ -1,7 +1,7 @@
-export default function Image({ imageUrl }: { imageUrl: string }) {
+export default function Photo({ photoUrl }: { photoUrl: string }) {
   return (
     <>
-    <img src={imageUrl} className="photo" />
+    <img src={photoUrl} className="photo" />
       <style jsx>{`
         .photo {
           width: 30%;
