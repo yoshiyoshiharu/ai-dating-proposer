@@ -121,6 +121,23 @@ export default function Loading() {
             right:15%;
             animation-delay: .3s;
         }
+
+        _:lang(x)+_:-webkit-full-screen-document, .circles{
+          width:200px;
+          height:60px;
+          position: absolute;
+          left:50%;
+          transform: translate(-50%, -50%);
+        }
+        _:lang(x)+_:-webkit-full-screen-document, .description {
+          text-align: center;
+          margin: 0 auto;
+          margin-top: 90px;
+          font-family: 'Lato';
+          font-size: 16px;
+          letter-spacing: 12px;
+          color: #fff;
+        }
       `}</style>
     </>
   );
