@@ -1,5 +1,5 @@
 import { Plan } from '../../entity/plan';
-import Photo from './Photo';
+import Images from './Images';
 
 const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
   if (submited && plans.length == 0) {
@@ -21,14 +21,7 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
             plans.map((plan) => (
               <div className="card" key={plan.place}>
                 <h2>{plan.place}</h2>
-                <div className="photos">
-                  {
-                    // ここImagesコンポーネントにする
-                    plan.image_urls.map((imageUrl: string) => (
-                      <Photo photoUrl={imageUrl} key={imageUrl}></Photo>
-                    ))
-                  }
-                </div>
+                <Images imageUrls={plan.image_urls}></Images>
               </div>
             ))
           }
@@ -43,11 +36,6 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
               border: 1px solid #333;
               border-radius: 10px;
             }
-          }
-          .photos {
-            display: flex;
-            width: 100%;
-            overflow: scroll;
           }
         `}</style>
       </>
