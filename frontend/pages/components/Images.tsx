@@ -12,7 +12,7 @@ const Images = ({ imageUrls }: { imageUrls: string[] }) => {
           width: 100%;
           overflow: scroll;
           .image {
-            width: 30%;
+            width: 250px;
             height: 250px;
             margin: 0 10px;
             border-radius: 10px;
