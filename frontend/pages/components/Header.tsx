@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <>
       <header>
-        <Image src="/icon2.png" alt="icon" className="header-icon" width="64" height="64" />
+        <Image src="/icon.png" alt="icon" className="header-icon" width="64" height="64" />
         <h1 className="title">
           AIデートプラン提案アプリ
         </h1>
