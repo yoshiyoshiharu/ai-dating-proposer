@@ -1,19 +1,22 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next';
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:8080'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const body = JSON.stringify({
-    area: req.body.area,
-})
+  console.log(BASE_URL)
+  if (req.method !== 'GET') {
+    res.status(500).json({ error: 'Only GET requests allowed' })
+    return
+  }
 
-  const resp = await fetch("http://localhost:8080", {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: body
-  })
+  const resp = await fetch(BASE_URL + '/api/plans?area=' + req.query.area)
 
-  const data = await resp.json();
-  console.log(data)
-  return res.json({ plans: data})
+  if (resp.status !== 200) {
+    res.status(500).json({ error: 'Error fetching plans' })
+    return
+  } else {
+    const data = await resp.json()
+
+    res.status(200).json(data)
+  }
 }

@@ -1,103 +1,141 @@
-import { useState } from "react";
-import Loading from "./Loading";
+import { useState } from "react"; import Loading from "./Loading"; import Cards from "./Cards";
+import { PREFECTURES } from "../../consts/prefectures";
+import { Plan } from "../../entity/plan";
 
 type PlanCondition = {
   area: string;
 }
 
-type Plan = {
-  place: string;
-  description: string;
+const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
+  try {
+    const res = await fetch("/api/client?area=" + planCondition.area)
+    if (!res.ok) {
+      throw new Error("API response was not ok");
+    }
+
+    const plans = await res.json();
+    return plans
+  } catch {
+    return []
+  }
 }
 
-const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
-  const res = await fetch("/api/client");
-  const jsonRes = await res.json();
-  const plans = jsonRes.plans;
-  return plans;
-}
 
 const Form = () => {
+  const [submited, setSubmited] = useState<boolean>(false);
   const [plans, setPlans] = useState<Plan[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [fetchingPlan, setFetchingPlan] = useState<boolean>(false);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
+    setSubmited(true);
 
     const planCondition = {
       area: event.target.area.value,
     };
 
-    setLoading(true);
+    setFetchingPlan(true);
     const plans = await fetchPlans(planCondition);
     setPlans(plans);
-    setLoading(false);
-
-    console.dir(plans)
+    setFetchingPlan(false);
   };
 
   return (
     <>
       {
-        loading &&
+        fetchingPlan &&
         <Loading></Loading>
       }
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="label" htmlFor="area">エリア</label>
-          <input className="input" type="text" id="area" name="area"/>
+          <select className="select" name="area" id="area" required>
+            <option value="">エリアを選択してください</option>
+            <>
+              {
+                PREFECTURES.map((prefecture) => (
+                  <option key={prefecture.label} value={prefecture.value}>{prefecture.label}</option>
+                ))
+              }
+            </>
+          </select>
         </div>
 
         <button className="submit-button" type="submit">提案してもらう</button>
       </form>
 
-      <div className="cards">
-        {
-          loading || plans.map((plan) => (
-            <div className="card" key={plan.place}>
-              <h2>{plan.place}</h2>
-              <p>{plan.description}</p>
-            </div>
-          ))
-        }
-      </div>
+      <Cards plans={plans} submited={submited}></Cards>
       <style jsx>{`
-      form {
-        width: 50%;
-        margin: 0 auto;
-        text-align: center;
-        .form-group {
-          display: flex;
-          margin: 10px;
-          .label {
-            width: 20%;
-          }
-          .input {
-            width: 100%;
-          }
-        }
-        .submit-button {
-          width: 100%;
-          margin: 10px auto;
-          padding: 10px;
-          border-radius: 10px;
-          border: 1px solid #333;
-          cursor: pointer;
-          &:hover {
-            background-color: pink;
-          }
-        }
-      }
-      .cards {
-        .card {
+        form {
           width: 50%;
-          margin: 10px auto;
-          padding: 10px;
-          border: 1px solid #333;
+          margin: 0 auto;
+          background-color: #ffaaaa;
+          padding: 30px;
           border-radius: 10px;
+          margin-bottom: 20px;
+          @media screen and (max-width: 768px) {
+            width: 90%;
+          }
+          .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .label {
+              width: 60px;
+              white-space: nowrap;
+            }
+            .select {
+              width: 90%;
+              box-sizing: border-box;
+              padding: 10px;
+              height: 40px;
+              border-radius: 10px;
+              color: #555;
+            }
+          }
+          .submit-button {
+            width: 100%;
+            margin: 20px auto 0 auto;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            cursor: pointer;
+            &:hover {
+              background-color: pink;
+            }
+          }
         }
-      }
+        _:lang(x)+_:-webkit-full-screen-document, form {
+          width: 90%;
+        }
+        _:lang(x)+_:-webkit-full-screen-document, .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+         _:lang(x)+_:-webkit-full-screen-document, .label {
+              width: 60px;
+              white-space: nowrap;
+            }
+        _:lang(x)+_:-webkit-full-screen-document, .select {
+              width: 80%;
+              box-sizing: border-box;
+              padding: 10px;
+              height: 40px;
+              border-radius: 10px;
+              color: #555;
+            }
+       _:lang(x)+_:-webkit-full-screen-document, .submit-button {
+            width: 100%;
+            background-color: #eee;
+            color: #333;
+            margin: 20px auto 0 auto;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            cursor: pointer;
+          }
       `}</style>
     </>
   )
