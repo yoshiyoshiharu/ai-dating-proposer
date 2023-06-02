@@ -1,5 +1,6 @@
 import { Plan } from '../../entity/plan';
 import Images from './Images';
+import Link from 'next/link';
 
 const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
   if (submited && plans.length == 0) {
@@ -20,7 +21,9 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
           {
             plans !== undefined && plans.map((plan) => (
               <div className="card" key={plan.place}>
-                <h2 className="place">{plan.place}</h2>
+                <Link href={"https://www.google.co.jp/maps/search/" + plan.place} target='_blank'>
+                  <span className='place'>{plan.place}</span>
+                </Link>
                 <Images imageUrls={plan.image_urls}></Images>
               </div>
             ))
@@ -38,8 +41,18 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
               @media screen and (max-width: 768px) {
                 width: 90%;
               }
+              }
               .place {
+                display: inline-block;
+                margin-bottom: 20px;
+                margin-left: 10px;
                 font-size: 1rem;
+                border-bottom: 1px solid #333;
+                color: #333;
+                font-weight: bold;
+                &:hover {
+                  opacity: 0.5;
+                }
               }
             }
           }
