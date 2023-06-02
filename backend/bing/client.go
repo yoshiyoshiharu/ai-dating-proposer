@@ -18,7 +18,11 @@ type BingAnswer struct {
 func SearchImages(query string) ([]string, error) {
 	maxImageSize := "10"
 
-	endpoint := "https://api.bing.microsoft.com/v7.0/images/search?mkt=ja-JP&count=" + maxImageSize + "&q=" + url.QueryEscape(query)
+	endpoint := "https://api.bing.microsoft.com/v7.0/images/search?mkt=ja-JP" +
+		"&imageType=Photo" +
+		"&license=ShareCommercially" +
+		"&count=" + maxImageSize +
+		"&q=" + url.QueryEscape(query)
 	token := os.Getenv("BING_API_TOKEN")
 	client := &http.Client{}
 
