@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - master
+      - github-workflow
 
 name: Build and Deploy to Cloud Run
 env:
