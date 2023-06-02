@@ -30,45 +30,30 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
           }
         </div>
         <style jsx>{`
-          .cards {
-            .card {
-              width: 50%;
-              background-color: #fff;
-              margin: 10px auto;
-              padding: 10px;
-              border: 1px solid #333;
-              border-radius: 10px;
-              @media screen and (max-width: 768px) {
-                width: 90%;
-              }
-              }
-              .place {
-                display: inline-block;
-                margin-bottom: 20px;
-                margin-left: 10px;
-                font-size: 1rem;
-                border-bottom: 1px solid #333;
-                color: #333;
-                font-weight: bold;
-                &:hover {
-                  opacity: 0.5;
-                }
-              }
-            }
-          }
-          _:lang(x)+_:-webkit-full-screen-document, .card {
-            width: 90%;
+          .card {
+            width: 50%;
             background-color: #fff;
             margin: 10px auto;
             padding: 10px;
             border: 1px solid #333;
             border-radius: 10px;
-            .place {
-              font-size: 1rem;
+          }
+          @media screen and (max-width: 768px) {
+            .card {
+              width: 90%;
             }
           }
-          _:lang(x)+_:-webkit-full-screen-document, .place {
-              font-size: 1.5rem;
+          .place {
+            display: inline-block;
+            margin-bottom: 20px;
+            margin-left: 10px;
+            font-size: 1rem;
+            border-bottom: 1px solid #333;
+            color: #333;
+            font-weight: bold;
+          }
+          .place:hover {
+            opacity: 0.5;
           }
         `}</style>
       </>

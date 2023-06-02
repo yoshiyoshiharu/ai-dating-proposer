@@ -14,10 +14,10 @@ export default function Header() {
           background-color: #ffaaaa;
           display: flex;
           align-items: center;
-          .title {
-            margin: 0;
-            font-family: "TsukuARdGothic-Regular", sans-serif;
-          }
+        }
+        .title {
+          margin: 0;
+          font-family: "TsukuARdGothic-Regular", ヒラギノ丸ゴ Pro, sans-serif;
         }
         @media screen and (max-width: 768px) {
           .title {

@@ -11,23 +11,20 @@ const Images = ({ imageUrls }: { imageUrls: string[] }) => {
           display: flex;
           width: 100%;
           overflow: scroll;
+
+        }
+        .image {
+          width: 250px;
+          height: 250px;
+          margin: 0 10px;
+          border-radius: 10px;
+        }
+        @media screen and (max-width: 768px) {
           .image {
-            width: 250px;
-            height: 250px;
-            margin: 0 10px;
-            border-radius: 10px;
-            @media screen and (max-width: 768px) {
-              width: 150px;
-              height: 150px;
-            }
+            width: 150px;
+            height: 150px;
           }
         }
-         _:lang(x)+_:-webkit-full-screen-document, .image {
-            width: 200px;
-            height: 200px;
-            margin: 0 5px;
-            border-radius: 10px;
-          }
         `}</style>
     </>
   )

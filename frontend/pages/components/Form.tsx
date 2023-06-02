@@ -74,68 +74,40 @@ const Form = () => {
           padding: 30px;
           border-radius: 10px;
           margin-bottom: 20px;
-          @media screen and (max-width: 768px) {
+        }
+        @media screen and (max-width: 768px) {
+          form {
             width: 90%;
           }
-          .form-group {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            .label {
-              width: 60px;
-              white-space: nowrap;
-            }
-            .select {
-              width: 90%;
-              box-sizing: border-box;
-              padding: 10px;
-              height: 40px;
-              border-radius: 10px;
-              color: #555;
-            }
-          }
-          .submit-button {
-            width: 100%;
-            margin: 20px auto 0 auto;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            cursor: pointer;
-            &:hover {
-              background-color: pink;
-            }
-          }
         }
-        _:lang(x)+_:-webkit-full-screen-document, form {
+        .form-group {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .label {
+          width: 60px;
+          white-space: nowrap;
+        }
+        .select {
           width: 90%;
+          box-sizing: border-box;
+          padding: 10px;
+          height: 40px;
+          border-radius: 10px;
+          color: #555;
         }
-        _:lang(x)+_:-webkit-full-screen-document, .form-group {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .submit-button {
+          width: 100%;
+          margin: 20px auto 0 auto;
+          padding: 10px;
+          border-radius: 10px;
+          border: 1px solid #333;
+          cursor: pointer;
         }
-         _:lang(x)+_:-webkit-full-screen-document, .label {
-              width: 60px;
-              white-space: nowrap;
-            }
-        _:lang(x)+_:-webkit-full-screen-document, .select {
-              width: 80%;
-              box-sizing: border-box;
-              padding: 10px;
-              height: 40px;
-              border-radius: 10px;
-              color: #555;
-            }
-       _:lang(x)+_:-webkit-full-screen-document, .submit-button {
-            width: 100%;
-            background-color: #eee;
-            color: #333;
-            margin: 20px auto 0 auto;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            cursor: pointer;
-          }
+        .submit-button:hover {
+          background-color: pink;
+        }
       `}</style>
     </>
   )

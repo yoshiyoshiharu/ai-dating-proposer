@@ -30,24 +30,22 @@ export default function Loading() {
           position: absolute;
           width: 100%;
           top:40%;
-          .circles{
-            width:200px;
-            height:60px;
-            position: absolute;
-            left:50%;
-            transform: translate(-50%, -50%);
-          }
-          .description {
-            text-align: center;
-            margin: 0 auto;
-            margin-top: 70px;
-            font-family: 'Lato';
-            font-size: 16px;
-            letter-spacing: 12px;
-            color: #fff;
-            .description-detail {
-            }
-          }
+        }
+        .circles{
+          width:200px;
+          height:60px;
+          position: absolute;
+          left:50%;
+          transform: translate(-50%, -50%);
+        }
+        .description {
+          text-align: center;
+          margin: 0 auto;
+          margin-top: 70px;
+          font-family: 'Lato';
+          font-size: 16px;
+          letter-spacing: 12px;
+          color: #fff;
         }
         .circle{
             width:20px;
@@ -120,23 +118,6 @@ export default function Loading() {
             left:auto;
             right:15%;
             animation-delay: .3s;
-        }
-
-        _:lang(x)+_:-webkit-full-screen-document, .circles{
-          width:200px;
-          height:60px;
-          position: absolute;
-          left:50%;
-          transform: translate(-50%, -50%);
-        }
-        _:lang(x)+_:-webkit-full-screen-document, .description {
-          text-align: center;
-          margin: 0 auto;
-          margin-top: 90px;
-          font-family: 'Lato';
-          font-size: 16px;
-          letter-spacing: 12px;
-          color: #fff;
         }
       `}</style>
     </>

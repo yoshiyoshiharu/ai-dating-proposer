@@ -17,10 +17,10 @@ export default function Header() {
           display: flex;
           align-items: center;
           justify-content: center;
-          .my-github {
-            margin-left: 5px;
-          }
-       }
+        }
+        .my-github {
+          margin-left: 5px;
+        }
       `}</style>
     </>
   );

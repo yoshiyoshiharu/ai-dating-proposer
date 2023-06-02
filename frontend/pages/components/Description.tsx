@@ -9,12 +9,11 @@ export default function Description() {
         .description {
           width: 50%;
           margin: 0 auto;
-          @media screen and (max-width: 768px) {
+        }
+        @media screen and (max-width: 768px) {
+          .description {
             width: 90%;
           }
-        }
-        _:lang(x)+_:-webkit-full-screen-document, .description {
-          width: 90%;
         }
       `}</style>
     </>
