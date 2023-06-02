@@ -33,14 +33,13 @@ jobs:
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
-
-      - name: Docker Auth
-        id: docker-auth
-        uses: 'docker/login-action@v1'
         with:
-          username: 'oauth2accesstoken'
-          password: '${{ steps.auth.outputs.access_token }}'
-          registry: 'asia-northeast1-docker.pkg.dev'
+          service_account_key: ${{ secrets.GCLOUD_AUTH }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Configure docker for artifact registry
+        run: |
+          gcloud auth configure-docker asia-docker.pkg.dev
 
       - name: Build Docker image
         run: cd backend && docker build . -t $IMAGE
