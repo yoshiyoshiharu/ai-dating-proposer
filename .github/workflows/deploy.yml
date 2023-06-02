@@ -8,6 +8,7 @@ env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   SERVICE_NAME: hello-world
   IMAGE: asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/$SERVICE_NAME:${{ github.sha }}
+  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
 
 jobs:
   deploy:
@@ -46,5 +47,7 @@ jobs:
             --project=$PROJECT_ID \
             --image=$IMAGE \
             --region=$REGION \
-            --service-account=github-actions@$PROJECT_ID.iam.gserviceaccount.com \
-            --allow-unauthenticated
+            --service-account=$SERVICE_ACCOUNT \
+            --allow-unauthenticated \
+            --no-traffic && \
+            gcloud run services update-traffic plan --to-latest
