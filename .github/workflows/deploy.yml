@@ -8,7 +8,7 @@ name: Build and Deploy to Cloud Run
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
-  IMAGE: asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/$SERVICE_NAME:${{ github.sha }}
+  IMAGE: asia-northeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.REPOSITORY_NAME }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
   SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
 
 jobs:
@@ -49,7 +49,6 @@ jobs:
             --project=$PROJECT_ID \
             --image=$IMAGE \
             --region=$REGION \
-            --service-account=$SERVICE_ACCOUNT \
             --allow-unauthenticated \
             --no-traffic && \
             gcloud run services update-traffic plan --to-latest
