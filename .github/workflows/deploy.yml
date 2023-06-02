@@ -39,7 +39,7 @@ jobs:
 
       - name: Configure docker for artifact registry
         run: |
-          gcloud auth configure-docker asia-docker.pkg.dev
+          gcloud auth configure-docker asia-northeast1-docker.pkg.dev
 
       - name: Build Docker image
         run: cd backend && docker build . -t $IMAGE
