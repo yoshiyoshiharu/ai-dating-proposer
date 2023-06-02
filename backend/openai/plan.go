@@ -35,7 +35,7 @@ NOTES:
 * Do not include areas that do not exist.
 * Please list only areas in Japan.
 * Output only JSON, No description` +
-		"What 5 data plan in" + area + "do you propose?"
+		"What 5 date plan in" + area + "do you propose?"
 }
 
 func FetchPlans(area string) ([]*entity.Plan, error) {
