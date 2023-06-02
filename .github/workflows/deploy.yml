@@ -36,6 +36,7 @@ jobs:
 
       - name: Authorize Docker push
         run: |-
+          gcloud auth login
           gcloud config set project ${GCP_PROJECT_ID}
           gcloud auth configure-docker asia-northeast1-docker.pkg.dev
 
