@@ -21,7 +21,7 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
           {
             plans !== undefined && plans.map((plan) => (
               <div className="card" key={plan.place}>
-                <Link href={"https://www.google.co.jp/maps/search/" + plan.place} target='_blank'>
+                <Link href={"https://www.google.co.jp/maps?q=" + plan.place} target='_blank'>
                   <span className='place'>{plan.place}</span>
                 </Link>
                 <Images imageUrls={plan.image_urls}></Images>
