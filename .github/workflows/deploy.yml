@@ -38,10 +38,10 @@ jobs:
         run: gcloud auth configure-docker
 
       - name: Build Docker image
-        run: docker build . -t $IMAGE
+        run: cd backend && docker build . -t $IMAGE
 
       - name: Push Docker Image
-        run: docker push $IMAGE
+        run: cd backend && docker push $IMAGE
 
       - name: Deploy to Cloud Run
         run: |-
