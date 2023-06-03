@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export default function Header() {
@@ -27,9 +26,11 @@ export default function Header() {
         .me {
           margin-left: 5px;
         }
-        .github-icon {
+       .github-icon {
+          display: inline-block;
+          width: 15px;
+          margin-top: 4px;
           margin-left: 10px;
-          font-size: 20px;
         }
       `}</style>
     </>
