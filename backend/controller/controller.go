@@ -49,6 +49,27 @@ func GetSpots(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, spots)
 }
 
+func GetPlans(c *gin.Context) {
+	var err error
+
+	spot := c.Query("spot")
+
+	if spot == "" {
+		c.IndentedJSON(http.StatusBadRequest, "spot is required")
+		return
+	}
+
+	spots, err := openai.FetchPlans(spot)
+
+	if err != nil {
+		fmt.Println(err)
+		c.IndentedJSON(http.StatusInternalServerError, err)
+		return
+	}
+
+	c.IndentedJSON(http.StatusOK, spots)
+}
+
 func stubImageUrls() []string {
 	stubImageUrls := []string{
 		"http://cdn.4travel.jp/img/tcs/t/tips/pict/src/154/396/src_15439606.jpg",
