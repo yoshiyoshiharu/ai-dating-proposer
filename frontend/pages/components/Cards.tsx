@@ -55,12 +55,14 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
           {
             spots !== undefined && spots.map((spot) => (
               <div className="card" key={spot.place}>
-                <Link href={"https://www.google.co.jp/maps?q=" + spot.place} target='_blank'>
-                  <span className='place'>{spot.place}</span>
-                </Link>
-                <button type="button" onClick={() => handleClick(spot.place)}>
-                  <span>ここでデートプランを組んでもらう</span>
-                </button>
+                <div className='card-header'>
+                  <Link href={"https://www.google.co.jp/maps?q=" + spot.place} target='_blank'>
+                    <span className='place'>{spot.place}</span>
+                  </Link>
+                  <button type="button" className="fetch-plan-button" onClick={() => handleClick(spot.place)}>
+                    このスポットでデートプランを組んでもらう
+                  </button>
+                </div>
                 <Images imageUrls={spot.image_urls}></Images>
               </div>
             ))
@@ -82,7 +84,6 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
           }
           .place {
             display: inline-block;
-            margin-bottom: 10px;
             margin-left: 10px;
             font-size: 1rem;
             border-bottom: 1px solid #333;
@@ -91,6 +92,24 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
           }
           .place:hover {
             opacity: 0.5;
+          }
+          .card-header {
+            display: flex;
+            margin-bottom: 10px;
+            justify-content: space-between;
+          }
+          .fetch-plan-button {
+            display: block;
+            background-color: lightblue;
+            color: #333;
+            font-weight: bold;
+            border-radius: 10px;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+          }
+          .fetch-plan-button:hover {
+            opacity: 0.8;
           }
         `}</style>
       </>
