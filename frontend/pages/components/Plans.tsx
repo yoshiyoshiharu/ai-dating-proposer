@@ -10,7 +10,8 @@ export default function Plans({ plan, spot }: { plan: Plan[], spot: Spot }) {
       <div className='plan'>
         <h2>{spot.place}周辺でのデートプラン</h2>
         <Images imageUrls={spot.image_urls}></Images>
-        {plan.map((plan: Plan) => (
+        { plan.length == 0 && <p>プランが見つかりませんでした。もう一度試してください。</p> }
+        { plan.length > 0 && plan.map((plan: Plan) => (
           <div key="plan.time">
             <p className='title'>{plan.time} : {plan.plan}</p>
             <p className='description'>{plan.description}</p>
