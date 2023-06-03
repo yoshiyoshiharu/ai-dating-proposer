@@ -1,6 +1,9 @@
+import Header from './Header';
+
 export default function Loading() {
   return (
-    <>
+    <div className='loading'>
+      <Header></Header>
       <div className="loader-wrap">
         <div className="wrapper">
           <div className="circles">
@@ -18,9 +21,9 @@ export default function Loading() {
         </div>
       </div >
       <style jsx>{`
-        .loader-wrap {
-          position: absolute;
-          top: 60px;
+        .loading {
+          position: fixed;
+          top: 0;
           left: 0;
           width: 100%;
           height: 100vh;
@@ -120,6 +123,6 @@ export default function Loading() {
             animation-delay: .3s;
         }
       `}</style>
-    </>
+    </div>
   );
 }
