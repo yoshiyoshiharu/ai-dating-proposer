@@ -4,6 +4,7 @@ import { Plan } from '../../entity/plan';
 import Images from './Images';
 import Link from 'next/link';
 import Loading from './Loading';
+import router from 'next/router';
 
 const fetchPlan = async (spot: string): Promise<Plan[]> => {
   try {
@@ -13,7 +14,7 @@ const fetchPlan = async (spot: string): Promise<Plan[]> => {
       throw new Error("Plan API response was not ok");
     }
 
-    const plans = await res.json();
+    const plans: Plan[] = await res.json();
 
     return plans
   } catch {
@@ -22,15 +23,16 @@ const fetchPlan = async (spot: string): Promise<Plan[]> => {
 }
 
 const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
-  const [plans, setPlans] = useState<Plan[]>([]);
   const [fetchingPlan, setFetchingPlan] = useState<boolean>(false);
 
   const handleClick = async (spot: string) => {
     setFetchingPlan(true);
     const plans = await fetchPlan(spot)
-    setPlans(plans);
+    router.push({
+      pathname: '/result',
+      query: { plans: JSON.stringify(plans) }
+   })
     setFetchingPlan(false);
-    console.log(plans)
   };
 
   if (submited && spots.length == 0) {
