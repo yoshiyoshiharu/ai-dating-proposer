@@ -1,6 +1,6 @@
 import Header from './Header';
 
-export default function Loading() {
+export default function Loading({ top_desc, bottom_desc }: { top_desc: string, bottom_desc: string }) {
   return (
     <div className='loading'>
       <Header></Header>
@@ -15,8 +15,8 @@ export default function Loading() {
             <div className="shadow"></div>
           </div>
           <div className="description">
-            <div className="description-detail">デートスポットを考えています</div>
-            <div className="description-detail">15秒ほどかかります</div>
+            <div className="description-detail">{top_desc}</div>
+            <div className="description-detail">{bottom_desc}</div>
           </div>
         </div>
       </div >

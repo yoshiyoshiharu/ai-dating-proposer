@@ -51,7 +51,7 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
       <>
         {
           fetchingPlan &&
-          <Loading></Loading>
+          <Loading top_desc='デートプランを考えています' bottom_desc='20秒ほどかかります'></Loading>
         }
         <div className="cards">
           {
