@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -6,7 +7,9 @@ export default function Header() {
       <header>
         <Image src="/icon.png" alt="icon" className="header-icon" width="64" height="64" />
         <h1 className="title">
-          AIデートプラン提案アプリ
+          <Link href="/">
+            AIデートプラン提案アプリ
+          </Link>
         </h1>
       </header>
       <style jsx>{`

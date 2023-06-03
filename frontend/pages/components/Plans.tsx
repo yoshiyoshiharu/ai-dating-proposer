@@ -1,9 +1,13 @@
 import { Plan } from '../../entity/plan';
+import { Spot } from '../../entity/spot';
+import Images from './Images';
 
-export default function Plans({ plan }: { plan: Plan[] }) {
+export default function Plans({ plan, spot }: { plan: Plan[], spot: Spot }) {
   return (
     <>
     <div className='plan'>
+      <h2>{spot.place}周辺でのデートプラン</h2>
+      <Images imageUrls={spot.image_urls}></Images>
       {plan.map((plan: Plan) => (
         <div>
           <p className='title'>{plan.time} : {plan.plan}</p>
@@ -16,16 +20,22 @@ export default function Plans({ plan }: { plan: Plan[] }) {
         width: 50%;
         margin: 30px auto;
         background-color: #fff;
-        padding: 10px;
+        padding: 20px;
         border-radius: 10px;
       }
+      @media screen and (max-width: 768px) {
+        .plan {
+          width: 90%;
+        }
+      }
       .title {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         border-bottom: 1px solid #333;
-        color: #FF9999;
+        color: #F88;
       }
       .description {
-
+        font-size: 1rem;
+        margin: 10px;
       }
     `}</style>
     </>

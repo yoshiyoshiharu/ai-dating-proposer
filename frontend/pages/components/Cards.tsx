@@ -25,12 +25,12 @@ const fetchPlan = async (spot: string): Promise<Plan[]> => {
 const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
   const [fetchingPlan, setFetchingPlan] = useState<boolean>(false);
 
-  const handleClick = async (spot: string) => {
+  const handleClick = async (spot: Spot) => {
     setFetchingPlan(true);
-    const plans = await fetchPlan(spot)
+    const plans = await fetchPlan(spot.place)
     router.push({
       pathname: '/result',
-      query: { plans: JSON.stringify(plans) }
+      query: { plans: JSON.stringify(plans), spot: JSON.stringify(spot) }
    })
     setFetchingPlan(false);
   };
@@ -61,7 +61,7 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
                   <Link href={"https://www.google.co.jp/maps?q=" + spot.place} target='_blank'>
                     <span className='place'>{spot.place}</span>
                   </Link>
-                  <button type="button" className="fetch-plan-button" onClick={() => handleClick(spot.place)}>
+                  <button type="button" className="fetch-plan-button" onClick={() => handleClick(spot)}>
                     デートプランを組んでもらう
                   </button>
                 </div>

@@ -5,14 +5,15 @@ import Plans from './components/Plans';
 
 const ResultPage = () => {
   const router = useRouter();
-  const { plans } = router.query as { plans: string };
+  const { plans, spot } = router.query as { plans: string, spot: string };
   const parsedPlan = plans != undefined ? JSON.parse(plans) : undefined;
+  const parsedSpot = spot != undefined ? JSON.parse(spot) : undefined;
 
   return (
     <>
       <Header></Header>
       { parsedPlan != undefined && parsedPlan.length > 0 &&
-        <Plans plan={parsedPlan}></Plans>
+        <Plans plan={parsedPlan} spot={parsedSpot}></Plans>
       }
       <Footer></Footer>
     </>
