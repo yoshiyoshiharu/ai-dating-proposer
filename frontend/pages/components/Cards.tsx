@@ -1,8 +1,38 @@
+import React, { useState } from 'react';
 import { Spot } from '../../entity/spot';
+import { Plan } from '../../entity/plan';
 import Images from './Images';
 import Link from 'next/link';
+import Loading from './Loading';
+
+const fetchPlan = async (spot: string): Promise<Plan[]> => {
+  try {
+    const res = await fetch("/api/plan?spot=" + spot)
+
+    if (!res.ok) {
+      throw new Error("Plan API response was not ok");
+    }
+
+    const plans = await res.json();
+
+    return plans
+  } catch {
+    return []
+  }
+}
 
 const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
+  const [plans, setPlans] = useState<Plan[]>([]);
+  const [fetchingPlan, setFetchingPlan] = useState<boolean>(false);
+
+  const handleClick = async (spot: string) => {
+    setFetchingPlan(true);
+    const plans = await fetchPlan(spot)
+    setPlans(plans);
+    setFetchingPlan(false);
+    console.log(plans)
+  };
+
   if (submited && spots.length == 0) {
     return (
       <>
@@ -17,6 +47,10 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
   } else {
     return (
       <>
+        {
+          fetchingPlan &&
+          <Loading></Loading>
+        }
         <div className="cards">
           {
             spots !== undefined && spots.map((spot) => (
@@ -24,6 +58,9 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
                 <Link href={"https://www.google.co.jp/maps?q=" + spot.place} target='_blank'>
                   <span className='place'>{spot.place}</span>
                 </Link>
+                <button type="button" onClick={() => handleClick(spot.place)}>
+                  <span>ここでデートプランを組んでもらう</span>
+                </button>
                 <Images imageUrls={spot.image_urls}></Images>
               </div>
             ))
@@ -45,7 +82,7 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
           }
           .place {
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             margin-left: 10px;
             font-size: 1rem;
             border-bottom: 1px solid #333;
