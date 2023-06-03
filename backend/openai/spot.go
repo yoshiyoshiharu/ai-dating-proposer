@@ -22,10 +22,10 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 [
   {
-   place: string, // place name of the data spot in Japanese.
+   place: string, // place name of the date spot in Japanese.
   },
   {
-   place: string, // place name of the data spot in Japanese.
+   place: string, // place name of the date spot in Japanese.
   },
 ]
 ` +
