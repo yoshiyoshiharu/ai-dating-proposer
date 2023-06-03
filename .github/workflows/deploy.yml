@@ -2,14 +2,12 @@ on:
   push:
     branches:
       - master
-      - github-workflow
 
 name: Build and Deploy to Cloud Run
 env:
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
   IMAGE: asia-northeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.REPOSITORY_NAME }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
-  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
   REGION: asia-northeast1
 
 jobs:
