@@ -44,7 +44,7 @@ const Form = () => {
     <>
       {
         fetchingSpot &&
-        <Loading></Loading>
+        <Loading top_desc='デートスポットを考えています' bottom_desc='10秒ほどかかります'></Loading>
       }
 
       <form onSubmit={handleSubmit}>

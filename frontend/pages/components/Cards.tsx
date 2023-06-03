@@ -1,8 +1,40 @@
+import React, { useState } from 'react';
 import { Spot } from '../../entity/spot';
+import { Plan } from '../../entity/plan';
 import Images from './Images';
 import Link from 'next/link';
+import Loading from './Loading';
+import router from 'next/router';
+
+const fetchPlan = async (spot: string): Promise<Plan[]> => {
+  try {
+    const res = await fetch("/api/plan?spot=" + spot)
+
+    if (!res.ok) {
+      throw new Error("Plan API response was not ok");
+    }
+
+    const plans: Plan[] = await res.json();
+
+    return plans
+  } catch {
+    return []
+  }
+}
 
 const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
+  const [fetchingPlan, setFetchingPlan] = useState<boolean>(false);
+
+  const handleClick = async (spot: Spot) => {
+    setFetchingPlan(true);
+    const plans = await fetchPlan(spot.place)
+    router.push({
+      pathname: '/result',
+      query: { plans: JSON.stringify(plans), spot: JSON.stringify(spot) }
+   })
+    setFetchingPlan(false);
+  };
+
   if (submited && spots.length == 0) {
     return (
       <>
@@ -17,13 +49,22 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
   } else {
     return (
       <>
+        {
+          fetchingPlan &&
+          <Loading top_desc='デートプランを考えています' bottom_desc='20秒ほどかかります'></Loading>
+        }
         <div className="cards">
           {
             spots !== undefined && spots.map((spot) => (
               <div className="card" key={spot.place}>
-                <Link href={"https://www.google.co.jp/maps?q=" + spot.place} target='_blank'>
-                  <span className='place'>{spot.place}</span>
-                </Link>
+                <div className='card-header'>
+                  <Link href={"https://www.google.co.jp/maps?q=" + spot.place} target='_blank'>
+                    <span className='place'>{spot.place}</span>
+                  </Link>
+                  <button type="button" className="fetch-plan-button" onClick={() => handleClick(spot)}>
+                    デートプランを組んでもらう
+                  </button>
+                </div>
                 <Images imageUrls={spot.image_urls}></Images>
               </div>
             ))
@@ -45,7 +86,6 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
           }
           .place {
             display: inline-block;
-            margin-bottom: 20px;
             margin-left: 10px;
             font-size: 1rem;
             border-bottom: 1px solid #333;
@@ -54,6 +94,24 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
           }
           .place:hover {
             opacity: 0.5;
+          }
+          .card-header {
+            display: flex;
+            margin-bottom: 10px;
+            justify-content: space-between;
+          }
+          .fetch-plan-button {
+            display: block;
+            background-color: lightblue;
+            color: #333;
+            font-weight: bold;
+            border-radius: 10px;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+          }
+          .fetch-plan-button:hover {
+            opacity: 0.8;
           }
         `}</style>
       </>

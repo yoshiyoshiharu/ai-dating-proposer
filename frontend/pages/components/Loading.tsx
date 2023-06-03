@@ -1,6 +1,9 @@
-export default function Loading() {
+import Header from './Header';
+
+export default function Loading({ top_desc, bottom_desc }: { top_desc: string, bottom_desc: string }) {
   return (
-    <>
+    <div className='loading'>
+      <Header></Header>
       <div className="loader-wrap">
         <div className="wrapper">
           <div className="circles">
@@ -12,15 +15,15 @@ export default function Loading() {
             <div className="shadow"></div>
           </div>
           <div className="description">
-            <div className="description-detail">デートスポットを考えています</div>
-            <div className="description-detail">15秒ほどかかります</div>
+            <div className="description-detail">{top_desc}</div>
+            <div className="description-detail">{bottom_desc}</div>
           </div>
         </div>
       </div >
       <style jsx>{`
-        .loader-wrap {
-          position: absolute;
-          top: 60px;
+        .loading {
+          position: fixed;
+          top: 0;
           left: 0;
           width: 100%;
           height: 100vh;
@@ -120,6 +123,6 @@ export default function Loading() {
             animation-delay: .3s;
         }
       `}</style>
-    </>
+    </div>
   );
 }

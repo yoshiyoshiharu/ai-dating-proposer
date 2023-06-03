@@ -29,7 +29,6 @@ export default function Footer() {
        .github-icon {
           display: inline-block;
           width: 15px;
-          margin-top: 4px;
           margin-left: 10px;
         }
       `}</style>
