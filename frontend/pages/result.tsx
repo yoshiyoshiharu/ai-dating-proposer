@@ -3,7 +3,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Plans from './components/Plans';
 import { SpotContext } from './components/SpotContext';
-import { useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
+
 
 const ResultPage = () => {
   const router = useRouter();
@@ -27,19 +28,3 @@ const ResultPage = () => {
 };
 
 export default ResultPage;
-
-const fetchPlan = async (spot: string): Promise<Plan[]> => {
-  try {
-    const res = await fetch("/api/plan?spot=" + spot)
-
-    if (!res.ok) {
-      throw new Error("Plan API response was not ok");
-    }
-
-    const plans: Plan[] = await res.json();
-
-    return plans
-  } catch {
-    return []
-  }
-}

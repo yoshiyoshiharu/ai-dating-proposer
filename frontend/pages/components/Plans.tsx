@@ -1,15 +1,35 @@
+import { useEffect, useState } from 'react';
 import { Plan } from '../../entity/plan';
 import { Spot } from '../../entity/spot';
 import Images from './Images';
+import Loading from './Loading';
 
 export default function Plans({ spot }: { spot: Spot }) {
-  const plan = [
-    {
-      time: '12:00',
-      plan: 'ランチ',
-      description: 'ランチの説明'
-    },
-  ]
+  const [loading, setLoading] = useState<boolean>(false);
+  const [plans, setPlans] = useState<Plan[]>([]);
+
+  const fetchPlan = async (spot: string): Promise<Plan[]> => {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/plan?spot=" + spot)
+      setLoading(false);
+
+      if (!res.ok) {
+        throw new Error("Plan API response was not ok");
+      }
+
+      const plans: Plan[] = await res.json();
+      return plans
+    } catch {
+      return []
+    }
+  }
+
+  useEffect(() => {
+    fetchPlan(spot.place).then((plans: Plan[]) => {
+      setPlans(plans)
+    })
+  }, [])
 
   return (
     <>
@@ -18,8 +38,12 @@ export default function Plans({ spot }: { spot: Spot }) {
         <div className='plan'>
           <h2>{spot.place}周辺でのデートプラン</h2>
           <Images imageUrls={spot.image_urls}></Images>
-          {plan.length == 0 && <p>プランが見つかりませんでした。もう一度試してください。</p>}
-          {plan.length > 0 && plan.map((plan: Plan) => (
+          {
+            loading &&
+            <Loading top_desc='デートプランを考えています' bottom_desc='20秒ほどかかります'></Loading>
+          }
+          {plans.length == 0 && <p>プランが見つかりませんでした。もう一度試してください。</p>}
+          {plans.length > 0 && plans.map((plan: Plan) => (
             <div key="plan.time">
               <p className='title'>{plan.time} : {plan.plan}</p>
               <p className='description'>{plan.description}</p>
