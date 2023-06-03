@@ -10,7 +10,7 @@ import (
 	"github.com/yoshiyoshiharu/ai-dating-proposer/openai"
 )
 
-func GetPlans(c *gin.Context) {
+func GetSpots(c *gin.Context) {
 	var err error
 
 	area := c.Query("area")
@@ -20,7 +20,7 @@ func GetPlans(c *gin.Context) {
 		return
 	}
 
-	plans, err := openai.FetchPlans(area)
+	spots, err := openai.FetchSpots(area)
 
 	if err != nil {
 		fmt.Println(err)
@@ -28,13 +28,13 @@ func GetPlans(c *gin.Context) {
 		return
 	}
 
-	for _, plan := range plans {
+	for _, spot := range spots {
 		var imageUrls []string
 
 		if os.Getenv("ENV") == "development" {
 			imageUrls = stubImageUrls()
 		} else {
-			imageUrls, err = bing.SearchImages(plan.Place)
+			imageUrls, err = bing.SearchImages(spot.Place)
 		}
 
 		if err != nil {
@@ -43,10 +43,10 @@ func GetPlans(c *gin.Context) {
 			return
 		}
 
-		plan.ImageUrls = imageUrls
+		spot.ImageUrls = imageUrls
 	}
 
-	c.IndentedJSON(http.StatusOK, plans)
+	c.IndentedJSON(http.StatusOK, spots)
 }
 
 func stubImageUrls() []string {
