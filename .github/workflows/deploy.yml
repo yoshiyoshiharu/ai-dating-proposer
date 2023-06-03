@@ -1,0 +1,50 @@
+on:
+  push:
+    branches:
+      - master
+
+name: Build and Deploy to Cloud Run
+env:
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+  IMAGE: asia-northeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.REPOSITORY_NAME }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
+  REGION: asia-northeast1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          service_account_key: ${{ secrets.GCLOUD_AUTH }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Configure docker for artifact registry
+        run: |
+          gcloud auth configure-docker asia-northeast1-docker.pkg.dev
+
+      - name: Build Docker image
+        run: cd backend && docker build . -t $IMAGE
+
+      - name: Push Docker Image
+        run: cd backend && docker push $IMAGE
+
+      - name: Deploy to Cloud Run
+        run: |-
+          gcloud run deploy $SERVICE_NAME \
+            --project=$GCP_PROJECT_ID \
+            --image=$IMAGE \
+            --region=$REGION \
+            --allow-unauthenticated \
+            --no-traffic && \
+            gcloud run services update-traffic plan --region=$REGION --to-latest
