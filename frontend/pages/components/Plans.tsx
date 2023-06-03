@@ -9,10 +9,9 @@ export default function Plans({ spot }: { spot: Spot }) {
   const [plans, setPlans] = useState<Plan[]>([]);
 
   const fetchPlan = async (spot: string): Promise<Plan[]> => {
+    setLoading(true)
     try {
-      setLoading(true);
       const res = await fetch("/api/plan?spot=" + spot)
-      setLoading(false);
 
       if (!res.ok) {
         throw new Error("Plan API response was not ok");
@@ -28,6 +27,7 @@ export default function Plans({ spot }: { spot: Spot }) {
   useEffect(() => {
     fetchPlan(spot.place).then((plans: Plan[]) => {
       setPlans(plans)
+      setLoading(false)
     })
   }, [])
 
@@ -42,7 +42,13 @@ export default function Plans({ spot }: { spot: Spot }) {
             loading &&
             <Loading top_desc='デートプランを考えています' bottom_desc='20秒ほどかかります'></Loading>
           }
-          {plans.length == 0 && <p>プランが見つかりませんでした。もう一度試してください。</p>}
+          {
+            plans.length == 0 &&
+            <>
+              <p>プランが見つかりませんでした。もう一度試してください。</p>
+              <button onClick={fetchPlan}>もう一度試す</button>
+            </>
+          }
           {plans.length > 0 && plans.map((plan: Plan) => (
             <div key="plan.time">
               <p className='title'>{plan.time} : {plan.plan}</p>
