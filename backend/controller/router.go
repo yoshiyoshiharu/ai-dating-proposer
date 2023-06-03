@@ -22,7 +22,9 @@ func NewRouter() *gin.Engine {
 		},
 		AllowCredentials: false,
 	}))
+
 	router.GET("/api/spots", GetSpots)
+	router.GET("/api/plans", GetPlans)
 
 	return router
 }

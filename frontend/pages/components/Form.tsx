@@ -8,7 +8,7 @@ type SpotCondition = {
 
 const fetchSpots = async (spotCondition: SpotCondition): Promise<Spot[]> => {
   try {
-    const res = await fetch("/api/client?area=" + spotCondition.area)
+    const res = await fetch("/api/spot?area=" + spotCondition.area)
     if (!res.ok) {
       throw new Error("API response was not ok");
     }
