@@ -1,6 +1,7 @@
-import { useState } from "react"; import Loading from "./Loading"; import Cards from "./Cards";
+import { useContext, useState } from "react"; import Loading from "./Loading"; import Cards from "./Cards";
 import { PREFECTURES } from "../../consts/prefectures";
 import { Spot } from "../../entity/spot";
+import { SpotContext } from "./SpotContext";
 
 type SpotCondition = {
   area: string;
@@ -23,7 +24,7 @@ const fetchSpots = async (spotCondition: SpotCondition): Promise<Spot[]> => {
 
 const Form = () => {
   const [submited, setSubmited] = useState<boolean>(false);
-  const [spots, setSpots] = useState<Spot[]>([]);
+  const { spots, setSpots } = useContext(SpotContext)
   const [fetchingSpot, setFetchingSpot] = useState<boolean>(false);
 
   const handleSubmit = async (event: any) => {
