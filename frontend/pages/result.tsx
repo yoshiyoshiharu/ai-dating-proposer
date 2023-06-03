@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Plans from './components/Plans';
 import { SpotContext } from './components/SpotContext';
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 
 
 const ResultPage = () => {

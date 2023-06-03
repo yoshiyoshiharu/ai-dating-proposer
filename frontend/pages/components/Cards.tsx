@@ -1,9 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Spot } from '../../entity/spot';
-import { Plan } from '../../entity/plan';
 import Images from './Images';
 import Link from 'next/link';
-import Loading from './Loading';
 import router from 'next/router';
 import { SpotContext } from './SpotContext';
 
