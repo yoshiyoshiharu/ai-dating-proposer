@@ -1,13 +1,13 @@
-import { Plan } from '../../entity/plan';
+import { Spot } from '../../entity/spot';
 import Images from './Images';
 import Link from 'next/link';
 
-const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
-  if (submited && plans.length == 0) {
+const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
+  if (submited && spots.length == 0) {
     return (
       <>
         <h2>プランが見つかりませんでした。もう一度試してください。</h2>
-      <style jsx>{`
+        <style jsx>{`
          h2 {
             text-align: center;
          }
@@ -19,12 +19,12 @@ const Cards = ({ plans, submited }: { plans: Plan[], submited: boolean }) => {
       <>
         <div className="cards">
           {
-            plans !== undefined && plans.map((plan) => (
-              <div className="card" key={plan.place}>
-                <Link href={"https://www.google.co.jp/maps?q=" + plan.place} target='_blank'>
-                  <span className='place'>{plan.place}</span>
+            spots !== undefined && spots.map((spot) => (
+              <div className="card" key={spot.place}>
+                <Link href={"https://www.google.co.jp/maps?q=" + spot.place} target='_blank'>
+                  <span className='place'>{spot.place}</span>
                 </Link>
-                <Images imageUrls={plan.image_urls}></Images>
+                <Images imageUrls={spot.image_urls}></Images>
               </div>
             ))
           }
