@@ -12,7 +12,7 @@ export default function Loading() {
             <div className="shadow"></div>
           </div>
           <div className="description">
-            <div className="description-detail">プランを考えています</div>
+            <div className="description-detail">デートスポットを考えています</div>
             <div className="description-detail">15秒ほどかかります</div>
           </div>
         </div>
