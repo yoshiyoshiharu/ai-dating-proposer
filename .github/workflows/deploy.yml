@@ -49,4 +49,4 @@ jobs:
             --region=$REGION \
             --allow-unauthenticated \
             --no-traffic && \
-            gcloud run services update-traffic plan --to-latest
+            gcloud run services update-traffic plan --region=$REGION --to-latest
