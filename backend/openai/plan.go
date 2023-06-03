@@ -22,22 +22,37 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 [
   {
-    time: string, // xx時
+    time: 9時
     plan: string, // date plan title
-    description: string,  // date plan detail in one sentence.
+    description: string // date plan detail in one sentence.
   },
   {
-    time: string, // xx時
+    time: 12時
     plan: string, // date plan title
-    description: string,  // date plan detail in one sentence.
+    description: string // date plan detail in one sentence.
+  },
+  {
+    time: 15時
+    plan: string, // date plan title
+    description: string // date plan detail in one sentence.
+  },
+  {
+    time: 18時
+    plan: string, // date plan title
+    description: string // date plan detail in one sentence.
+  },
+  {
+    time: 21時
+    plan: string, // date plan title
+    description: string // date plan detail in one sentence.
   },
 ]
 ` +
 		"```" +
-		`
+`
 NOTES:
-* Output only JSON, No description` +
-		"What 5 date Plan in" + spot + "do you propose?"
+* Output only JSON
+Please propose the one day date plan around` + spot
 }
 
 func FetchPlans(area string) ([]*entity.Plan, error) {
