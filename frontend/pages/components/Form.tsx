@@ -1,20 +1,20 @@
 import { useState } from "react"; import Loading from "./Loading"; import Cards from "./Cards";
 import { PREFECTURES } from "../../consts/prefectures";
-import { Plan } from "../../entity/plan";
+import { Spot } from "../../entity/spot";
 
-type PlanCondition = {
+type SpotCondition = {
   area: string;
 }
 
-const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
+const fetchSpots = async (spotCondition: SpotCondition): Promise<Spot[]> => {
   try {
-    const res = await fetch("/api/client?area=" + planCondition.area)
+    const res = await fetch("/api/client?area=" + spotCondition.area)
     if (!res.ok) {
       throw new Error("API response was not ok");
     }
 
-    const plans = await res.json();
-    return plans
+    const spots = await res.json();
+    return spots
   } catch {
     return []
   }
@@ -23,27 +23,27 @@ const fetchPlans = async (planCondition: PlanCondition): Promise<Plan[]> => {
 
 const Form = () => {
   const [submited, setSubmited] = useState<boolean>(false);
-  const [plans, setPlans] = useState<Plan[]>([]);
-  const [fetchingPlan, setFetchingPlan] = useState<boolean>(false);
+  const [spots, setSpots] = useState<Spot[]>([]);
+  const [fetchingSpot, setFetchingSpot] = useState<boolean>(false);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     setSubmited(true);
 
-    const planCondition = {
+    const spotCondition = {
       area: event.target.area.value,
     };
 
-    setFetchingPlan(true);
-    const plans = await fetchPlans(planCondition);
-    setPlans(plans);
-    setFetchingPlan(false);
+    setFetchingSpot(true);
+    const spots = await fetchSpots(spotCondition);
+    setSpots(spots);
+    setFetchingSpot(false);
   };
 
   return (
     <>
       {
-        fetchingPlan &&
+        fetchingSpot &&
         <Loading></Loading>
       }
 
@@ -65,7 +65,7 @@ const Form = () => {
         <button className="submit-button" type="submit">提案してもらう</button>
       </form>
 
-      <Cards plans={plans} submited={submited}></Cards>
+      <Cards spots={spots} submited={submited}></Cards>
       <style jsx>{`
         form {
           width: 50%;
