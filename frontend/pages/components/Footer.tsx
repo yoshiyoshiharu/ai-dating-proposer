@@ -1,12 +1,18 @@
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGamepad } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export default function Header() {
   return (
     <>
       <footer>
-        created by
-        <Link href="https://github.com/yoshiyoshiharu" target="_blank">
-          <span className="my-github">Haruki Yoshdia</span>
+        <span>created by</span>
+        <span className="me">Haruki Yoshdia</span>
+        <Link href="https://github.com/yoshiyoshiharu/ai-dating-proposer" target="_blank">
+          <span className="github-icon">
+            <FontAwesomeIcon icon={faGithub} />
+          </span>
         </Link>
       </footer>
       <style jsx>{`
@@ -18,8 +24,12 @@ export default function Header() {
           align-items: center;
           justify-content: center;
         }
-        .my-github {
+        .me {
           margin-left: 5px;
+        }
+        .github-icon {
+          margin-left: 10px;
+          font-size: 20px;
         }
       `}</style>
     </>
