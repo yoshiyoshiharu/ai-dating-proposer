@@ -60,7 +60,7 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
                     <span className='place'>{spot.place}</span>
                   </Link>
                   <button type="button" className="fetch-plan-button" onClick={() => handleClick(spot.place)}>
-                    このスポットでデートプランを組んでもらう
+                    デートプランを組んでもらう
                   </button>
                 </div>
                 <Images imageUrls={spot.image_urls}></Images>
