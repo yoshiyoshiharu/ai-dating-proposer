@@ -4,6 +4,7 @@ import { Spot } from '../../entity/spot';
 import Images from './Images';
 import Loading from './Loading';
 import Link from 'next/link';
+import Share from './Share';
 
 export default function Plans({ spot }: { spot: Spot }) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -59,6 +60,7 @@ export default function Plans({ spot }: { spot: Spot }) {
               <p>プランが見つかりませんでした。もう一度試してください。</p>
             </>
           }
+          <Share></Share>
           {plans.length > 0 && plans.map((plan: Plan) => (
             <div key="plan.time">
               <p className='title'>{plan.time} : {plan.plan}</p>
@@ -70,7 +72,6 @@ export default function Plans({ spot }: { spot: Spot }) {
       }
       <style jsx>{`
         .plan {
-          width: 50%;
           margin: 30px auto;
           background-color: #fff;
           padding: 20px;
@@ -84,15 +85,10 @@ export default function Plans({ spot }: { spot: Spot }) {
         .plan-title {
           font-size: 1.2rem;
         }
-        @media screen and (max-width: 768px) {
-          .plan {
-            width: 90%;
-          }
-        }
         .title {
           font-size: 1.4rem;
           border-bottom: 1px solid #333;
-          color: #F88;
+          color: #F77;
         }
         .description {
           font-size: 1rem;

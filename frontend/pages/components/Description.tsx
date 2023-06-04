@@ -19,14 +19,7 @@ export default function Description() {
       </div>
      <style jsx>{`
         .descriptions {
-          width: 50%;
           margin: 0 auto;
-          padding: 30px 0 20px 0;
-        }
-        @media screen and (max-width: 768px) {
-          .descriptions {
-            width: 90%;
-          }
         }
         .description > h2 {
           font-size: 1.5rem;

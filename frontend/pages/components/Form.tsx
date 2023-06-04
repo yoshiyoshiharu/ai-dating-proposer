@@ -73,17 +73,10 @@ const Form = () => {
       <Cards submited={submited}></Cards>
       <style jsx>{`
         form {
-          width: 50%;
-          margin: 30px auto;
           background-color: #ffaaaa;
           padding: 30px;
           border-radius: 10px;
           margin-bottom: 20px;
-        }
-        @media screen and (max-width: 768px) {
-          form {
-            width: 90%;
-          }
         }
         .form-title {
           font-size: 1rem;

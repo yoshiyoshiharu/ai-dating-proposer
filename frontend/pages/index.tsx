@@ -25,6 +25,14 @@ const Main = () => {
       <style jsx>{`
         main {
           min-height: calc(100vh - 7rem);
+          width: 50%;
+          margin: 0 auto;
+        }
+        @media screen and (max-width: 768px) {
+          main {
+            width: 90%;
+          }
+        }
       `}</style>
     </>
   )

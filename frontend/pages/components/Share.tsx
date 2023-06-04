@@ -17,15 +17,10 @@ export default function Share() {
         </div>
       <style jsx>{`
         .shares {
-          width: 50%;
           margin: 0 auto;
+          margin-top: 10px;
           display: flex;
           justify-content: flex-end;
-        }
-        @media screen and (max-width: 768px) {
-          .shares {
-            width: 90%;
-          }
         }
         .twitter-share-button {
           display: inline-block;

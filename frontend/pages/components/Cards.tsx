@@ -49,17 +49,11 @@ const Cards = ({ submited }: { submited: boolean }) => {
         </div>
         <style jsx>{`
           .card {
-            width: 50%;
             background-color: #fff;
             margin: 10px auto;
             padding: 10px;
             border: 1px solid #333;
             border-radius: 10px;
-          }
-          @media screen and (max-width: 768px) {
-            .card {
-              width: 90%;
-            }
           }
           .place {
             display: inline-block;

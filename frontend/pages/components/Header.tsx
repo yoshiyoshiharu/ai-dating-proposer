@@ -18,6 +18,7 @@ export default function Header() {
           display: flex;
           align-items: center;
           height: 4rem;
+          margin-bottom: 20px;
         }
         .title {
           margin: 0;
