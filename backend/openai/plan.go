@@ -4,10 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"os"
 	"regexp"
-	"strings"
 
 	openai "github.com/sashabaranov/go-openai"
 	entity "github.com/yoshiyoshiharu/ai-dating-proposer/entity"
@@ -50,10 +48,10 @@ The output should be a markdown code snippet formatted in the following schema i
 ]
 ` +
 		"```" +
-`
+		`
 NOTES:
-* Output only JSON
-Please propose the one day date plan around` + spot
+* Output only JSON` +
+		`Please propose the one day date plan around` + spot
 }
 
 func FetchPlans(area string) ([]*entity.Plan, error) {
@@ -93,16 +91,13 @@ func executePlanApi(message string) (string, error) {
 		return "", err
 	}
 
-	fmt.Println(resp.Choices[0].Message.Content)
 	return resp.Choices[0].Message.Content, nil
 }
 
 func parsePlanResponse(res string) []*entity.Plan {
-	reg, _ := regexp.Compile("```json" + `([\s\S]*?)` + "```")
-	matched := reg.FindString(res)
+	reg, _ := regexp.Compile(`\[([\s\S]*?)\]`)
 
-	matched = strings.Replace(matched, "```json", "", 1)
-	matched = strings.Replace(matched, "```", "", 1)
+	matched := reg.FindString(res)
 
 	var plans []*entity.Plan
 	json.Unmarshal([]byte(matched), &plans)
