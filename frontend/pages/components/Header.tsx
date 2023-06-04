@@ -17,6 +17,7 @@ export default function Header() {
           background-color: #ffaaaa;
           display: flex;
           align-items: center;
+          height: 4rem;
         }
         .title {
           margin: 0;

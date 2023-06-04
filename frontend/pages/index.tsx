@@ -13,9 +13,15 @@ const Main = () => {
       </Head>
 
       <Header></Header>
-      <Description></Description>
-      <Form></Form>
+      <main>
+        <Description></Description>
+        <Form></Form>
+      </main>
       <Footer></Footer>
+      <style jsx>{`
+        main {
+          min-height: calc(100vh - 7rem);
+      `}</style>
     </>
   )
 }

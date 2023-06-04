@@ -17,7 +17,7 @@ export default function Footer() {
       <style jsx>{`
         footer {
           background-color: #333;
-          height: 50px;
+          height: 3rem;
           color: #fff;
           display: flex;
           align-items: center;
