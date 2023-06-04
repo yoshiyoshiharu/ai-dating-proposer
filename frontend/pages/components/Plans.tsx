@@ -61,7 +61,7 @@ export default function Plans({ spot }: { spot: Spot }) {
               <p className='description'>{plan.description}</p>
             </div>
           ))}
-          <button onClick={handleClick}>もう一度試す</button>
+          <button onClick={handleClick} className='retry-button'>もう一度試す</button>
         </div>
       }
       <style jsx>{`
@@ -85,6 +85,18 @@ export default function Plans({ spot }: { spot: Spot }) {
       .description {
         font-size: 1rem;
         margin: 10px;
+      }
+      .retry-button {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #F88;
+        border: none;
+        cursor: pointer;
+        color: white;
+      }
+      .retry-button:hover {
+        opacity: 0.8;
       }
     `}</style>
     </>
