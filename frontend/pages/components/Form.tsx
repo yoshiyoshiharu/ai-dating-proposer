@@ -2,6 +2,7 @@ import { useContext, useState } from "react"; import Loading from "./Loading"; i
 import { PREFECTURES } from "../../consts/prefectures";
 import { Spot } from "../../entity/spot";
 import { SpotContext } from "../../context/SpotContext";
+import Share from "./Share";
 
 type SpotCondition = {
   area: string;
@@ -49,6 +50,7 @@ const Form = () => {
       }
 
       <form onSubmit={handleSubmit}>
+        <h3 className="form-title">デートスポットの提案</h3>
         <div className="form-group">
           <label className="label" htmlFor="area">エリア</label>
           <select className="select" name="area" id="area" required>
@@ -66,20 +68,19 @@ const Form = () => {
         <button className="submit-button" type="submit">提案してもらう</button>
       </form>
 
+      <Share></Share>
+
       <Cards submited={submited}></Cards>
       <style jsx>{`
         form {
-          width: 50%;
-          margin: 0 auto;
           background-color: #ffaaaa;
           padding: 30px;
           border-radius: 10px;
           margin-bottom: 20px;
         }
-        @media screen and (max-width: 768px) {
-          form {
-            width: 90%;
-          }
+        .form-title {
+          font-size: 1rem;
+          margin-top: 0;
         }
         .form-group {
           display: flex;

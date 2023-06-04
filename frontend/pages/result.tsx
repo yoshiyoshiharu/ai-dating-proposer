@@ -14,15 +14,30 @@ const ResultPage = () => {
   return (
     <>
       <Header></Header>
-      {
-        spots[spotIndex] == undefined &&
-        <h1>スポットが指定されていません</h1>
-      }
-      {
-        spots[spotIndex] !== undefined &&
-        <Plans spot={spots[spotIndex]}></Plans>
-      }
+      <main>
+        {
+          spots[spotIndex] == undefined &&
+          <h1>スポットが指定されていません</h1>
+        }
+        {
+          spots[spotIndex] !== undefined &&
+          <Plans spot={spots[spotIndex]}></Plans>
+        }
+      <style jsx>{`
+        main {
+          min - height: calc(100vh - 7rem);
+          width: 50%;
+          margin: 0 auto;
+        }
+          @media screen and (max-width: 768px) {
+            main {
+            width: 90%;
+          }
+        }
+      `}</style>
+      </main>
       <Footer></Footer>
+
     </>
   );
 };

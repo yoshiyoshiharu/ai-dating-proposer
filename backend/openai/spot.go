@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"os"
 	"regexp"
-	"strings"
 
 	openai "github.com/sashabaranov/go-openai"
 	entity "github.com/yoshiyoshiharu/ai-dating-proposer/entity"
@@ -36,7 +35,7 @@ NOTES:
 * Do not include areas that do not exist.
 * Please list only areas in Japan.
 * Output only JSON` +
-"What 5 tourist spot in" + area + "do you propose?"
+		"What 5 tourist spot in" + area + "do you propose?"
 }
 
 func FetchSpots(area string) ([]*entity.Spot, error) {
@@ -85,11 +84,9 @@ func executeSpotApi(message string) (string, error) {
 }
 
 func parseSpotResponse(res string) []*entity.Spot {
-	reg, _ := regexp.Compile("```json" + `([\s\S]*?)` + "```")
-	matched := reg.FindString(res)
+	reg, _ := regexp.Compile(`\[([\s\S]*?)\]`)
 
-	matched = strings.Replace(matched, "```json", "", 1)
-	matched = strings.Replace(matched, "```", "", 1)
+	matched := reg.FindString(res)
 
 	var spots []*entity.Spot
 	json.Unmarshal([]byte(matched), &spots)

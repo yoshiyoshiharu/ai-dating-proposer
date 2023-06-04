@@ -19,7 +19,7 @@ const Cards = ({ submited }: { submited: boolean }) => {
   if (submited && spots.length == 0) {
     return (
       <>
-        <h2>プランが見つかりませんでした。もう一度試してください。</h2>
+        <h2>デートスポットが見つかりませんでした。もう一度試してください。</h2>
         <style jsx>{`
          h2 {
             text-align: center;
@@ -49,17 +49,11 @@ const Cards = ({ submited }: { submited: boolean }) => {
         </div>
         <style jsx>{`
           .card {
-            width: 50%;
             background-color: #fff;
             margin: 10px auto;
             padding: 10px;
             border: 1px solid #333;
             border-radius: 10px;
-          }
-          @media screen and (max-width: 768px) {
-            .card {
-              width: 90%;
-            }
           }
           .place {
             display: inline-block;
