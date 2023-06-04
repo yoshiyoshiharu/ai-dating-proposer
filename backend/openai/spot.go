@@ -35,9 +35,7 @@ The output should be a markdown code snippet formatted in the following schema i
 NOTES:
 * Do not include areas that do not exist.
 * Please list only areas in Japan.
-* Output only JSON, No description` +
-"* Output start with ```json" +
-"* Output end with ````" +
+* Output only JSON` +
 "What 5 tourist spot in" + area + "do you propose?"
 }
 

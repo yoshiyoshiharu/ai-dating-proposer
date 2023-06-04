@@ -51,8 +51,6 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 NOTES:
 * Output only JSON` +
-		"* Output start with ```json" +
-		"* Output end with ````" +
 		`Please propose the one day date plan around` + spot
 }
 
