@@ -2,11 +2,10 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
-export default function Information() {
+export default function Share() {
   return (
     <>
-      <div className="informations">
-        <div className="information">
+        <div className="shares">
           <a href="https://twitter.com/intent/tweet?url=https://ai-dating-proposer.vercel.app&text=AIデートプラン提案アプリ" data-show-count="false" target='_blank' className='twitter-share-button'>
             <div className='button-inner'>
               <span className='twitter-icon'>
@@ -16,20 +15,17 @@ export default function Information() {
             </div>
           </a>
         </div>
-      </div>
       <style jsx>{`
-        .informations {
+        .shares {
           width: 50%;
           margin: 0 auto;
-        }
-        @media screen and (max-width: 768px) {
-          .informations {
-            width: 90%;
-          }
-        }
-        .information {
           display: flex;
           justify-content: flex-end;
+        }
+        @media screen and (max-width: 768px) {
+          .shares {
+            width: 90%;
+          }
         }
         .twitter-share-button {
           display: inline-block;

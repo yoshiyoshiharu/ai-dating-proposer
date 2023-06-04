@@ -22,6 +22,7 @@ export default function Footer() {
           display: flex;
           align-items: center;
           justify-content: center;
+          margin-top: 20px;
         }
         .me {
           margin-left: 5px;
