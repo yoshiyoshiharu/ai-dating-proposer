@@ -3,7 +3,7 @@ import { Spot } from '../../entity/spot';
 import Images from './Images';
 import Link from 'next/link';
 import router from 'next/router';
-import { SpotContext } from './SpotContext';
+import { SpotContext } from '../../context/SpotContext';
 
 
 const Cards = ({ submited }: { submited: boolean }) => {

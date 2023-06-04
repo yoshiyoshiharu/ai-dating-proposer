@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"; import Loading from "./Loading"; import Cards from "./Cards";
 import { PREFECTURES } from "../../consts/prefectures";
 import { Spot } from "../../entity/spot";
-import { SpotContext } from "./SpotContext";
+import { SpotContext } from "../../context/SpotContext";
 
 type SpotCondition = {
   area: string;

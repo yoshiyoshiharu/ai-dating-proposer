@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Plans from './components/Plans';
-import { SpotContext } from './components/SpotContext';
+import { SpotContext } from '../context/SpotContext';
 import { useContext } from 'react';
 
 

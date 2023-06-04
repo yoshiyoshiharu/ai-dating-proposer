@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from 'react'
-import { Spot } from '../../entity/spot'
+import { Spot } from '../entity/spot'
 
 interface ContextProps {
   spots: Spot[];
@@ -10,4 +10,3 @@ export const SpotContext = createContext<ContextProps>({
   spots: [],
   setSpots: () => { },
 });
-
