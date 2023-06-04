@@ -2,18 +2,25 @@ import { useRouter } from 'next/router';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Plans from './components/Plans';
+import { SpotContext } from '../context/SpotContext';
+import { useContext } from 'react';
+
 
 const ResultPage = () => {
   const router = useRouter();
-  const { plans, spot } = router.query as { plans: string, spot: string };
-  const parsedPlan = plans != undefined ? JSON.parse(plans) : undefined;
-  const parsedSpot = spot != undefined ? JSON.parse(spot) : undefined;
+  const spotIndex = parseInt(router.query.spotIndex as string, 10);
+  const { spots, setSpots } = useContext(SpotContext)
 
   return (
     <>
       <Header></Header>
-      { parsedPlan != undefined && parsedPlan.length > 0 &&
-        <Plans plan={parsedPlan} spot={parsedSpot}></Plans>
+      {
+        spots[spotIndex] == undefined &&
+        <h1>スポットが指定されていません</h1>
+      }
+      {
+        spots[spotIndex] !== undefined &&
+        <Plans spot={spots[spotIndex]}></Plans>
       }
       <Footer></Footer>
     </>

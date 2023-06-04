@@ -1,38 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Spot } from '../../entity/spot';
-import { Plan } from '../../entity/plan';
 import Images from './Images';
 import Link from 'next/link';
-import Loading from './Loading';
 import router from 'next/router';
+import { SpotContext } from '../../context/SpotContext';
 
-const fetchPlan = async (spot: string): Promise<Plan[]> => {
-  try {
-    const res = await fetch("/api/plan?spot=" + spot)
 
-    if (!res.ok) {
-      throw new Error("Plan API response was not ok");
-    }
+const Cards = ({ submited }: { submited: boolean }) => {
+  const { spots, setSpots } = useContext(SpotContext)
 
-    const plans: Plan[] = await res.json();
-
-    return plans
-  } catch {
-    return []
-  }
-}
-
-const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
-  const [fetchingPlan, setFetchingPlan] = useState<boolean>(false);
-
-  const handleClick = async (spot: Spot) => {
-    setFetchingPlan(true);
-    const plans = await fetchPlan(spot.place)
+  const handleClick = async (spotIndex: number) => {
     router.push({
       pathname: '/result',
-      query: { plans: JSON.stringify(plans), spot: JSON.stringify(spot) }
-   })
-    setFetchingPlan(false);
+      query: { spotIndex: spotIndex }
+    })
   };
 
   if (submited && spots.length == 0) {
@@ -49,19 +30,15 @@ const Cards = ({ spots, submited }: { spots: Spot[], submited: boolean }) => {
   } else {
     return (
       <>
-        {
-          fetchingPlan &&
-          <Loading top_desc='デートプランを考えています' bottom_desc='20秒ほどかかります'></Loading>
-        }
         <div className="cards">
           {
-            spots !== undefined && spots.map((spot) => (
-              <div className="card" key={spot.place}>
+            spots !== undefined && spots.map((spot: Spot, index: number) => (
+              <div className="card" key={index}>
                 <div className='card-header'>
                   <Link href={"https://www.google.co.jp/maps?q=" + spot.place} target='_blank'>
                     <span className='place'>{spot.place}</span>
                   </Link>
-                  <button type="button" className="fetch-plan-button" onClick={() => handleClick(spot)}>
+                  <button type="button" className="fetch-plan-button" onClick={() => handleClick(index)}>
                     デートプランを組んでもらう
                   </button>
                 </div>
