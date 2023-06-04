@@ -66,7 +66,7 @@ const Form = () => {
         <button className="submit-button" type="submit">提案してもらう</button>
       </form>
 
-      <Cards spots={spots} submited={submited}></Cards>
+      <Cards submited={submited}></Cards>
       <style jsx>{`
         form {
           width: 50%;

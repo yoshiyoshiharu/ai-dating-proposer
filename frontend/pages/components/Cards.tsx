@@ -9,10 +9,10 @@ import { SpotContext } from './SpotContext';
 const Cards = ({ submited }: { submited: boolean }) => {
   const { spots, setSpots } = useContext(SpotContext)
 
-  const handleClick = async (spot_index: string) => {
+  const handleClick = async (spotIndex: number) => {
     router.push({
       pathname: '/result',
-      query: { spot_index: spot_index }
+      query: { spotIndex: spotIndex }
     })
   };
 
@@ -32,7 +32,7 @@ const Cards = ({ submited }: { submited: boolean }) => {
       <>
         <div className="cards">
           {
-            spots !== undefined && spots.map((spot: Spot, index: string) => (
+            spots !== undefined && spots.map((spot: Spot, index: number) => (
               <div className="card" key={index}>
                 <div className='card-header'>
                   <Link href={"https://www.google.co.jp/maps?q=" + spot.place} target='_blank'>

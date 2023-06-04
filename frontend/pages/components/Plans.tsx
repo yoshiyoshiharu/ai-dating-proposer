@@ -8,10 +8,10 @@ export default function Plans({ spot }: { spot: Spot }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [plans, setPlans] = useState<Plan[]>([]);
 
-  const fetchPlan = async (spot: string): Promise<Plan[]> => {
+  const fetchPlan = async (event: any): Promise<Plan[]> => {
     setLoading(true)
     try {
-      const res = await fetch("/api/plan?spot=" + spot)
+      const res = await fetch("/api/plan?spot=" + spot.place)
 
       if (!res.ok) {
         throw new Error("Plan API response was not ok");

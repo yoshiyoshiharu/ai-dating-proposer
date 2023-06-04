@@ -8,19 +8,19 @@ import { useContext } from 'react';
 
 const ResultPage = () => {
   const router = useRouter();
-  const { spot_index } = router.query as { spot_index: string };
+  const spotIndex = parseInt(router.query.spotIndex as string, 10);
   const { spots, setSpots } = useContext(SpotContext)
 
   return (
     <>
       <Header></Header>
       {
-        spots[spot_index] == undefined &&
+        spots[spotIndex] == undefined &&
         <h1>スポットが指定されていません</h1>
       }
       {
-        spots[spot_index] !== undefined &&
-        <Plans spot={spots[spot_index]}></Plans>
+        spots[spotIndex] !== undefined &&
+        <Plans spot={spots[spotIndex]}></Plans>
       }
       <Footer></Footer>
     </>
