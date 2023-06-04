@@ -2,6 +2,7 @@ import { useContext, useState } from "react"; import Loading from "./Loading"; i
 import { PREFECTURES } from "../../consts/prefectures";
 import { Spot } from "../../entity/spot";
 import { SpotContext } from "../../context/SpotContext";
+import Information from "./Information";
 
 type SpotCondition = {
   area: string;
@@ -66,6 +67,8 @@ const Form = () => {
 
         <button className="submit-button" type="submit">提案してもらう</button>
       </form>
+
+      <Information></Information>
 
       <Cards submited={submited}></Cards>
       <style jsx>{`
