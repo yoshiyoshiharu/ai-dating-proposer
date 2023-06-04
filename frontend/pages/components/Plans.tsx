@@ -3,6 +3,7 @@ import { Plan } from '../../entity/plan';
 import { Spot } from '../../entity/spot';
 import Images from './Images';
 import Loading from './Loading';
+import Link from 'next/link';
 
 export default function Plans({ spot }: { spot: Spot }) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -43,7 +44,10 @@ export default function Plans({ spot }: { spot: Spot }) {
       {
         spot != undefined &&
         <div className='plan'>
-          <h2>{spot.place}周辺でのデートプラン</h2>
+          <div className='plan-header'>
+            <h2 className='plan-title'>{spot.place}周辺でのデートプラン</h2>
+            <Link href="/" className='plan-link'>スポット一覧に戻る</Link>
+          </div>
           <Images imageUrls={spot.image_urls}></Images>
           {
             loading &&
@@ -65,40 +69,48 @@ export default function Plans({ spot }: { spot: Spot }) {
         </div>
       }
       <style jsx>{`
-      .plan {
-        width: 50%;
-        margin: 30px auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-      }
-      @media screen and (max-width: 768px) {
         .plan {
-          width: 90%;
+          width: 50%;
+          margin: 30px auto;
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 10px;
         }
-      }
-      .title {
-        font-size: 1.4rem;
-        border-bottom: 1px solid #333;
-        color: #F88;
-      }
-      .description {
-        font-size: 1rem;
-        margin: 10px;
-      }
-      .retry-button {
-        width: 100%;
-        padding: 10px;
-        border-radius: 10px;
-        background-color: #F88;
-        border: none;
-        cursor: pointer;
-        color: white;
-      }
-      .retry-button:hover {
-        opacity: 0.8;
-      }
-    `}</style>
+        .plan-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .plan-title {
+          font-size: 1.2rem;
+        }
+        @media screen and (max-width: 768px) {
+          .plan {
+            width: 90%;
+          }
+        }
+        .title {
+          font-size: 1.4rem;
+          border-bottom: 1px solid #333;
+          color: #F88;
+        }
+        .description {
+          font-size: 1rem;
+          margin: 10px;
+        }
+        .retry-button {
+          width: 100%;
+          padding: 10px;
+          border-radius: 10px;
+          background-color: #F88;
+          border: none;
+          cursor: pointer;
+          color: white;
+        }
+        .retry-button:hover {
+          opacity: 0.8;
+        }
+     `}</style>
     </>
   )
 }
