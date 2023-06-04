@@ -52,8 +52,10 @@ The output should be a markdown code snippet formatted in the following schema i
 		"```" +
 `
 NOTES:
-* Output only JSON
-Please propose the one day date plan around` + spot
+* Output only JSON` +
+"* Output start with ```json" +
+"* Output end with ````" +
+`Please propose the one day date plan around` + spot
 }
 
 func FetchPlans(area string) ([]*entity.Plan, error) {

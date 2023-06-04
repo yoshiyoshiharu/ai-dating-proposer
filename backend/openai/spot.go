@@ -36,7 +36,9 @@ NOTES:
 * Do not include areas that do not exist.
 * Please list only areas in Japan.
 * Output only JSON, No description` +
-		"What 5 tourist spot in" + area + "do you propose?"
+"* Output start with ```json" +
+"* Output end with ````" +
+"What 5 tourist spot in" + area + "do you propose?"
 }
 
 func FetchSpots(area string) ([]*entity.Spot, error) {
