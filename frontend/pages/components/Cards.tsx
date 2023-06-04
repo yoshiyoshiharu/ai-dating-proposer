@@ -19,7 +19,7 @@ const Cards = ({ submited }: { submited: boolean }) => {
   if (submited && spots.length == 0) {
     return (
       <>
-        <h2>プランが見つかりませんでした。もう一度試してください。</h2>
+        <h2>デートスポットが見つかりませんでした。もう一度試してください。</h2>
         <style jsx>{`
          h2 {
             text-align: center;
