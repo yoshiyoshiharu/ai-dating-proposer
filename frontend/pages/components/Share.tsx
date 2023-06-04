@@ -8,10 +8,10 @@ export default function Share() {
         <div className="shares">
           <a href="https://twitter.com/intent/tweet?url=https://ai-dating-proposer.vercel.app&text=AIデートプラン提案アプリ" data-show-count="false" target='_blank' className='twitter-share-button'>
             <div className='button-inner'>
-              <span className='twitter-icon'>
+              <div className='twitter-icon'>
                 <FontAwesomeIcon icon={faTwitter}/>
-              </span>
-              Twitterでシェア
+              </div>
+            <div>Twitterでシェア</div>
             </div>
           </a>
         </div>
@@ -32,11 +32,15 @@ export default function Share() {
         .twitter-share-button a {
           display: block;
         }
+        .button-inner {
+          display: flex;
+          align-items: center;
+        }
         .twitter-icon {
           display: inline-block;
           width: 15px;
           margin-right: 10px;
-          padding-top: 5px;
+          padding-top: 2px;
         }
       `}</style>
     </>
