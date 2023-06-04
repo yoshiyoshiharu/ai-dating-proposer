@@ -77,6 +77,15 @@ const Cards = ({ submited }: { submited: boolean }) => {
             margin-bottom: 10px;
             justify-content: space-between;
           }
+          @media screen and (max-width: 768px) {
+            .card-header {
+              display: block;
+            }
+            .fetch-plan-button {
+              margin-top: 10px;
+              margin-left: 10px;
+            }
+          }
           .fetch-plan-button {
             display: block;
             background-color: lightblue;

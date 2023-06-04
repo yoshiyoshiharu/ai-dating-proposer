@@ -28,6 +28,7 @@ export default function Loading({ top_desc, bottom_desc }: { top_desc: string, b
           width: 100%;
           height: 100vh;
           background: pink;
+          z-index: 1000;
         }
         .wrapper {
           position: absolute;

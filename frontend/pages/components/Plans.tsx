@@ -8,8 +8,7 @@ export default function Plans({ spot }: { spot: Spot }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [plans, setPlans] = useState<Plan[]>([]);
 
-  const fetchPlan = async (event: any): Promise<Plan[]> => {
-    setLoading(true)
+  const fetchPlan = async (): Promise<Plan[]> => {
     try {
       const res = await fetch("/api/plan?spot=" + spot.place)
 
@@ -24,8 +23,16 @@ export default function Plans({ spot }: { spot: Spot }) {
     }
   }
 
+  const handleClick = async (event: any) => {
+    setLoading(true);
+    const plans = await fetchPlan();
+    setPlans(plans);
+    setLoading(false);
+  }
+
   useEffect(() => {
-    fetchPlan(spot.place).then((plans: Plan[]) => {
+    setLoading(true)
+    fetchPlan().then((plans: Plan[]) => {
       setPlans(plans)
       setLoading(false)
     })
@@ -46,7 +53,6 @@ export default function Plans({ spot }: { spot: Spot }) {
             plans.length == 0 &&
             <>
               <p>プランが見つかりませんでした。もう一度試してください。</p>
-              <button onClick={fetchPlan}>もう一度試す</button>
             </>
           }
           {plans.length > 0 && plans.map((plan: Plan) => (
@@ -55,6 +61,7 @@ export default function Plans({ spot }: { spot: Spot }) {
               <p className='description'>{plan.description}</p>
             </div>
           ))}
+          <button onClick={handleClick} className='retry-button'>もう一度試す</button>
         </div>
       }
       <style jsx>{`
@@ -78,6 +85,18 @@ export default function Plans({ spot }: { spot: Spot }) {
       .description {
         font-size: 1rem;
         margin: 10px;
+      }
+      .retry-button {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #F88;
+        border: none;
+        cursor: pointer;
+        color: white;
+      }
+      .retry-button:hover {
+        opacity: 0.8;
       }
     `}</style>
     </>
