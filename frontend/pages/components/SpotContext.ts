@@ -1,3 +1,13 @@
-import { createContext } from 'react'
+import { createContext, Dispatch, SetStateAction } from 'react'
+import { Spot } from '../../entity/spot'
 
-export const SpotContext = createContext([])
+interface ContextProps {
+  spots: Spot[];
+  setSpots: Dispatch<SetStateAction<Spot[]>>;
+}
+
+export const SpotContext = createContext<ContextProps>({
+  spots: [],
+  setSpots: () => { },
+});
+
