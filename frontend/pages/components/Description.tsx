@@ -8,7 +8,7 @@ export default function Description() {
         </div>
         <div className="description">
           <h2>使い方</h2>
-          <p>1. 選択したエリアからデートスポットを紹介します。</p>
+          <p>1. 選択したエリアからデートスポットを提案します。</p>
           <p>2. デートスポットを選択し、あなたの一日のデートプランを時系列で提案します。</p>
         </div>
         <div className="description">
@@ -21,7 +21,7 @@ export default function Description() {
         .descriptions {
           width: 50%;
           margin: 0 auto;
-          padding: 50px 0;
+          padding: 30px 0 20px 0;
         }
         @media screen and (max-width: 768px) {
           .descriptions {

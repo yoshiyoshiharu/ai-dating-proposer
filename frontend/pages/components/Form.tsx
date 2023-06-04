@@ -49,6 +49,7 @@ const Form = () => {
       }
 
       <form onSubmit={handleSubmit}>
+        <h3 className="form-title">デートスポットの提案</h3>
         <div className="form-group">
           <label className="label" htmlFor="area">エリア</label>
           <select className="select" name="area" id="area" required>
@@ -70,7 +71,7 @@ const Form = () => {
       <style jsx>{`
         form {
           width: 50%;
-          margin: 0 auto;
+          margin: 30px auto;
           background-color: #ffaaaa;
           padding: 30px;
           border-radius: 10px;
@@ -80,6 +81,10 @@ const Form = () => {
           form {
             width: 90%;
           }
+        }
+        .form-title {
+          font-size: 1rem;
+          margin-top: 0;
         }
         .form-group {
           display: flex;

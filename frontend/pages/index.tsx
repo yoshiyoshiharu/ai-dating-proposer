@@ -3,8 +3,12 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Form from './components/Form'
 import Description from './components/Description'
+import { SpotContext } from '../context/SpotContext'
+import { useContext } from 'react'
 
 const Main = () => {
+  const { spots, setSpots } = useContext(SpotContext)
+
   return (
     <>
       <Head>
@@ -14,7 +18,7 @@ const Main = () => {
 
       <Header></Header>
       <main>
-        <Description></Description>
+        { spots.length == 0 && <Description></Description> }
         <Form></Form>
       </main>
       <Footer></Footer>
