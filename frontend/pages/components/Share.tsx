@@ -6,7 +6,7 @@ export default function Share() {
   return (
     <>
       <div className="shares">
-        <a href="https://github.com/yoshiyoshiharu/ai-dating-proposer" className='github-button'>
+        <a href="https://github.com/yoshiyoshiharu/ai-dating-proposer" className='github-button' target="_blank">
           <div className='button-inner'>
             <div className='github-icon'>
               <FontAwesomeIcon icon={faGithub} />
