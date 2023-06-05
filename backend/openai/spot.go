@@ -22,10 +22,10 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 [
   {
-   place: string, // place name of the tourist spot in Japanese.
+   place: string // place name of the tourist spot in Japanese.
   },
   {
-   place: string, // place name of the tourist spot in Japanese.
+   place: string // place name of the tourist spot in Japanese.
   },
 ]
 ` +
@@ -33,9 +33,8 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 NOTES:
 * Do not include areas that do not exist.
-* Please list only areas in Japan.
 * Output only JSON` +
-		"What 5 tourist spot in" + area + "do you propose?"
+		"What 5 tourist spot in" + area + " Japan do you propose?"
 }
 
 func FetchSpots(area string) ([]*entity.Spot, error) {
