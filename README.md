@@ -6,11 +6,9 @@ https://ai-dating-proposer.vercel.app
 
 ## 機能
 ### デートスポットの提案
-エリアを指定し、おすすめのデートスポットを提案します。
 ![spots](/images/spots.png)
 
 ### デートスポットから一日のプランを提案
-デートスポットを指定し、一日のデートプランを提案します。
 ![plan](/images/plan.png)
 
 ## 使用技術
