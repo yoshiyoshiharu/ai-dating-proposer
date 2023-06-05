@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
 	"regexp"
 
@@ -21,30 +22,30 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 [
   {
-    time: 9時
+    time: 9時,
     plan: string, // date plan title
     description: string // date plan detail in one sentence.
   },
   {
-    time: 12時
+    time: 12時,
     plan: string, // date plan title
     description: string // date plan detail in one sentence.
   },
   {
-    time: 15時
+    time: 15時,
     plan: string, // date plan title
     description: string // date plan detail in one sentence.
   },
   {
-    time: 18時
+    time: 18時,
     plan: string, // date plan title
     description: string // date plan detail in one sentence.
   },
   {
-    time: 21時
+    time: 21時,
     plan: string, // date plan title
     description: string // date plan detail in one sentence.
-  },
+  }
 ]
 ` +
 		"```" +
@@ -91,6 +92,7 @@ func executePlanApi(message string) (string, error) {
 		return "", err
 	}
 
+	fmt.Println(resp.Choices[0].Message.Content)
 	return resp.Choices[0].Message.Content, nil
 }
 
