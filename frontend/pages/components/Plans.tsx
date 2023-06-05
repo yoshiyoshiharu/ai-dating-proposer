@@ -6,7 +6,7 @@ import Loading from './Loading';
 import Link from 'next/link';
 import Share from './Share';
 
-export default function Plans({ spot }: { spot: Spot }) {
+export default function Plans({ spot, area }: { spot: Spot, area: string }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [plans, setPlans] = useState<Plan[]>([]);
 
@@ -47,7 +47,7 @@ export default function Plans({ spot }: { spot: Spot }) {
         <div className='plan'>
           <div className='plan-header'>
             <h2 className='plan-title'>{spot.place}周辺でのデートプラン</h2>
-            <Link href="/">スポット一覧に戻る</Link>
+            <Link href={"/spots?area=" + area}>スポット一覧に戻る</Link>
           </div>
           <Images imageUrls={spot.image_urls}></Images>
           {

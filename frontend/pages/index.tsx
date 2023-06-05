@@ -18,8 +18,8 @@ const Main = () => {
 
       <Header></Header>
       <main>
-        { spots.length == 0 && <Description></Description> }
-        <Form></Form>
+        <Description></Description>
+        <Form area=""></Form>
       </main>
       <Footer></Footer>
       <style jsx>{`

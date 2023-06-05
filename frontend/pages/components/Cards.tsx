@@ -6,17 +6,17 @@ import router from 'next/router';
 import { SpotContext } from '../../context/SpotContext';
 
 
-const Cards = ({ submited }: { submited: boolean }) => {
+const Cards = ({ area }: { area: string }) => {
   const { spots, setSpots } = useContext(SpotContext)
 
   const handleClick = async (spotIndex: number) => {
     router.push({
       pathname: '/result',
-      query: { spotIndex: spotIndex }
+      query: { spotIndex: spotIndex, area: area }
     })
   };
 
-  if (submited && spots.length == 0) {
+  if (spots.length == 0) {
     return (
       <>
         <h2>デートスポットが見つかりませんでした。もう一度試してください。</h2>
@@ -35,7 +35,7 @@ const Cards = ({ submited }: { submited: boolean }) => {
             spots !== undefined && spots.map((spot: Spot, index: number) => (
               <div className="card" key={index}>
                 <div className='card-header'>
-                  <Link href={"https://www.google.co.jp/maps?q=" + spot.place} target='_blank'>
+                  <Link href={"https://www.google.co.jp/maps?q=" + spot.place + " " + area} target='_blank'>
                     <span className='place'>{spot.place}</span>
                   </Link>
                   <button type="button" className="fetch-plan-button" onClick={() => handleClick(index)}>

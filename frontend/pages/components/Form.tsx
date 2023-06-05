@@ -1,64 +1,34 @@
-import { useContext, useState } from "react"; import Loading from "./Loading"; import Cards from "./Cards";
 import { PREFECTURES } from "../../consts/prefectures";
-import { Spot } from "../../entity/spot";
-import { SpotContext } from "../../context/SpotContext";
 import Share from "./Share";
+import { useRouter } from "next/router";
 
-type SpotCondition = {
-  area: string;
-}
-
-const fetchSpots = async (spotCondition: SpotCondition): Promise<Spot[]> => {
-  try {
-    const res = await fetch("/api/spot?area=" + spotCondition.area)
-    if (!res.ok) {
-      throw new Error("API response was not ok");
-    }
-
-    const spots = await res.json();
-    return spots
-  } catch {
-    return []
-  }
-}
-
-
-const Form = () => {
-  const [submited, setSubmited] = useState<boolean>(false);
-  const { spots, setSpots } = useContext(SpotContext)
-  const [fetchingSpot, setFetchingSpot] = useState<boolean>(false);
+const Form = ({ area }: { area: string }) => {
+  const router = useRouter();
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    setSubmited(true);
 
     const spotCondition = {
       area: event.target.area.value,
     };
 
-    setFetchingSpot(true);
-    const spots = await fetchSpots(spotCondition);
-    setSpots(spots);
-    setFetchingSpot(false);
+    router.push('/spots?area=' + spotCondition.area);
   };
 
   return (
     <>
-      {
-        fetchingSpot &&
-        <Loading top_desc='デートスポットを考えています' bottom_desc='10秒ほどかかります'></Loading>
-      }
-
       <form onSubmit={handleSubmit}>
         <h3 className="form-title">デートスポットの提案</h3>
         <div className="form-group">
           <label className="label" htmlFor="area">エリア</label>
-          <select className="select" name="area" id="area" required>
+          <select className="select" name="area" id="area" defaultValue={area} required>
             <option value="">エリアを選択してください</option>
             <>
               {
                 PREFECTURES.map((prefecture) => (
-                  <option key={prefecture.label} value={prefecture.value}>{prefecture.label}</option>
+                  <option key={prefecture.label} value={prefecture.value}>
+                    {prefecture.label}
+                  </option>
                 ))
               }
             </>
@@ -70,7 +40,6 @@ const Form = () => {
 
       <Share></Share>
 
-      <Cards submited={submited}></Cards>
       <style jsx>{`
         form {
           background-color: #ffaaaa;
