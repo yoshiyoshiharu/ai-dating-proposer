@@ -8,7 +8,7 @@ export default function Footer() {
       <footer>
         <span>created by</span>
         <span className="me">Haruki Yoshdia</span>
-        <Link href="https://github.com/yoshiyoshiharu/ai-dating-proposer" target="_blank">
+        <Link href="https://github.com/yoshiyoshiharu" target="_blank">
           <span className="github-icon">
             <FontAwesomeIcon icon={faGithub} />
           </span>
