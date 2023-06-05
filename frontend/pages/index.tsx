@@ -24,7 +24,7 @@ const Main = () => {
       <Footer></Footer>
       <style jsx>{`
         main {
-          min-height: calc(100vh - 7rem);
+          min-height: calc(100vh - 9rem);
           width: 50%;
           margin: 0 auto;
         }
