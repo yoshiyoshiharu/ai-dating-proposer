@@ -14,7 +14,7 @@ import (
 
 func spotMessageFormat(area string) string {
 	return `
-You are an excellent tourist architecture proposer.
+You are an excellent tourist spot introducer.
 
 The output should be a markdown code snippet formatted in the following schema in Japanese:
 ` +
@@ -22,19 +22,19 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 [
   {
-   place: string // place name of the tourist architecture in Japanese.
+   place: string // famous tourist spot name in Japanese.
   },
   {
-   place: string // place name of the tourist architecture in Japanese.
+   place: string // famous tourist spot name in Japanese.
   },
 ]
 ` +
 		"```" +
 		`
 NOTES:
-* Do not include areas that do not exist.
+* Never include tourist spots that do not exist.
 * Output only JSON` +
-		"What 5 tourist architecture in" + area + " Japan do you propose?"
+		"What 5 tourist spot in" + area + " do you introduce?"
 }
 
 func FetchSpots(area string) ([]*entity.Spot, error) {
