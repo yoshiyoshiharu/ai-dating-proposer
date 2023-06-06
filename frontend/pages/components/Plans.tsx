@@ -3,8 +3,6 @@ import Images from './Images';
 import Link from 'next/link';
 import Share from './Share';
 import { Spot } from '../../entity/spot';
-import { SpotContext } from '../../contexts/SpotContext';
-import { useContext } from 'react';
 
 export default function Plans({ spot }: { spot: Spot }) {
   return (
@@ -18,7 +16,7 @@ export default function Plans({ spot }: { spot: Spot }) {
           </div>
           <Images imageUrls={spot.image_urls}></Images>
           {
-            spot.plans.length == 0 &&
+            spot.plans == undefined || spot.plans.length == 0 &&
             <p className='error-message'>プランが見つかりませんでした。もう一度試してください。</p>
           }
           <Share></Share>
