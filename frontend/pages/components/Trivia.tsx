@@ -48,7 +48,7 @@ export default function Trivia () {
           color: #fff;
           background-color: #faa;
           margin-top: 50px;
-          height: 300px;
+          height: 275px;
         }
         @media screen and (max-width: 768px) {
           .trivia {
