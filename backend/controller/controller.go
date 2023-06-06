@@ -53,13 +53,14 @@ func GetPlans(c *gin.Context) {
 	var err error
 
 	spot := c.Query("spot")
+	area := c.Query("area")
 
-	if spot == "" {
-		c.IndentedJSON(http.StatusBadRequest, "spot is required")
+	if spot == "" || area == "" {
+		c.IndentedJSON(http.StatusBadRequest, "spot and area is required")
 		return
 	}
 
-	spots, err := openai.FetchPlans(spot)
+	plans, err := openai.FetchPlans(spot, area)
 
 	if err != nil {
 		fmt.Println(err)
@@ -67,7 +68,7 @@ func GetPlans(c *gin.Context) {
 		return
 	}
 
-	c.IndentedJSON(http.StatusOK, spots)
+	c.IndentedJSON(http.StatusOK, plans)
 }
 
 func stubImageUrls() []string {

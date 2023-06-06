@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { SpotContext } from '../context/SpotContext'
+import { SpotContext } from '../contexts/SpotContext'
 import { useState } from 'react'
 import { Spot } from '../entity/spot'
 

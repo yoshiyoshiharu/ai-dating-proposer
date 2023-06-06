@@ -2,13 +2,13 @@ import { useRouter } from 'next/router';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Plans from './components/Plans';
-import { SpotContext } from '../context/SpotContext';
+import { SpotContext } from '../contexts/SpotContext';
 import { useContext } from 'react';
 
 
 const ResultPage = () => {
   const router = useRouter();
-  const spotIndex = parseInt(router.query.spotIndex as string, 10);
+  const spotIndex = parseInt(router.query.spot_index as string, 10);
   const { spots, setSpots } = useContext(SpotContext)
 
   return (
@@ -17,13 +17,13 @@ const ResultPage = () => {
       <main>
         {
           spots[spotIndex] == undefined &&
-          <h1>スポットが指定されていません</h1>
+          <p>スポットが指定されていません</p>
         }
         {
           spots[spotIndex] !== undefined &&
           <Plans spot={spots[spotIndex]}></Plans>
         }
-      <style jsx>{`
+        <style jsx>{`
         main {
           min - height: calc(100vh - 7rem);
           width: 50%;
@@ -37,7 +37,6 @@ const ResultPage = () => {
       `}</style>
       </main>
       <Footer></Footer>
-
     </>
   );
 };

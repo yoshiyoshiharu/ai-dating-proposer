@@ -1,64 +1,70 @@
-import { useContext, useState } from "react"; import Loading from "./Loading"; import Cards from "./Cards";
 import { PREFECTURES } from "../../consts/prefectures";
+import { useRouter } from "next/router";
 import { Spot } from "../../entity/spot";
-import { SpotContext } from "../../context/SpotContext";
-import Share from "./Share";
+import Loading from "./Loading";
+import { useState } from "react";
+import { useContext } from "react";
+import { SpotContext } from "../../contexts/SpotContext";
 
-type SpotCondition = {
-  area: string;
-}
-
-const fetchSpots = async (spotCondition: SpotCondition): Promise<Spot[]> => {
-  try {
-    const res = await fetch("/api/spot?area=" + spotCondition.area)
-    if (!res.ok) {
-      throw new Error("API response was not ok");
-    }
-
-    const spots = await res.json();
-    return spots
-  } catch {
-    return []
-  }
-}
-
-
-const Form = () => {
-  const [submited, setSubmited] = useState<boolean>(false);
+const Form = ({ area }: { area: string }) => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false)
   const { spots, setSpots } = useContext(SpotContext)
-  const [fetchingSpot, setFetchingSpot] = useState<boolean>(false);
+  const [spotFound, setSpotFound] = useState(true)
+
+  const fetchSpots = async (area: string): Promise<Spot[]> => {
+    try {
+      const res = await fetch("/api/spot?area=" + area)
+      if (!res.ok) {
+        throw new Error("API response was not ok");
+      }
+
+      const spots = await res.json();
+      return spots
+    } catch {
+      return []
+    }
+  }
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    setSubmited(true);
+    const area = event.target.area.value
 
-    const spotCondition = {
-      area: event.target.area.value,
-    };
+    setLoading(true)
+    const spots = await fetchSpots(area)
+    setSpots(spots)
+    setLoading(false)
 
-    setFetchingSpot(true);
-    const spots = await fetchSpots(spotCondition);
-    setSpots(spots);
-    setFetchingSpot(false);
+    if (spots.length > 0) {
+      setSpotFound(true)
+      router.push('/spots?area=' + area);
+    } else {
+      setSpotFound(false)
+    }
   };
 
   return (
     <>
       {
-        fetchingSpot &&
+        loading &&
         <Loading top_desc='デートスポットを考えています' bottom_desc='10秒ほどかかります'></Loading>
       }
-
+      {
+        !spotFound &&
+        <p className="error-message">デートスポットが見つかりませんでした。もう一度お試しください。</p>
+      }
       <form onSubmit={handleSubmit}>
         <h3 className="form-title">デートスポットの提案</h3>
         <div className="form-group">
           <label className="label" htmlFor="area">エリア</label>
-          <select className="select" name="area" id="area" required>
+          <select className="select" name="area" id="area" defaultValue={area} required>
             <option value="">エリアを選択してください</option>
             <>
               {
                 PREFECTURES.map((prefecture) => (
-                  <option key={prefecture.label} value={prefecture.value}>{prefecture.label}</option>
+                  <option key={prefecture.label} value={prefecture.value}>
+                    {prefecture.label}
+                  </option>
                 ))
               }
             </>
@@ -68,10 +74,11 @@ const Form = () => {
         <button className="submit-button" type="submit">提案してもらう</button>
       </form>
 
-      <Share></Share>
-
-      <Cards submited={submited}></Cards>
       <style jsx>{`
+        .error-message {
+          color: #f44336;
+          text-align: center;
+        }
         form {
           background-color: #ffaaaa;
           padding: 30px;

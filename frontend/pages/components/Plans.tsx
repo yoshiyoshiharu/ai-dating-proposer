@@ -1,45 +1,12 @@
-import { useEffect, useState } from 'react';
 import { Plan } from '../../entity/plan';
-import { Spot } from '../../entity/spot';
 import Images from './Images';
-import Loading from './Loading';
 import Link from 'next/link';
 import Share from './Share';
+import { Spot } from '../../entity/spot';
+import { SpotContext } from '../../contexts/SpotContext';
+import { useContext } from 'react';
 
 export default function Plans({ spot }: { spot: Spot }) {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [plans, setPlans] = useState<Plan[]>([]);
-
-  const fetchPlan = async (): Promise<Plan[]> => {
-    try {
-      const res = await fetch("/api/plan?spot=" + spot.place)
-
-      if (!res.ok) {
-        throw new Error("Plan API response was not ok");
-      }
-
-      const plans: Plan[] = await res.json();
-      return plans
-    } catch {
-      return []
-    }
-  }
-
-  const handleClick = async (event: any) => {
-    setLoading(true);
-    const plans = await fetchPlan();
-    setPlans(plans);
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    setLoading(true)
-    fetchPlan().then((plans: Plan[]) => {
-      setPlans(plans)
-      setLoading(false)
-    })
-  }, [])
-
   return (
     <>
       {
@@ -47,27 +14,20 @@ export default function Plans({ spot }: { spot: Spot }) {
         <div className='plan'>
           <div className='plan-header'>
             <h2 className='plan-title'>{spot.place}周辺でのデートプラン</h2>
-            <Link href="/">スポット一覧に戻る</Link>
+            <Link href={"/spots?area=" + spot.area}>スポット一覧に戻る</Link>
           </div>
           <Images imageUrls={spot.image_urls}></Images>
           {
-            loading &&
-            <Loading top_desc='デートプランを考えています' bottom_desc='20秒ほどかかります'></Loading>
-          }
-          {
-            plans.length == 0 &&
-            <>
-              <p>プランが見つかりませんでした。もう一度試してください。</p>
-            </>
+            spot.plans.length == 0 &&
+            <p className='error-message'>プランが見つかりませんでした。もう一度試してください。</p>
           }
           <Share></Share>
-          {plans.length > 0 && plans.map((plan: Plan) => (
+          {spot.plans.length > 0 && spot.plans.map((plan: Plan) => (
             <div key="plan.time">
               <p className='title'>{plan.time} : {plan.plan}</p>
               <p className='description'>{plan.description}</p>
             </div>
           ))}
-          <button onClick={handleClick} className='retry-button'>もう一度試す</button>
         </div>
       }
       <style jsx>{`
@@ -90,6 +50,9 @@ export default function Plans({ spot }: { spot: Spot }) {
           border-bottom: 1px solid #333;
           color: #F77;
         }
+        .error-message {
+          font-size: 0.8rem;
+        }
         @media screen and (max-width: 768px) {
           .plan-header {
             display: block;
@@ -105,18 +68,6 @@ export default function Plans({ spot }: { spot: Spot }) {
         .description {
           font-size: 1rem;
           margin: 10px;
-        }
-        .retry-button {
-          width: 100%;
-          padding: 10px;
-          border-radius: 10px;
-          background-color: #F88;
-          border: none;
-          cursor: pointer;
-          color: white;
-        }
-        .retry-button:hover {
-          opacity: 0.8;
         }
      `}</style>
     </>
