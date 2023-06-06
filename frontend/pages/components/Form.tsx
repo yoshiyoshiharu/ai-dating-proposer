@@ -2,7 +2,7 @@ import { PREFECTURES } from "../../consts/prefectures";
 import { useRouter } from "next/router";
 import { Spot } from "../../entity/spot";
 import Loading from "./Loading";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { SpotContext } from "../../contexts/SpotContext";
 

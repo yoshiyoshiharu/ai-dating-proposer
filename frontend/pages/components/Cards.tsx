@@ -3,13 +3,15 @@ import { Spot } from '../../entity/spot';
 import Images from './Images';
 import Loading from './Loading';
 import Link from 'next/link';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import { SpotContext } from '../../contexts/SpotContext';
 import { Plan } from '../../entity/plan';
 
 
 
 const Cards = () => {
+  const router = useRouter();
+
   const area = router.query.area
   const { spots, setSpots } = useContext(SpotContext)
   const [loading, setLoading] = useState<boolean>(false);
