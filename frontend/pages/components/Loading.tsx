@@ -1,4 +1,5 @@
 import Header from './Header';
+import Trivia from './Trivia';
 
 export default function Loading({ top_desc, bottom_desc }: { top_desc: string, bottom_desc: string }) {
   return (
@@ -18,6 +19,7 @@ export default function Loading({ top_desc, bottom_desc }: { top_desc: string, b
             <div className="description-detail">{top_desc}</div>
             <div className="description-detail">{bottom_desc}</div>
           </div>
+          <Trivia></Trivia>
         </div>
       </div >
       <style jsx>{`
@@ -33,7 +35,7 @@ export default function Loading({ top_desc, bottom_desc }: { top_desc: string, b
         .wrapper {
           position: absolute;
           width: 100%;
-          top:40%;
+          top:30%;
         }
         .circles{
           width:200px;
