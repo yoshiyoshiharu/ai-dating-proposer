@@ -13,10 +13,9 @@ const Cards = () => {
   const area = router.query.area
   const { spots, setSpots } = useContext(SpotContext)
   const [loading, setLoading] = useState<boolean>(false);
-  const [plans, setPlans] = useState<Plan[]>([]);
   const [planFound, setPlanFound] = useState(true)
 
-  const fetchPlan = async (place: string): Promise<Plan[]> => {
+  const fetchPlans = async (place: string): Promise<Plan[]> => {
     try {
       const res = await fetch("/api/plan?spot=" + place)
 
@@ -31,17 +30,25 @@ const Cards = () => {
     }
   }
 
+  const updatePlans = (index: number, newPlans: Plan[]) => {
+    setSpots(Spots => {
+      Spots[index].plans = newPlans;
+      return Spots;
+    });
+  };
+
   const handleClick = async (spotIndex: number) => {
     const spot = spots[spotIndex]
     setLoading(true)
-    const plans = await fetchPlan(spot.place)
-    setPlans(plans)
+    const newPlans = await fetchPlans(spot.place)
+    updatePlans(spotIndex, newPlans)
     setLoading(false)
 
-    if (plans.length > 0) {
+    const plans = spots[spotIndex].plans
+
+    if (plans !== undefined && plans.length > 0) {
       router.push({
         pathname: '/result',
-        query: { spotIndex: spotIndex, area: area }
       })
     } else {
       setPlanFound(false)
