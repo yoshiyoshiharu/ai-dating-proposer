@@ -59,7 +59,7 @@ func GetPlans(c *gin.Context) {
 		return
 	}
 
-	spots, err := openai.FetchPlans(spot)
+	plans, err := openai.FetchPlans(spot)
 
 	if err != nil {
 		fmt.Println(err)
@@ -67,7 +67,7 @@ func GetPlans(c *gin.Context) {
 		return
 	}
 
-	c.IndentedJSON(http.StatusOK, spots)
+	c.IndentedJSON(http.StatusOK, plans)
 }
 
 func stubImageUrls() []string {
