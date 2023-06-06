@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return
   }
 
-  const resp = await fetch(BASE_URL + '/api/plans?spot=' + req.query.spot)
+  const resp = await fetch(BASE_URL + '/api/plans?spot=' + req.query.spot + '&area=' + req.query.area )
 
   if (resp.status !== 200) {
     res.status(500).json({ error: 'Error fetching plans' })

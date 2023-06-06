@@ -17,7 +17,7 @@ const Cards = () => {
 
   const fetchPlans = async (place: string): Promise<Plan[]> => {
     try {
-      const res = await fetch("/api/plan?spot=" + place)
+      const res = await fetch("/api/plan?spot=" + place + "&area=" + area)
 
       if (!res.ok) {
         throw new Error("Plan API response was not ok");

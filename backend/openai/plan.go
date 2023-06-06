@@ -12,7 +12,7 @@ import (
 	entity "github.com/yoshiyoshiharu/ai-dating-proposer/entity"
 )
 
-func planMessageFormat(spot string) string {
+func planMessageFormat(spot string, area string) string {
 	return `
 You are an excellent couple dating plan proposer.
 
@@ -52,11 +52,11 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 NOTES:
 * Output only JSON` +
-		`Please propose the one day date plan around` + spot
+		`Please propose the one day date plan around` + spot + " in " + area
 }
 
-func FetchPlans(area string) ([]*entity.Plan, error) {
-	message := planMessageFormat(area)
+func FetchPlans(spot string, area string) ([]*entity.Plan, error) {
+	message := planMessageFormat(spot, area)
 
 	res, err := executePlanApi(message)
 
