@@ -1,11 +1,32 @@
+import { useEffect, useState } from "react"
+import { Trivia } from "../../entity/trivia"
+import { TRIVIAS } from "../../consts/trivias"
+
 export default function Trivia () {
+  const [triviaIndex, setTriviaIndex] = useState<number>(0)
+  const [trivia, setTrivia] = useState<Trivia>()
+
+  const fetchTrivia = () => {
+    const randomIndex = Math.floor(Math.random() * TRIVIAS.length)
+    const randomeTrivia = TRIVIAS[randomIndex]
+    setTrivia(randomeTrivia)
+  }
+
+  useEffect(() => {
+    fetchTrivia()
+  }, [])
+
   return (
     <>
-      <div className='trivia'>
-        <h3 className='trivia-header'>デートを成功させよう</h3>
-        <h4 className='trivia-title'>相手と目を合わせよう</h4>
-        <p className='tirivia-detail'>デート中、相手の目を見ることは重要です。目の接触は相手とのつながりを深めるのに役立ちます。相手の目を見ながら話すことで、興味を示していることや尊重していることを伝えることができます。</p>
-      </div>
+      {
+        trivia &&
+        <div className='trivia'>
+          <h3 className='trivia-header'>デートを成功させよう</h3>
+          <button onClick={fetchTrivia}>次のトリビア</button>
+          <h4 className='trivia-title'>{trivia.title}</h4>
+          <p className='tirivia-detail'>{trivia.description}</p>
+        </div>
+      }
       <style jsx>{`
         .trivia {
           width: 50%;
