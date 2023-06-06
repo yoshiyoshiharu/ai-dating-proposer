@@ -4,7 +4,7 @@ import Images from './Images';
 import Loading from './Loading';
 import Link from 'next/link';
 import router from 'next/router';
-import { SpotContext } from '../../context/SpotContext';
+import { SpotContext } from '../../contexts/SpotContext';
 import { Plan } from '../../entity/plan';
 
 

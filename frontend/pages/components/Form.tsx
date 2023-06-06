@@ -4,7 +4,7 @@ import { Spot } from "../../entity/spot";
 import Loading from "./Loading";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { SpotContext } from "../../context/SpotContext";
+import { SpotContext } from "../../contexts/SpotContext";
 
 const Form = ({ area }: { area: string }) => {
   const router = useRouter();

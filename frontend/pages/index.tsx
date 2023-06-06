@@ -4,7 +4,7 @@ import Footer from './components/Footer'
 import Form from './components/Form'
 import Description from './components/Description'
 import Share from './components/Share'
-import { SpotContext } from '../context/SpotContext'
+import { SpotContext } from '../contexts/SpotContext'
 import { useContext } from 'react'
 
 const Main = () => {
