@@ -4,12 +4,8 @@ import Footer from './components/Footer'
 import Form from './components/Form'
 import Description from './components/Description'
 import Share from './components/Share'
-import { SpotContext } from '../contexts/SpotContext'
-import { useContext } from 'react'
 
 const Main = () => {
-  const { spots, setSpots } = useContext(SpotContext)
-
   return (
     <>
       <Head>
