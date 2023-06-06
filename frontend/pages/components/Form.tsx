@@ -46,7 +46,7 @@ const Form = ({ area }: { area: string }) => {
   return (
     <>
       {
-        loading &&
+        // loading &&
         <Loading top_desc='デートスポットを考えています' bottom_desc='10秒ほどかかります'></Loading>
       }
       {
