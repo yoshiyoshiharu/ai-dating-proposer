@@ -49,6 +49,7 @@ const Cards = () => {
     if (plans !== undefined && plans.length > 0) {
       router.push({
         pathname: '/result',
+        query: { spot_index: spotIndex }
       })
     } else {
       setPlanFound(false)

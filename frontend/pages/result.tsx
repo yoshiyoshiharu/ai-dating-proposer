@@ -8,8 +8,7 @@ import { useContext } from 'react';
 
 const ResultPage = () => {
   const router = useRouter();
-  const spotIndex = parseInt(router.query.spotIndex as string, 10);
-  const area = router.query.area as string;
+  const spotIndex = parseInt(router.query.spot_index as string, 10);
   const { spots, setSpots } = useContext(SpotContext)
 
   return (
@@ -22,7 +21,7 @@ const ResultPage = () => {
         }
         {
           spots[spotIndex] !== undefined &&
-          <Plans spot={spots[spotIndex]} area={area}></Plans>
+          <Plans spot={spots[spotIndex]}></Plans>
         }
         <style jsx>{`
         main {

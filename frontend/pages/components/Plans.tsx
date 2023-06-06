@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
 import { Plan } from '../../entity/plan';
-import { Spot } from '../../entity/spot';
 import Images from './Images';
-import Loading from './Loading';
 import Link from 'next/link';
 import Share from './Share';
+import { Spot } from '../../entity/spot';
+import { SpotContext } from '../../contexts/SpotContext';
+import { useContext } from 'react';
 
-export default function Plans({ plans, area, spot }: { plans: Plan[], area: string, spot: Spot }) {
+export default function Plans({ spot }: { spot: Spot }) {
   return (
     <>
       {
@@ -14,15 +14,15 @@ export default function Plans({ plans, area, spot }: { plans: Plan[], area: stri
         <div className='plan'>
           <div className='plan-header'>
             <h2 className='plan-title'>{spot.place}周辺でのデートプラン</h2>
-            <Link href={"/spots?area=" + area}>スポット一覧に戻る</Link>
+            <Link href={"/spots?area=" + spot.area}>スポット一覧に戻る</Link>
           </div>
           <Images imageUrls={spot.image_urls}></Images>
           {
-            plans.length == 0 &&
+            spot.plans.length == 0 &&
             <p className='error-message'>プランが見つかりませんでした。もう一度試してください。</p>
           }
           <Share></Share>
-          {plans.length > 0 && plans.map((plan: Plan) => (
+          {spot.plans.length > 0 && spot.plans.map((plan: Plan) => (
             <div key="plan.time">
               <p className='title'>{plan.time} : {plan.plan}</p>
               <p className='description'>{plan.description}</p>
