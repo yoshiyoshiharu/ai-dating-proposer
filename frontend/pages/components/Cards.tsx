@@ -60,7 +60,7 @@ const Cards = () => {
     <>
       {
         loading &&
-        <Loading top_desc='デートプランを考えています' bottom_desc='10秒ほどかかります'></Loading>
+        <Loading top_desc='デートプランを考えています' bottom_desc='20秒ほどかかります'></Loading>
       }
       {
         !planFound &&
