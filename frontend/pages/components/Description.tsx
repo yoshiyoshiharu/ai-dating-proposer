@@ -15,7 +15,6 @@ export default function Description() {
           <h2>注意事項</h2>
           <p>※ このサービスは、ChatGPTを活用しています。誤った情報が表示される可能性がありますのでご了承ください。</p>
         </div>
-
       </div>
      <style jsx>{`
         .descriptions {

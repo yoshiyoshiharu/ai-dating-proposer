@@ -1,4 +1,5 @@
 import Header from './Header';
+import Trivia from './Trivia';
 
 export default function Loading({ top_desc, bottom_desc }: { top_desc: string, bottom_desc: string }) {
   return (
@@ -18,11 +19,7 @@ export default function Loading({ top_desc, bottom_desc }: { top_desc: string, b
             <div className="description-detail">{top_desc}</div>
             <div className="description-detail">{bottom_desc}</div>
           </div>
-          <div className='trivia'>
-            <h3 className='trivia-header'>デートを成功させよう</h3>
-            <h4 className='trivia-title'>相手と目を合わせよう</h4>
-            <p className='tirivia-detail'>デート中、相手の目を見ることは重要です。目の接触は相手とのつながりを深めるのに役立ちます。相手の目を見ながら話すことで、興味を示していることや尊重していることを伝えることができます。</p>
-          </div>
+          <Trivia></Trivia>
         </div>
       </div >
       <style jsx>{`
@@ -56,28 +53,6 @@ export default function Loading({ top_desc, bottom_desc }: { top_desc: string, b
           letter-spacing: 12px;
           color: #fff;
         }
-        .trivia {
-          width: 50%;
-          margin: 0 auto;
-          padding: 20px;
-          border-radius: 50px;
-          font-size: 1rem;
-          color: #fff;
-          background-color: #faa;
-          margin-top: 50px;
-        }
-        @media screen and (max-width: 768px) {
-          .trivia {
-            width: 80%;
-          }
-        }
-        .trivia-header {
-          text-align: center;
-        }
-        .trivia-title {
-          text-align: left;
-        }
-
         .circle{
             width:20px;
             height:20px;
