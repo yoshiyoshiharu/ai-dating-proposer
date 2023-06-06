@@ -6,40 +6,7 @@ import Loading from './Loading';
 import Link from 'next/link';
 import Share from './Share';
 
-export default function Plans({ spot, area }: { spot: Spot, area: string }) {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [plans, setPlans] = useState<Plan[]>([]);
-
-  const fetchPlan = async (): Promise<Plan[]> => {
-    try {
-      const res = await fetch("/api/plan?spot=" + spot.place)
-
-      if (!res.ok) {
-        throw new Error("Plan API response was not ok");
-      }
-
-      const plans: Plan[] = await res.json();
-      return plans
-    } catch {
-      return []
-    }
-  }
-
-  const handleClick = async (event: any) => {
-    setLoading(true);
-    const plans = await fetchPlan();
-    setPlans(plans);
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    setLoading(true)
-    fetchPlan().then((plans: Plan[]) => {
-      setPlans(plans)
-      setLoading(false)
-    })
-  }, [])
-
+export default function Plans({ plans, area, spot }: { plans: Plan[], area: string, spot: Spot }) {
   return (
     <>
       {
@@ -51,14 +18,8 @@ export default function Plans({ spot, area }: { spot: Spot, area: string }) {
           </div>
           <Images imageUrls={spot.image_urls}></Images>
           {
-            loading &&
-            <Loading top_desc='デートプランを考えています' bottom_desc='20秒ほどかかります'></Loading>
-          }
-          {
             plans.length == 0 &&
-            <>
-              <p>プランが見つかりませんでした。もう一度試してください。</p>
-            </>
+            <p className='error-message'>プランが見つかりませんでした。もう一度試してください。</p>
           }
           <Share></Share>
           {plans.length > 0 && plans.map((plan: Plan) => (
@@ -67,7 +28,6 @@ export default function Plans({ spot, area }: { spot: Spot, area: string }) {
               <p className='description'>{plan.description}</p>
             </div>
           ))}
-          <button onClick={handleClick} className='retry-button'>もう一度試す</button>
         </div>
       }
       <style jsx>{`
@@ -90,6 +50,9 @@ export default function Plans({ spot, area }: { spot: Spot, area: string }) {
           border-bottom: 1px solid #333;
           color: #F77;
         }
+        .error-message {
+          font-size: 0.8rem;
+        }
         @media screen and (max-width: 768px) {
           .plan-header {
             display: block;
@@ -105,18 +68,6 @@ export default function Plans({ spot, area }: { spot: Spot, area: string }) {
         .description {
           font-size: 1rem;
           margin: 10px;
-        }
-        .retry-button {
-          width: 100%;
-          padding: 10px;
-          border-radius: 10px;
-          background-color: #F88;
-          border: none;
-          cursor: pointer;
-          color: white;
-        }
-        .retry-button:hover {
-          opacity: 0.8;
         }
      `}</style>
     </>

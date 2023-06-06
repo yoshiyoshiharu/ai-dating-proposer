@@ -18,7 +18,7 @@ const ResultPage = () => {
       <main>
         {
           spots[spotIndex] == undefined &&
-          <h1>スポットが指定されていません</h1>
+          <p>スポットが指定されていません</p>
         }
         {
           spots[spotIndex] !== undefined &&

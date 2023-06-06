@@ -1,53 +1,81 @@
 import React, { useState, useContext } from 'react';
 import { Spot } from '../../entity/spot';
 import Images from './Images';
+import Loading from './Loading';
 import Link from 'next/link';
 import router from 'next/router';
 import { SpotContext } from '../../context/SpotContext';
+import { Plan } from '../../entity/plan';
 
 
-const Cards = ({ area }: { area: string }) => {
+
+const Cards = () => {
+  const area = router.query.area
   const { spots, setSpots } = useContext(SpotContext)
+  const [loading, setLoading] = useState<boolean>(false);
+  const [plans, setPlans] = useState<Plan[]>([]);
+  const [planFound, setPlanFound] = useState(true)
+
+  const fetchPlan = async (place: string): Promise<Plan[]> => {
+    try {
+      const res = await fetch("/api/plan?spot=" + place)
+
+      if (!res.ok) {
+        throw new Error("Plan API response was not ok");
+      }
+
+      const plans: Plan[] = await res.json();
+      return plans
+    } catch {
+      return []
+    }
+  }
 
   const handleClick = async (spotIndex: number) => {
-    router.push({
-      pathname: '/result',
-      query: { spotIndex: spotIndex, area: area }
-    })
+    const spot = spots[spotIndex]
+    setLoading(true)
+    const plans = await fetchPlan(spot.place)
+    setPlans(plans)
+    setLoading(false)
+
+    if (plans.length > 0) {
+      router.push({
+        pathname: '/result',
+        query: { spotIndex: spotIndex, area: area }
+      })
+    } else {
+      setPlanFound(false)
+    }
   };
 
-  if (spots.length == 0) {
-    return (
-      <>
-        <h2>デートスポットが見つかりませんでした。もう一度試してください。</h2>
-        <style jsx>{`
-         h2 {
-            text-align: center;
-         }
-      `}</style>
-      </>
-    )
-  } else {
-    return (
-      <>
-        <div className="cards">
-          {
-            spots !== undefined && spots.map((spot: Spot, index: number) => (
-              <div className="card" key={index}>
-                <div className='card-header'>
-                  <Link href={"https://www.google.co.jp/maps?q=" + spot.place + " " + area} target='_blank'>
-                    <span className='place'>{spot.place}</span>
-                  </Link>
-                  <button type="button" className="fetch-plan-button" onClick={() => handleClick(index)}>
-                    デートプランを組んでもらう
-                  </button>
-                </div>
-                <Images imageUrls={spot.image_urls}></Images>
+  return (
+    <>
+      {
+        loading &&
+        <Loading top_desc='デートプランを考えています' bottom_desc='10秒ほどかかります'></Loading>
+      }
+      {
+        !planFound &&
+        <p className="error-message">デートプランが見つかりませんでした。もう一度お試しください。</p>
+      }
+      <div className="cards">
+        {
+          spots !== undefined && spots.map((spot: Spot, index: number) => (
+            <div className="card" key={index}>
+              <div className='card-header'>
+                <Link href={"https://www.google.co.jp/maps?q=" + spot.place + " " + area} target='_blank'>
+                  <span className='place'>{spot.place}</span>
+                </Link>
+                <button type="button" className="fetch-plan-button" onClick={() => handleClick(index)}>
+                  デートプランを組んでもらう
+                </button>
               </div>
-            ))
-          }
-        </div>
-        <style jsx>{`
+              <Images imageUrls={spot.image_urls}></Images>
+            </div>
+          ))
+        }
+      </div>
+      <style jsx>{`
           .card {
             background-color: #fff;
             margin: 10px auto;
@@ -94,9 +122,8 @@ const Cards = ({ area }: { area: string }) => {
             opacity: 0.8;
           }
         `}</style>
-      </>
-    )
-  }
+    </>
+  )
 }
 
 export default Cards;

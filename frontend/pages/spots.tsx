@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Form from './components/Form'
 import Cards from './components/Cards'
 import Loading from './components/Loading'
+import Share from './components/Share'
 import { Spot } from '../entity/spot'
 import { SpotContext } from '../context/SpotContext'
 import { useContext, useEffect } from 'react'
@@ -15,31 +15,11 @@ const Spots = () => {
   const { spots, setSpots } = useContext(SpotContext)
   const [loading, setLoading] = useState(false)
 
-  const fetchSpots = async (area: string): Promise<Spot[]> => {
-    try {
-      const res = await fetch("/api/spot?area=" + area)
-      if (!res.ok) {
-        throw new Error("API response was not ok");
-      }
-
-      const spots = await res.json();
-      return spots
-    } catch {
-      return []
-    }
-  }
-
-  const area = router.query.area as string;
-
   useEffect(() => {
-    if (area !== undefined && spots.length == 0) {
-      setLoading(true)
-      fetchSpots(area).then((spots: Spot[]) => {
-        setSpots(spots)
-        setLoading(false)
-      })
+    if (spots.length == 0) {
+      router.push('/');
     }
-  }, []);
+  }, [])
 
   return (
     <>
@@ -55,8 +35,15 @@ const Spots = () => {
 
       <Header></Header>
       <main>
-        <Form area={area}></Form>
-        <Cards area={area}></Cards>
+        <Share></Share>
+        {
+          spots.length == 0 &&
+          <p>デートスポットが見つかりませんでした。もう一度お試しください。</p>
+        }
+        {
+          spots.length > 0 &&
+          <Cards></Cards>
+        }
       </main>
       <Footer></Footer>
       <style jsx>{`

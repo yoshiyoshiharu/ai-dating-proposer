@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Form from './components/Form'
 import Description from './components/Description'
+import Share from './components/Share'
 import { SpotContext } from '../context/SpotContext'
 import { useContext } from 'react'
 
@@ -20,6 +21,7 @@ const Main = () => {
       <main>
         <Description></Description>
         <Form area=""></Form>
+        <Share></Share>
       </main>
       <Footer></Footer>
       <style jsx>{`
