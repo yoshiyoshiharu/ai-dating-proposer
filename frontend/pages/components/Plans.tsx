@@ -3,10 +3,67 @@ import Images from './Images';
 import Link from 'next/link';
 import Share from './Share';
 import { Spot } from '../../entity/spot';
+import { SpotContext } from '../../contexts/SpotContext';
+import { useRouter } from 'next/router';
+import { useContext, useState } from 'react';
+import Loading from './Loading';
 
 export default function Plans({ spot }: { spot: Spot }) {
+  const router = useRouter();
+  const spotIndex = Number(router.query.spot_index)
+
+  const area = router.query.area
+  const { spots, setSpots } = useContext(SpotContext)
+  const [loading, setLoading] = useState<boolean>(false);
+  const [planFound, setPlanFound] = useState(true)
+
+  const fetchPlans = async (place: string): Promise<Plan[]> => {
+    try {
+      const res = await fetch("/api/plan?spot=" + place + "&area=" + area)
+
+      if (!res.ok) {
+        throw new Error("Plan API response was not ok");
+      }
+
+      const plans: Plan[] = await res.json();
+      return plans
+    } catch {
+      return []
+    }
+  }
+
+  const updatePlans = (index: number, newPlans: Plan[]) => {
+    setSpots(Spots => {
+      Spots[index].plans = newPlans;
+      return Spots;
+    });
+  };
+
+  const handleClick = async () => {
+    const spot = spots[spotIndex]
+    setLoading(true)
+    const newPlans = await fetchPlans(spot.place)
+    updatePlans(spotIndex, newPlans)
+    setLoading(false)
+
+    const plans = spots[spotIndex].plans
+
+    if (plans !== undefined && plans.length > 0) {
+      router.push({
+        pathname: '/result',
+        query: { spot_index: spotIndex, area: area }
+      })
+    } else {
+      setPlanFound(false)
+    }
+  }
+
   return (
     <>
+      {
+        loading &&
+        <Loading top_desc='デートプランを考えています' bottom_desc='20秒ほどかかります'></Loading>
+      }
       {
         spot != undefined &&
         <div className='plan'>
@@ -29,6 +86,7 @@ export default function Plans({ spot }: { spot: Spot }) {
             </li>
           ))}
           </ul>
+          <button className='try-again' onClick={handleClick}>もう一度試す</button>
         </div>
       }
       <style jsx>{`
@@ -43,7 +101,7 @@ export default function Plans({ spot }: { spot: Spot }) {
           list-style: none;
           margin: 3rem auto 0 5rem;
           padding-left: 20px;
-          border-left: 6px solid #a7be18;
+          border-left: 6px solid #faa;
           box-sizing: border-box;
         }
         .time-schedule li {
@@ -68,7 +126,7 @@ export default function Plans({ spot }: { spot: Spot }) {
           position: absolute;
           right: -35px;
           top: 0;
-          background: #a7be18;
+          background: #faa;
           width: 20px;
           height: 20px;
           border-radius: 10px;
@@ -109,6 +167,21 @@ export default function Plans({ spot }: { spot: Spot }) {
         .description {
           font-size: 1rem;
           margin: 10px;
+        }
+        .try-again {
+          display: block;
+          width: 100%;
+          padding: 10px 20px;
+          margin-top: 20px;
+          border-radius: 20px;
+          background-color: #faa;
+          color: #fff;
+          border: none;
+          font-size: 1rem;
+          cursor: pointer;
+        }
+        .try-again:hover {
+          opacity: 0.8;
         }
       `}</style>
     </>
