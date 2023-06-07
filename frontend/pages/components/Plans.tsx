@@ -41,7 +41,7 @@ export default function Plans({ spot }: { spot: Spot }) {
         .time-schedule {
           width: 80%;
           list-style: none;
-          margin: 3rem auto 0 6em;
+          margin: 3rem auto 0 5rem;
           padding-left: 20px;
           border-left: 6px solid #a7be18;
           box-sizing: border-box;
