@@ -22,10 +22,10 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 [
   {
-   place: string // famous tourist spot name in Japanese.
+    "place": string // famous tourist spot name in Japanese.
   },
   {
-   place: string // famous tourist spot name in Japanese.
+    "place": string // famous tourist spot name in Japanese.
   },
 ]
 ` +
