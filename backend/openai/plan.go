@@ -22,36 +22,33 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 [
   {
-    time: 9時,
-    plan: string, // date plan title
-    description: string // date plan detail in one sentence.
+    "time": 9時,
+    "plan": string
   },
   {
-    time: 12時,
-    plan: string, // date plan title
-    description: string // date plan detail in one sentence.
+    "time": 12時,
+    "plan": string
   },
   {
-    time: 15時,
-    plan: string, // date plan title
-    description: string // date plan detail in one sentence.
+    "time": 15時,
+    "plan": string
   },
   {
-    time: 18時,
-    plan: string, // date plan title
-    description: string // date plan detail in one sentence.
+    "time": 18時,
+    "plan": string
   },
   {
-    time: 21時,
-    plan: string, // date plan title
-    description: string // date plan detail in one sentence.
+    "time": 21時,
+    "plan": string
   }
 ]
 ` +
 		"```" +
 		`
 NOTES:
-* Output only 5 size array JSON` +
+* Output only JSON, no descriptions
+* "plan" should be within 50 characters
+` +
 		`Please propose the one day date plan around` + spot + " in " + area
 }
 
