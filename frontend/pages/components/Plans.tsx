@@ -22,7 +22,7 @@ export default function Plans({ spot }: { spot: Spot }) {
           <Share></Share>
           <ul className="time-schedule">
           {spot.plans.length > 0 && spot.plans.map((plan: Plan) => (
-              <li>
+              <li key={plan.time}>
                 <span className="time">{plan.time}</span>
                 <div className="sch_box"><p className="sch_title">{plan.plan}</p>
               </div>
