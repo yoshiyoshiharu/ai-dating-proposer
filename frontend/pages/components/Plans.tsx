@@ -3,8 +3,6 @@ import Images from './Images';
 import Link from 'next/link';
 import Share from './Share';
 import { Spot } from '../../entity/spot';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faClockFour } from '@fortawesome/free-solid-svg-icons';
 
 export default function Plans({ spot }: { spot: Spot }) {
   return (
