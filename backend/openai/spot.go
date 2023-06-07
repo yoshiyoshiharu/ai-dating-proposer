@@ -22,10 +22,10 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 [
   {
-    "place": string // famous tourist spot name in Japanese.
+    "place": string
   },
   {
-    "place": string // famous tourist spot name in Japanese.
+    "place": string
   },
 ]
 ` +
@@ -33,6 +33,7 @@ The output should be a markdown code snippet formatted in the following schema i
 		`
 NOTES:
 * Never include tourist spots that do not exist.
+* "place" is famoust tourist spot name.
 * Output only JSON` +
 		"What 5 tourist spot in" + area + " do you introduce?"
 }

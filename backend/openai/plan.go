@@ -23,30 +23,32 @@ The output should be a markdown code snippet formatted in the following schema i
 [
   {
     "time": 9時,
-    "plan": string // date plan
+    "plan": string
   },
   {
     "time": 12時,
-    "plan": string // date plan
+    "plan": string
   },
   {
     "time": 15時,
-    "plan": string // date plan
+    "plan": string
   },
   {
     "time": 18時,
-    "plan": string // date plan
+    "plan": string
   },
   {
     "time": 21時,
-    "plan": string // date plan
+    "plan": string
   }
 ]
 ` +
 		"```" +
 		`
 NOTES:
-* Output only JSON, no other characters` +
+* Output only JSON, no descriptions
+* "plan" should be within 50 characters
+` +
 		`Please propose the one day date plan around` + spot + " in " + area
 }
 
@@ -101,4 +103,3 @@ func parsePlanResponse(res string) []*entity.Plan {
 
 	return plans
 }
-
