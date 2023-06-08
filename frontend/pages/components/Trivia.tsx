@@ -28,7 +28,7 @@ export default function Trivia () {
         <div className='trivia'>
           <div className="trivia-header">
             <h3>デートを成功させよう</h3>
-              <button onClick={fetchTrivia} className="next-trivia"><FontAwesomeIcon icon={faForward}/></button>
+            <button onClick={fetchTrivia} className="next-trivia"><FontAwesomeIcon icon={faForward}/></button>
           </div>
           {
             <div className={showTrivia ? "trivia-detail active" : "trivia-detail"}>
@@ -59,11 +59,14 @@ export default function Trivia () {
           text-align: center;
           position: relative;
         }
+        .trivia-header > h3 {
+          font-size: 1.2rem;
+        }
         .next-trivia {
           position: absolute;
           top: 0;
           right: 0;
-          width: 30px;
+          width: 2rem;
           background-color: rgba(0,0,0,0);
           border: none;
           color: #fff;
