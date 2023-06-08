@@ -69,7 +69,7 @@ export default function Plans({ spot }: { spot: Spot }) {
         <div className='plan'>
           <div className='plan-header'>
             <h2 className='plan-title'>{spot.place}周辺でのデートプラン</h2>
-            <Link href={"/spots?area=" + spot.area}>スポット一覧に戻る</Link>
+            <Link className='back-link' href={"/spots?area=" + spot.area}>スポット一覧に戻る</Link>
           </div>
           <Images imageUrls={spot.image_urls}></Images>
           {
@@ -90,6 +90,26 @@ export default function Plans({ spot }: { spot: Spot }) {
         </div>
       }
       <style jsx>{`
+        .plan-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .plan-header > a {
+          border-bottom: 1px solid #333;
+        }
+        @media screen and (max-width: 768px) {
+          .plan-header {
+            display: block;
+            margin-bottom: 10px;
+          }
+          .plan-title {
+            margin-bottom: 0;
+          }
+          .title {
+            font-size: 1.2rem;
+          }
+        }
         .plan {
           margin: 30px auto;
           background-color: #fff;
@@ -150,19 +170,8 @@ export default function Plans({ spot }: { spot: Spot }) {
           font-weight: normal;
         }
         .error-message {
-          font-size: 0.8rem;
-        }
-        @media screen and (max-width: 768px) {
-          .plan-header {
-            display: block;
-            margin-bottom: 10px;
-          }
-          .plan-title {
-            margin-bottom: 0;
-          }
-          .title {
-            font-size: 1.2rem;
-          }
+          color: #f44336;
+          text-align: center;
         }
         .description {
           font-size: 1rem;
