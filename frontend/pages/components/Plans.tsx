@@ -69,7 +69,7 @@ export default function Plans({ spot }: { spot: Spot }) {
         <div className='plan'>
           <div className='plan-header'>
             <h2 className='plan-title'>{spot.place}周辺でのデートプラン</h2>
-            <a className='back-link' href={"/spots?area=" + spot.area}>スポット一覧に戻る</a>
+            <Link className='back-link' href={"/spots?area=" + spot.area}>スポット一覧に戻る</Link>
           </div>
           <Images imageUrls={spot.image_urls}></Images>
           {
