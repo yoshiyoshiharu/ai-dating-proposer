@@ -35,7 +35,7 @@ export default function Loading({ top_desc, bottom_desc }: { top_desc: string, b
         .wrapper {
           position: absolute;
           width: 100%;
-          top:30%;
+          top:25%;
         }
         .circles{
           width:200px;
