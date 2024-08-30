@@ -2,8 +2,6 @@
 
 AIがデートプランを提案します。
 
-https://ai-dating-proposer.vercel.app
-
 ## 機能
 ### デートスポットの提案
 ![spots](/images/spots.png)
